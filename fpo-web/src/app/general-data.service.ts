@@ -13,18 +13,18 @@ export class GeneralDataService {
   private onUserInfo: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   private userInfo: any = null;
   // restrict to browser cache - not database
-  private browserOnly: boolean = true;
+  private browserOnly: boolean = false;
 
   constructor(
     private http: Http,
     private platformLocation: PlatformLocation
   ) { }
 
-  getBaseHref() : string {
+  getBaseHref(): string {
     return this.platformLocation.getBaseHrefFromDOM() || '/';
   }
 
-  getApiUrl(action: string) : string {
+  getApiUrl(action: string): string {
     return this.getBaseHref() + 'api/' + action;
   }
 
@@ -34,9 +34,9 @@ export class GeneralDataService {
     let user = null;
     try {
       user = sessionUser ? JSON.parse(sessionUser) : null;
-    } catch(e) {
+    } catch (e) {
     }
-    if(! user) {
+    if (!user) {
       user = {
         accepted_terms_at: null, // "2018-09-14T05:46:24.165233Z",
         demo_user: true,
@@ -50,7 +50,7 @@ export class GeneralDataService {
 
   updateBrowserUser(params?: any) {
     let user = this.getBrowserUser();
-    if(params)
+    if (params)
       Object.assign(user, params);
     sessionStorage.setItem('temp-user', JSON.stringify(user));
   }
@@ -74,10 +74,10 @@ export class GeneralDataService {
     location.replace('https://www.google.com');
   }
 
-  loadJson(url: string, params?: any, headers?: any, relative?: boolean) : Promise<any> {
-    if(! url)
+  loadJson(url: string, params?: any, headers?: any, relative?: boolean): Promise<any> {
+    if (!url)
       return Promise.reject('Cache name not defined');
-    if(relative)
+    if (relative)
       url = this.getBaseHref() + url;
     return this.http.get(url, { params, headers, withCredentials: true })
       .map((x) => x.json())
@@ -88,20 +88,20 @@ export class GeneralDataService {
   }
 
   loadUserInfo(demo_login?: string) {
-    if(this.browserOnly) {
+    if (this.browserOnly) {
       return new Promise(resolve => {
         try {
           let user = this.getBrowserUser();
           this.returnUserInfo(user);
           resolve(user);
-        } catch(e) {
+        } catch (e) {
           console.error(e);
         }
       });
     } else {
       let headers = null;
-      if(demo_login !== undefined) {
-        headers = new Headers({'X-DEMO-LOGIN': demo_login});
+      if (demo_login !== undefined) {
+        headers = new Headers({ 'X-DEMO-LOGIN': demo_login });
       }
       let url = this.getApiUrl('user-info');
       return this.loadJson(url, { t: new Date().getTime() }, headers)
@@ -118,11 +118,11 @@ export class GeneralDataService {
   }
 
   logout() {
-    if(this.browserOnly) {
+    if (this.browserOnly) {
       this.clearSession();
       window.location.replace(this.getBaseHref());
     }
-    else if(this.userInfo && this.userInfo.demo_user) {
+    else if (this.userInfo && this.userInfo.demo_user) {
       // clear demo login cookie
       this.loadUserInfo('').then(() => {
         window.location.replace(this.getBaseHref());
@@ -144,18 +144,18 @@ export class GeneralDataService {
   }
 
   requireLogin(no_terms?) {
-    if(this.userInfo && this.userInfo.user_id && (no_terms || this.userInfo.accepted_terms_at)) {
+    if (this.userInfo && this.userInfo.user_id && (no_terms || this.userInfo.accepted_terms_at)) {
       return Promise.resolve(this.userInfo);
     }
     return this.loadUserInfo().then((result) => {
-        if(result && result.user_id) return result;
-        return Promise.reject('Not logged in');
-      });
+      if (result && result.user_id) return result;
+      return Promise.reject('Not logged in');
+    });
   }
 
   acceptTerms() {
-    if(this.browserOnly) {
-      this.updateBrowserUser({accepted_terms_at: (new Date()).toString()});
+    if (this.browserOnly) {
+      this.updateBrowserUser({ accepted_terms_at: (new Date()).toString() });
       return this.loadUserInfo();
     } else {
       let url = this.getApiUrl('accept-terms');
@@ -167,12 +167,12 @@ export class GeneralDataService {
   }
 
   clearSurveyCache(name: string, key?: string, useLocal?: boolean) {
-    if(! name)
+    if (!name)
       return Promise.reject('Cache name not defined');
     let localKey = 'survey-' + name;
-    if(this.browserOnly) {
+    if (this.browserOnly) {
       return new Promise(resolve => {
-        if(key)
+        if (key)
           sessionStorage.removeItem(localKey + '-key');
         let index = this.getLocalSurveyCache(name, 'index', true);
         index = index ? index.result.filter(x => x.key !== key) : [];
@@ -180,25 +180,25 @@ export class GeneralDataService {
         resolve(null);
       });
     }
-    if(useLocal) {
+    if (useLocal) {
       localStorage.removeItem(localKey);
     }
     return this.saveSurveyCache(name, null, key);
   }
 
   loadSurveyCache(name: string, key?: string, useLocal?: boolean) {
-    if(! name)
+    if (!name)
       return Promise.reject('Cache name not defined');
-    if(this.browserOnly) {
+    if (this.browserOnly) {
       return this.loadUserInfo().then(info => {
-        if(! info.accepted_terms_at && key !== 'index') {
-          return {accept_terms: true};
+        if (!info.accepted_terms_at && key !== 'index') {
+          return { accept_terms: true };
         }
         return this.getLocalSurveyCache(name, key, true);
       });
     }
     let url = this.getApiUrl('survey-cache/' + encodeURIComponent(name));
-    if(key) url += '/' + encodeURIComponent(key);
+    if (key) url += '/' + encodeURIComponent(key);
     return this.loadJson(url, { t: new Date().getTime() })
       .then((result) => this.returnSurveyCache(name, key, result, null, useLocal))
       .catch((err) => this.returnSurveyCache(name, key, null, err, useLocal));
@@ -207,25 +207,25 @@ export class GeneralDataService {
   getLocalSurveyCache(name, key, session?) {
     let localKey = 'survey-' + name;
     let cached;
-    if(session) {
-      if(key === 'clear') {
+    if (session) {
+      if (key === 'clear') {
         cached = sessionStorage.removeItem(localKey + '-latest');
         return;
       }
-      if(! key)
+      if (!key)
         key = sessionStorage.getItem(localKey + '-latest');
-      else if(key !== 'index')
+      else if (key !== 'index')
         sessionStorage.setItem(localKey + '-latest', key);
-      if(key)
+      if (key)
         cached = sessionStorage.getItem(localKey + '-' + key);
     } else {
       cached = localStorage.getItem(localKey);
     }
     let result = null;
-    if(cached) {
+    if (cached) {
       cached = JSON.parse(cached);
-      if(cached) {
-        result = {'uid': null, 'local': true, 'key': key, 'result': cached};
+      if (cached) {
+        result = { 'uid': null, 'local': true, 'key': key, 'result': cached };
       }
     }
     return result;
@@ -233,8 +233,8 @@ export class GeneralDataService {
 
   saveLocalSurveyCache(name, data, key, session?) {
     let localKey = 'survey-' + name;
-    if(session) {
-      if(! key)
+    if (session) {
+      if (!key)
         key = '' + Math.random();
       sessionStorage.setItem(localKey + '-' + key, JSON.stringify(data));
       let index = this.getLocalSurveyCache(name, 'index', true);
@@ -252,38 +252,38 @@ export class GeneralDataService {
   }
 
   returnSurveyCache(name, key, result, err, useLocal?: boolean) {
-    if((! result || ! result.key) && useLocal) {
+    if ((!result || !result.key) && useLocal) {
       result = this.getLocalSurveyCache(name, key);
     }
     return result;
   }
 
   saveSurveyCache(name: string, data: object, key?: string, useLocal?: boolean) {
-    if(! name)
+    if (!name)
       return Promise.reject('Cache name not defined');
-    if(this.browserOnly) {
+    if (this.browserOnly) {
       key = this.saveLocalSurveyCache(name, data, key, true);
-      return Promise.resolve({'uid': null, 'local': true, 'key': key, 'status': 'ok', 'result': data});
+      return Promise.resolve({ 'uid': null, 'local': true, 'key': key, 'status': 'ok', 'result': data });
     }
     let url = this.getApiUrl('survey-cache/' + encodeURIComponent(name));
-    if(key) url += '/' + encodeURIComponent(key);
-    let headers = new Headers({"Content-Type": "application/json"});
+    if (key) url += '/' + encodeURIComponent(key);
+    let headers = new Headers({ "Content-Type": "application/json" });
     let postData = data === null ? '' : JSON.stringify(data);
     let savedLocal = false;
-    if(useLocal && postData) {
+    if (useLocal && postData) {
       this.saveLocalSurveyCache(name, data, key);
       savedLocal = true;
     }
     return this.http.post(url, postData, { headers, withCredentials: true })
       .map((result) => {
         let json = result.json();
-        if(json && json.key) json.result = data;
+        if (json && json.key) json.result = data;
         return json;
       })
       .toPromise()
       .catch((error: any) => {
-        if(savedLocal) {
-          return Promise.resolve({'uid': null, 'local': true, 'key': null, 'status': 'ok', 'result': data});
+        if (savedLocal) {
+          return Promise.resolve({ 'uid': null, 'local': true, 'key': null, 'status': 'ok', 'result': data });
         }
         return Promise.reject(error.message || error);
       });
