@@ -3,7 +3,7 @@ export PROJECT_NAMESPACE="jag-csb-jes-family-protection-order"
 # The templates that should not have their GIT referances(uri and ref) over-ridden
 # Templates NOT in this list will have they GIT referances over-ridden
 # with the values of GIT_URI and GIT_REF
-export skip_git_overrides="schema-spy-build.json"
+export skip_git_overrides="schema-spy-build.json backup-build.json"
 export GIT_URI="https://github.com/bcgov/Family-Protection-Order.git"
 export GIT_REF="master"
 
