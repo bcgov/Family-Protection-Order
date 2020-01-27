@@ -59,51 +59,63 @@ build-web() {
   # fpo-web
   #
   # The nginx-runtime image is used for the final runtime image.
-  # The angular-app image is used to build the artifacts for the angular distribution.
+  # The nodejs-build image is used to build the artifacts for the angular distribution.
   # The angular-on-nginx image is copy of the nginx-runtime image complete with a copy of the build artifacts.
   #
-  echo -e "\n\n===================================================================================================="
-  echo -e "Building the nginx-runtime image using Docker ..."
-  echo -e "----------------------------------------------------------------------------------------------------"
-  docker build \
+  echo -e "\nBuilding nginx-runtime image ..."
+  docker build -q \
     -t 'nginx-runtime' \
     -f '../fpo-web/openshift/templates/nginx-runtime/Dockerfile' '../fpo-web/openshift/templates/nginx-runtime/'
-  echo -e "===================================================================================================="
-  
-  echo -e "\n\n===================================================================================================="
-  echo -e "Building the angular-app image using s2i ..."
-  echo -e "----------------------------------------------------------------------------------------------------"
-  ${S2I_EXE} build \
-    '../fpo-web' \
-    'centos/nodejs-6-centos7:6' \
-    'angular-app'
-  echo -e "===================================================================================================="
 
-  echo -e "\n\n===================================================================================================="
-  echo -e "Building the angular-on-nginx image using Docker ..."
-  echo -e "----------------------------------------------------------------------------------------------------"
-  docker build \
-    -t 'fpo-angular-on-nginx' \
-    -f '../fpo-web/openshift/templates/angular-on-nginx/Dockerfile' '../fpo-web/openshift/templates/angular-on-nginx/'
-  echo -e "===================================================================================================="
+  # This image only exists to pre-create the npm cache directory
+  # so it can be properly used as a volume, it doesn't apply to openshift
+  echo -e "\nBuilding nodejs-build image ..."
+  docker build -q \
+    -t 'nodejs-build' \
+    -f '../fpo-web/openshift/templates/nodejs-build/Dockerfile' '../fpo-web/openshift/templates/nodejs-build/'
+
+  if [ -t 0 ]; then
+    # color npm output in interactive terminal
+	NPM_COLOR="always"
+  else
+    NPM_COLOR="true"
+  fi
+
+  echo -e "\nBuilding angular-on-nginx image ..."
+  ${S2I_EXE} build \
+    -e "NPM_CONFIG_COLOR=${NPM_COLOR}" \
+    -e "NPM_CONFIG_LOGLEVEL=timing" \
+    -e "HTTP_PROXY=${HTTP_PROXY}" \
+    -e "HTTPS_PROXY=${HTTPS_PROXY}" \
+    -v "${COMPOSE_PROJECT_NAME}_fpo-npm-cache:/opt/app-root/src/.npm" \
+    --runtime-image nginx-runtime \
+    -a /opt/app-root/src/dist:app \
+    '../fpo-web' \
+    'nodejs-build' \
+    'fpo-angular-on-nginx'
 }
 
 build-web-dev() {
   echo -e "Building web-dev environment ..."
-  docker build \
-    -t 'nginx-runtime' \
-    -f '../fpo-web/openshift/templates/nginx-runtime/Dockerfile' '../fpo-web/openshift/templates/nginx-runtime/'
-  
-#-v "${COMPOSE_PROJECT_NAME}_fpo-npm-cache:/opt/app-root/src/.npm" \
+  #
+  # fpo-web-dev
+  # Alternative version of fpo-web for live development
+  #
+  echo -e "\nBuilding nodejs-build image ..."
+  docker build -q \
+    -t 'nodejs-build' \
+    -f '../fpo-web/openshift/templates/nodejs-build/Dockerfile' '../fpo-web/openshift/templates/nodejs-build/'
+
+  # NB: We build with DEV_MODE=true but run with DEV_MODE=false
+  echo -e "\nBuilding angular-dev image ..."
   ${S2I_EXE} build \
     -e "DEV_MODE=true" \
+    -e "HTTP_PROXY=${HTTP_PROXY}" \
+    -e "HTTPS_PROXY=${HTTPS_PROXY}" \
+    -v "${COMPOSE_PROJECT_NAME}_fpo-npm-cache:/opt/app-root/src/.npm" \
     '../fpo-web' \
-    'centos/nodejs-6-centos7:6' \
+    'nodejs-build' \
     'fpo-angular-dev'
-
-  #docker build \
-  #  -t 'fpo-angular-on-nginx' \
-  #  -f '../fpo-web/openshift/templates/angular-on-nginx/Dockerfile' '../fpo-web/openshift/templates/angular-on-nginx/'
 }
 
 build-db() {
