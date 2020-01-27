@@ -64,6 +64,7 @@ services:
       - FPO_DB_SERVICE_PORT=5432
     volumes:
       - ../fpo-api/api:/opt/app-root/src/api
+      - ../fpo-api/templates:/opt/app-root/src/templates
     networks:
       - fpo
     ports:

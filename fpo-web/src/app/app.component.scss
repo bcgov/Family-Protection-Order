@@ -1,6 +1,4 @@
-$bootstrap-sass-asset-helper: true;
-// @import "~bootstrap-sass/assets/stylesheets/bootstrap";
-@import "../variables";
+@import "../common";
 
 .app-outer {
   display: flex;
@@ -13,6 +11,8 @@ $bootstrap-sass-asset-helper: true;
   flex: 1 0 auto;
   flex-flow: row nowrap;
   max-width: 100%;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .app-main {
@@ -20,15 +20,22 @@ $bootstrap-sass-asset-helper: true;
   padding: 0 15px 80px;
 }
 
-.sidebar-left, .sidebar-right {
+.sidebar-left,
+.sidebar-right {
   display: block;
   flex: none;
   overflow: hidden;
   position: relative;
   transition: width 0.2s ease-in;
-  width: $sidebar-width;
+  width: $sidebar-width-md;
   &.insert-hidden {
     width: 0;
+  }
+}
+@include media-breakpoint-up(lg) {
+  .sidebar-left,
+  .sidebar-right {
+    width: $sidebar-width-lg;
   }
 }
 
@@ -100,8 +107,10 @@ $bootstrap-sass-asset-helper: true;
 }
 
 // Footer Styles
+/*
 .app-footer .navbar-default{background: $gov-navy-blue;}
 .app-footer li{
 	border-left: none;
 	border-right: 1px solid #4b5e73;
 }
+*/

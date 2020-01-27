@@ -1,4 +1,4 @@
-@import "variables";
+@import "common";
 
 // survey styles
 
@@ -7,26 +7,33 @@
   .sv_page_description {
     margin-bottom: 10px;
   }
-  label{ color: $text-color;}
-  hr { border-top-color: $gov-light-grey; }
+  label {
+    color: $text-color;
+  }
+  hr {
+    border-top-color: $gov-light-grey;
+  }
   .sv_container {
-    > .panel-heading, > .panel-body {
+    > .panel-heading,
+    > .panel-body {
       padding: 0;
     }
   }
-// as per Jack they don't want this heading here, just hiding it until
-// dev can remove
-.sv_container h3{display: none;}
+  // as per Jack they don't want this heading here, just hiding it until
+  // dev can remove
+  .sv_container h3 {
+    display: none;
+  }
 
   h3 {
     font-size: 34px;
     font-weight: 600;
   }
 
-h4.sv_page_title {
-  color: $gov-navy-blue;
-  font-size: 2.25em;
-  margin: .65em 0 .5em;
+  h4.sv_page_title {
+    //color: $gov-navy-blue;
+    font-size: 1.6em;
+    margin: 0.65em 0 0.5em;
   }
 
   .sv_p_title {
@@ -38,7 +45,7 @@ h4.sv_page_title {
     padding-left: 0.5em;
   }
   .sv_row {
-    margin: .65em 0 .85em;
+    margin: 0.65em 0 0.85em;
   }
   .sv_page .sv_qstn {
     padding-top: 0;
@@ -52,17 +59,17 @@ h4.sv_page_title {
     border-radius: 5px;
     padding-top: 1em;
     //when there is another panel inside
-    .sv_p_container{
+    /*.sv_p_container {
       // border: none;
       // padding: .5em 0;
       .sv_qstn {
         // margin-left: -15px;
       }
-    }
+    }*/
   }
   .sv_q_title {
     color: #556077;
-    font-size: 1.75em;
+    font-size: 1.5em;
     line-height: 1.2;
     margin-bottom: 1em;
     margin-top: 5px;
@@ -70,7 +77,7 @@ h4.sv_page_title {
   .sv_q_description {
     font-size: 16px;
     margin-bottom: 1.5em;
-    }
+  }
   .panel-footer {
     background: none;
     border: none;
@@ -98,7 +105,7 @@ h4.sv_page_title {
   // when a container is inside another one;
   .sv_p_container {
     border: none;
-    padding: 1em 0 .5em;
+    padding: 1em 0 0.5em;
   }
 }
 
@@ -109,17 +116,19 @@ h4.sv_page_title {
   font-weight: normal;
   padding-left: 0.25em;
 }
-.sv_bootstrap_css .sv_qcbc input[type="checkbox"], .sv_bootstrap_css .sv_qcbc input[type="radio"] {
+.sv_bootstrap_css .sv_qcbc input[type="checkbox"],
+.sv_bootstrap_css .sv_qcbc input[type="radio"] {
   vertical-align: baseline;
   margin: 4px;
 }
 
-.survey-helptext, .survey-infotext {
+.survey-helptext,
+.survey-infotext {
   background: #e7efff;
   border: 1px solid #c9d0e3;
   border-radius: 4px;
   margin: 0.5em 0 0 0;
-  padding: .5em;
+  padding: 0.5em;
   line-height: 1.4;
   .fa {
     color: $gov-navy-blue;
@@ -197,7 +206,8 @@ h4.sv_page_title {
     .panel-title {
       border-bottom: 1px solid $text-color-link;
       color: $text-color-link;
-      &:hover, &:focus {
+      &:hover,
+      &:focus {
         color: $text-color-link-hover;
         border-bottom-color: $text-color-link-hover;
       }

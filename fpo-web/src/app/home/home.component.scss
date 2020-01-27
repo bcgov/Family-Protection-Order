@@ -1,19 +1,19 @@
 @import "../../variables";
 
 .home-content {
-  padding-bottom: 20px;
-  padding-top: 8rem;
+  padding-top: 6rem;
   max-width: 900px;
 }
 
-h1, h2 {
+h1,
+h2 {
   font-weight: 600;
 }
 
 .intro {
-  font-size: 24px;
+  font-size: 1.3em;
   line-height: 1.6;
-  margin: 3rem auto 4rem;
+  margin: 3rem auto 2rem;
   p {
     margin-bottom: 2rem;
   }
@@ -27,7 +27,9 @@ h1, h2 {
 }
 
 .alert {
-  h2, h3, h4 {
+  h2,
+  h3,
+  h4 {
     color: inherit;
   }
 }
@@ -55,7 +57,7 @@ h1, h2 {
 }
 
 .ordinal {
-  baseline-shift: -.2em;
+  baseline-shift: -0.2em;
   border: 2px solid $gov-white;
   border-radius: 50%;
   display: inline-block;
@@ -80,7 +82,8 @@ h1, h2 {
   border: 2px solid rgba($gov-accent-grey, 0.8);
   color: $gov-mid-blue;
   margin-top: 2.5rem;
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background-color: darken($gov-gold, 8%);
     color: #222;
   }
@@ -98,18 +101,22 @@ h1, h2 {
   a {
     color: $gov-white;
     text-decoration: none;
-    &:hover, &:active, &:focus {
+    &:hover,
+    &:active,
+    &:focus {
       text-decoration: underline;
     }
   }
 }
 
 // Need to know area
-.need-to-know{
+.need-to-know {
   color: $alert-red;
   margin-top: 1rem;
   border: 1px solid $alert-red;
   border-radius: 8px;
   padding: 1.5rem;
-  > h2{ color: $alert-red;}
+  > h2 {
+    color: $alert-red;
   }
+}

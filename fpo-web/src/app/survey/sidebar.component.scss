@@ -1,4 +1,4 @@
-@import "../../variables";
+@import "../../common";
 
 // outer sidebar
 .sidebar-container {
@@ -12,14 +12,21 @@
   padding: 0;
   position: absolute;
   top: 0;
-  width: $sidebar-width;
+  width: $sidebar-width-md;
+}
+@include media-breakpoint-up(lg) {
+  .sidebar-container {
+    width: $sidebar-width-lg;
+  }
 }
 
 // sidebar title
-.sidebar-title{
-  padding: 2rem 2rem 2.5rem;
-  h3 { margin: 0; }
+.sidebar-title {
+  padding: 1rem 2rem 1.5rem;
+  h3 {
+    margin: 0;
   }
+}
 
 // Sidebar Nav
 
@@ -40,7 +47,7 @@ $link-disabled-color: #777;
     flex-flow: row wrap;
     list-style-type: none;
     margin: 0;
-    padding: .5rem 1em;
+    padding: 0.5rem 1em;
     &.disabled {
       cursor: not-allowed;
     }
@@ -53,7 +60,8 @@ $link-disabled-color: #777;
         color: $link-hover-color;
       }
     }
-    &:active, &:focus {
+    &:active,
+    &:focus {
       .link-icon {
         border-color: $link-active-color;
         color: $link-active-color;
@@ -87,7 +95,7 @@ $link-disabled-color: #777;
       margin-top: 1em;
       &::before {
         display: block;
-        content: ' ';
+        content: " ";
         margin: 0 1.5em;
         position: relative;
         top: -0.75em;
@@ -101,7 +109,7 @@ $link-disabled-color: #777;
 
 .link-icon {
   position: relative;
-  top: .15em;
+  top: 0.15em;
   border: 2px solid $gov-navy-blue;
   border-radius: 50%;
   color: $gov-navy-blue;
@@ -119,8 +127,8 @@ $link-disabled-color: #777;
 }
 
 .link-label {
-  font-size: 20px;
-  color: $gov-navy-blue;
+  font-size: 1.1em;
+  color: $text-color-link;
   padding-left: 10px;
   padding-top: 5px;
   transition: color 0.1s linear;

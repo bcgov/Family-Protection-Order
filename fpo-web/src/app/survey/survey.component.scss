@@ -1,4 +1,4 @@
-@import "../../variables";
+@import "../../common";
 
 // utility navigation
 .survey-cache-info {
@@ -7,10 +7,11 @@
   right: 0;
 }
 // util nav items, profile, log-out button
-button.util-nav, a.util-nav{
+button.util-nav,
+a.util-nav {
   background: none;
   border: none;
-  padding-top: .65em;
+  padding-top: 0.65em;
   font-size: 16px;
   &:hover {
     // color: $gov-mid-blue;
@@ -19,8 +20,8 @@ button.util-nav, a.util-nav{
 button.util-nav {
   &:before {
     content: " | ";
-    margin-left: .5em;
-    margin-right: .5em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
   }
 }
 a.util-nav {
@@ -32,7 +33,8 @@ a.util-nav {
   color: $gov-navy-blue;
 }
 
-.survey-nav-left, .survey-nav-right {
+.survey-nav-left,
+.survey-nav-right {
   display: inline-block;
 }
 .survey-nav-left {

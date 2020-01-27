@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "base-app2"
+    "name": "fpo-web"
   },
   "apps": [
     {
@@ -9,7 +9,12 @@
       "outDir": "dist",
       "assets": [
         "assets",
-        "favicon.ico"
+        "favicon.ico",
+        {
+          "glob": "**/*",
+          "input": "../node_modules/@bcgov/bootstrap-theme/dist/images",
+          "output": "./assets/images"
+        }
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -18,15 +23,9 @@
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
-      "styles": [
-        "styles.scss"
-      ],
+      "styles": ["styles.scss"],
 
-      "scripts": [
-
-        "assets/js/zendesk.js"
-      ],
-
+      "scripts": ["assets/js/zendesk.js"],
 
       "environmentSource": "environments/environment.ts",
       "environments": {
