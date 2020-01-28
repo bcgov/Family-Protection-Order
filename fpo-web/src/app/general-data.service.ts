@@ -1,11 +1,8 @@
 import { PlatformLocation } from "@angular/common";
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { BehaviorSubject } from "rxjs/BehaviorSubject";
-import "rxjs/add/operator/map";
-import "rxjs/add/operator/catch";
-import "rxjs/add/operator/toPromise";
+import { BehaviorSubject } from "rxjs";
+import { map } from "rxjs/operators";
 
 export interface UserInfo {
   accepted_terms_at?: string;
@@ -290,10 +287,12 @@ export class GeneralDataService {
     }
     return this.http
       .post(url, postData, { headers, withCredentials: true })
-      .map((result: any) => {
-        if (result && result.key) result.result = data;
-        return result;
-      })
+      .pipe(
+        map((result: any) => {
+          if (result && result.key) result.result = data;
+          return result;
+        })
+      )
       .toPromise()
       .catch((error: any) => {
         if (savedLocal) {

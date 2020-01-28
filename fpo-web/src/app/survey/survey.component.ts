@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { BehaviorSubject } from "rxjs";
 import * as Survey from "survey-angular";
 import * as showdown from "showdown";
 import { GeneralDataService } from "../general-data.service";

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 import {
   Router,
   Resolve,
@@ -7,7 +7,6 @@ import {
   ActivatedRouteSnapshot
 } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
-import "rxjs/add/operator/map";
 
 @Injectable()
 export class SurveyResolver implements Resolve<any> {
@@ -18,7 +17,7 @@ export class SurveyResolver implements Resolve<any> {
     state: RouterStateSnapshot
   ): Observable<object> {
     if (route.data.survey) {
-      return Observable.of(route.data.survey);
+      return of(route.data.survey);
     }
 
     if (route.data.survey_path) {
