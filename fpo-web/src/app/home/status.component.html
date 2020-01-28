@@ -57,13 +57,14 @@
         <terms-content></terms-content>
       </div>
       <div class="panel-footer">
-        <div class="checkbox">
+        <div class="accept-terms-check form-check mt-3 mb-3">
           <input
             type="checkbox"
-            class="form-control"
+            class="form-check-input"
+            id="accept-terms"
             (change)="setPreAccept($event.target.checked)"
           />
-          <label
+          <label class="form-check-label" for="accept-terms"
             >I agree to the "Apply for a Family Law Protection Order" Terms of
             Use</label
           >

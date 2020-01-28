@@ -11,24 +11,30 @@
 button.util-nav {
   background: none;
   border: none;
-  padding-top: .65em;
+  padding-top: 0.65em;
 }
 
 // Terms & Conditions
-.terms-panel{
+.terms-panel {
   > h2 {
     font-size: 2em;
   }
   box-shadow: none;
   border: none;
   background: $gov-white;
-  > h3{
-    margin-bottom: .25em;
+  > h3 {
+    margin-bottom: 0.25em;
   }
 }
 
-.terms-panel .panel-footer{
+.accept-terms-check {
+  .form-check-input,
+  .form-check-label {
+    cursor: pointer;
+  }
+}
+
+.terms-panel .panel-footer {
   background-color: $gov-white;
   border-top: 1px solid $gov-light-grey;
-  > .checkbox{margin-bottom: 1.5em;}
 }

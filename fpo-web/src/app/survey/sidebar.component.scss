@@ -110,16 +110,17 @@ $link-disabled-color: #777;
 .link-icon {
   position: relative;
   top: 0.15em;
-  border: 2px solid $gov-navy-blue;
+  border: 2px solid $text-color-link;
   border-radius: 50%;
-  color: $gov-navy-blue;
+  color: $text-color-link;
   font-size: 20px;
   flex: none;
   height: 28px;
-  line-height: 26px;
+  line-height: 24px;
   width: 28px;
   text-align: center;
   transition: border-color color 0.1s linear;
+  font-variant-numeric: tabular-nums;
 }
 .link-icon.fa {
   line-height: 23px;

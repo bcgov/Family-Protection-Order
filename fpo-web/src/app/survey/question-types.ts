@@ -773,10 +773,10 @@ function initNameBlock(Survey) {
       let row;
       let cell;
       let input;
-      let acceptLbl;
-      let acceptRow;
-      let acceptBtn;
-      let cancelBtn;
+      const acceptLbl = null;
+      const acceptRow = null;
+      // let acceptBtn;
+      // let cancelBtn;
       outer.className = outerCls;
 
       row = document.createElement("div");
