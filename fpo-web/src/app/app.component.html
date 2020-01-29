@@ -1,8 +1,18 @@
 <div class="app-outer fill-body">
   <header class="app-header">
+    <div id="app-exit" class="app-exit">
+      <a
+        target="_blank"
+        href="https://www.google.ca"
+        rel="external"
+        class="btn btn-primary"
+        (click)="quickExit()"
+        ><span class="fa fa-sign-out"></span> Quick Exit</a
+      >
+    </div>
     <nav class="navbar navbar-expand-lg navbar-dark">
-      <div class="container">
-        <a class="navbar-brand" href="https://www2.gov.bc.ca">
+      <div class="navbar-brand logo">
+        <a routerLink="/" tabindex="-1" class="navbar-link">
           <img
             class="img-fluid d-none d-md-block"
             src="assets/images/bcid-logo-rev-en.svg"
@@ -18,26 +28,16 @@
             alt="B.C. Government Logo"
           />
         </a>
-        <div class="navbar-brand">
-          Apply for a Family Law Act Protection Order
-          <span class="tag">BETA</span>
-        </div>
-        <div class="navbar-extra">
-          <div id="app-profile" class="header-link">
-            <a routerLink="/prv/status" class="btn btn-primary" *ngIf="isPrv"
-              ><span class="fa fa-user"></span> Profile</a
-            >
-          </div>
-          <div id="app-exit" class="header-link">
-            <a
-              target="_blank"
-              href="https://www.google.ca"
-              rel="external"
-              class="btn btn-primary"
-              (click)="quickExit()"
-              ><span class="fa fa-sign-out"></span> Quick Exit</a
-            >
-          </div>
+      </div>
+      <div class="navbar-brand navbar-text">
+        Apply for a Family Law Act Protection Order
+        <span class="tag">BETA</span>
+      </div>
+      <div class="navbar-extra">
+        <div id="app-profile">
+          <a routerLink="/prv/status" class="btn btn-primary" *ngIf="isPrv"
+            ><span class="fa fa-user"></span> Profile</a
+          >
         </div>
       </div>
     </nav>
