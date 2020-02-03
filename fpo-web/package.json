@@ -23,7 +23,7 @@
     "@angular/platform-browser-dynamic": "^8.2.14",
     "@angular/platform-server": "^8.2.14",
     "@angular/router": "^8.2.14",
-    "@bcgov/bootstrap-theme": "https://github.com/andrewwhitehead/bootstrap-theme/releases/download/1.1.1/bcgov-bootstrap-theme-1.1.1.tgz",
+    "@bcgov/bootstrap-theme": "https://github.com/bcgov/bootstrap-theme/releases/download/v1.1.1/bcgov-bootstrap-theme-1.1.1.tgz",
     "ace-builds": "~1.2.2",
     "bootstrap": "~4.3.1",
     "core-js": "^3.6.4",
