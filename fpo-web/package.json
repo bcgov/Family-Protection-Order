@@ -27,7 +27,6 @@
     "ace-builds": "~1.2.2",
     "bootstrap": "~4.3.1",
     "core-js": "^3.6.4",
-    "font-awesome": "4.7.0",
     "node-sass": "^4.13.1",
     "rxjs": "^6.5.4",
     "showdown": "^1.9.1",
