@@ -5,27 +5,41 @@
   <button class="util-nav" (click)="logout()">Logout</button>
 </div -->
 
-<div class="page-load" *ngIf="loading && ! error">
+<div class="page-load" *ngIf="loading && !error">
   <div class="loading-indicator"></div>
 </div>
 <div class="alert alert-danger" *ngIf="error">
-  {{error}}
+  {{ error }}
 </div>
 
 <div class="survey-container contentcontainer codecontainer">
   <div id="surveyElement"></div>
 </div>
-<div class="survey-nav" *ngIf="! loading">
-  <div class="survey-nav-left" *ngIf="! isFirstPage">
+<div class="survey-nav" *ngIf="!loading">
+  <div class="survey-nav-left" *ngIf="!showSidebar">
+    <a class="btn btn-primary btn-lg" routerLink="/">
+      <span class="fa fa-arrow-circle-left btn-icon-left"></span> Back
+    </a>
+  </div>
+  <div class="survey-nav-left" *ngIf="showSidebar && !isFirstPage">
     <button class="btn btn-primary btn-lg" (click)="prevPage()">
       <span class="fa fa-arrow-circle-left btn-icon-left"></span> Back
     </button>
   </div>
   <div class="survey-nav-right">
-    <button class="btn btn-primary btn-lg" (click)="nextPage()" *ngIf="! isLastPage">
+    <button
+      class="btn btn-primary btn-lg"
+      (click)="nextPage()"
+      *ngIf="!isLastPage"
+    >
       Next <span class="fa fa-arrow-circle-right btn-icon-right"></span>
     </button>
-    <button class="btn btn-success btn-lg" (click)="complete()" *ngIf="isLastPage">
+    <button
+      class="btn btn-success btn-lg"
+      (click)="complete()"
+      [disabled]="!canComplete"
+      *ngIf="isLastPage"
+    >
       <span class="fa fa-check-circle btn-icon-left"></span> Complete
     </button>
   </div>

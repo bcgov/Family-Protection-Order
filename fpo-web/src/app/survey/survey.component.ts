@@ -9,7 +9,7 @@ import { InsertService } from "../insert/insert.service";
 import { addQuestionTypes } from "./question-types";
 
 @Component({
-  selector: "survey",
+  selector: "survey-view",
   templateUrl: "./survey.component.html",
   styleUrls: ["./survey.component.scss"]
 })
@@ -36,6 +36,7 @@ export class SurveyComponent implements OnInit {
   private disableCache = false;
   private markdownConverter: any;
   private showMissingTerms = true;
+  private missingRequired = true;
   private prevPageIndex = null;
 
   constructor(
@@ -215,6 +216,11 @@ export class SurveyComponent implements OnInit {
     this.surveyModel.nextPage();
   }
 
+  get canComplete() {
+    if (this.showSidebar) return true; // quick workaround for primary survey
+    return !this.missingRequired;
+  }
+
   complete() {
     this.surveyModel.completeLastPage();
   }
@@ -283,18 +289,20 @@ export class SurveyComponent implements OnInit {
   }
 
   evalProgress() {
+    let missing = false;
     if (this.surveyModel) {
       const page = this.surveyModel.currentPage;
-      let done = true;
       if (page) {
         for (const q of page.questions) {
           if (q.isVisible && q.isRequired && q.isEmpty()) {
-            done = false;
+            missing = true;
+            break;
           }
         }
       }
       // console.log('progress: ', this.surveyModel.getProgress(), done);
     }
+    this.missingRequired = missing;
   }
 
   logout() {
