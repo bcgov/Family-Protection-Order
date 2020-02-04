@@ -3,7 +3,6 @@
 // survey styles
 
 .sv_main {
-  font-size: 16px;
   .sv_page_description {
     margin-bottom: 10px;
   }
@@ -26,7 +25,7 @@
   }
 
   h3 {
-    font-size: 34px;
+    // font-size: 34px;
     font-weight: 600;
   }
 
@@ -36,9 +35,18 @@
     margin: 0.65em 0 0.5em;
   }
 
+  .sv-title {
+    // dynamic panel
+    font-size: 20px;
+  }
+  .sv_qstn hr {
+    // above add button on dynamic panel
+    margin: 1.5rem 0;
+  }
+
   .sv_p_title {
     border-bottom: 2px solid $gov-light-grey;
-    font-size: 20px;
+    // font-size: 20px;
     font-weight: 600;
     margin: 5px 0.3em 1.6rem;
     padding-bottom: 3px;
@@ -78,7 +86,7 @@
     margin-top: 5px;
   }
   .sv_q_description {
-    font-size: 16px;
+    // font-size: 16px;
     margin-bottom: 1.5em;
   }
   .panel-footer {
@@ -86,14 +94,11 @@
     border: none;
     padding: 0;
   }
-  .form-control {
-    font-size: 16px;
-  }
   .survey-address-line + .survey-address-line {
     margin-top: 0.8em;
   }
   .survey-address-label {
-    font-size: 16px;
+    // font-size: 16px;
     font-weight: normal;
   }
 }
@@ -141,6 +146,7 @@
   .fa {
     color: $gov-navy-blue;
     font-size: 20px;
+    line-height: inherit;
   }
   .panel-heading {
     color: #55555a;
@@ -189,6 +195,7 @@
   .fa {
     color: $gov-navy-blue;
     font-size: 20px;
+    line-height: inherit;
   }
   .panel-heading {
     padding: 0;

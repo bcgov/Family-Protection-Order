@@ -1106,7 +1106,7 @@ function initCustomDate(Survey) {
         }
       };
 
-      yearSel.className = "form-control date-select-year";
+      yearSel.className = "form-control date-select-year mr-1";
       yearSel.id = question.inputId; // allow auto focus
       const yrFst = document.createElement("option");
       yrFst.text = "(Year)";
@@ -1128,7 +1128,7 @@ function initCustomDate(Survey) {
       };
       el.appendChild(yearSel);
 
-      monthSel.className = "form-control date-select-month";
+      monthSel.className = "form-control date-select-month mr-1";
       const monthFst = document.createElement("option");
       monthFst.text = "(Month)";
       monthFst.value = "";
