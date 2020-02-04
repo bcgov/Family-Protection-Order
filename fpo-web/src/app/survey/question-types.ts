@@ -391,6 +391,7 @@ function initYesNo(Survey) {
   };
 
   Survey.CustomWidgetCollection.Instance.addCustomWidget(widget, "type");
+  console.log(Survey.CustomWidgetCollection);
 }
 
 function initAddressBlock(Survey) {

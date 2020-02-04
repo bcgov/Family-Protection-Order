@@ -62,17 +62,13 @@ export class SurveyComponent implements OnInit {
 
   initSurvey() {
     addQuestionTypes(Survey);
-    Survey.Survey.cssType = "bootstrap";
     Survey.defaultBootstrapCss.page.root = "sv_page";
     Survey.defaultBootstrapCss.pageDescription = "sv_page_description";
     Survey.defaultBootstrapCss.pageTitle = "sv_page_title";
     Survey.defaultBootstrapCss.navigationButton = "btn btn-primary";
     Survey.defaultBootstrapCss.question.title = "sv_q_title";
     Survey.defaultBootstrapCss.question.description = "sv_q_description small";
-    Survey.defaultBootstrapCss.panel.title = "sv_p_title";
-    Survey.defaultBootstrapCss.panel.container = "sv_p_container";
     Survey.defaultBootstrapCss.panel.description = "sv_p_description";
-    Survey.defaultBootstrapCss.row = "sv_row";
     Survey.defaultBootstrapCss.matrixdynamic.button = "btn btn-primary";
     Survey.defaultBootstrapCss.paneldynamic.button = "btn btn-primary";
     Survey.defaultBootstrapCss.paneldynamic.root = "sv_p_dynamic"; // not used?
@@ -82,6 +78,7 @@ export class SurveyComponent implements OnInit {
     Survey.defaultBootstrapCss.radiogroup.item = "sv-radio";
     Survey.defaultBootstrapCss.radiogroup.controlLabel = "sv-checkbox-label";
     Survey.defaultBootstrapCss.radiogroup.materialDecorator = "";
+    Survey.StylesManager.applyTheme("bootstrap");
   }
 
   get surveyJson() {

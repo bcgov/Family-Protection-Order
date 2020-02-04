@@ -15,7 +15,7 @@ export class GeneralDataService {
   private onUserInfo: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   private userInfo: any = null;
   // restrict to browser cache - not database
-  private browserOnly: boolean = true;
+  private browserOnly = true;
 
   constructor(
     private http: HttpClient,
@@ -32,8 +32,8 @@ export class GeneralDataService {
   }
 
   getBrowserUser() {
-    let userKey = "temp-user";
-    let sessionUser = sessionStorage.getItem(userKey);
+    const userKey = "temp-user";
+    const sessionUser = sessionStorage.getItem(userKey);
     let user = null;
     try {
       user = sessionUser ? JSON.parse(sessionUser) : null;
@@ -51,7 +51,7 @@ export class GeneralDataService {
   }
 
   updateBrowserUser(params?: any) {
-    let user = this.getBrowserUser();
+    const user = this.getBrowserUser();
     if (params) Object.assign(user, params);
     sessionStorage.setItem("temp-user", JSON.stringify(user));
   }
@@ -61,7 +61,7 @@ export class GeneralDataService {
   }
 
   quickExit() {
-    let div = document.createElement("div");
+    const div = document.createElement("div");
     div.style.background = "#fff";
     div.style.position = "absolute";
     div.style.left = "0px";
@@ -95,7 +95,7 @@ export class GeneralDataService {
     if (this.browserOnly) {
       return new Promise(resolve => {
         try {
-          let user = this.getBrowserUser();
+          const user = this.getBrowserUser();
           this.returnUserInfo(user);
           resolve(user);
         } catch (e) {
@@ -107,7 +107,7 @@ export class GeneralDataService {
       if (demo_login !== undefined) {
         headers = new Headers({ "X-DEMO-LOGIN": demo_login });
       }
-      let url = this.getApiUrl("user-info");
+      const url = this.getApiUrl("user-info");
       return this.loadJson(url, { t: new Date().getTime() }, headers)
         .then(result => {
           this.returnUserInfo(result);
@@ -165,7 +165,7 @@ export class GeneralDataService {
       this.updateBrowserUser({ accepted_terms_at: new Date().toString() });
       return this.loadUserInfo();
     } else {
-      let url = this.getApiUrl("accept-terms");
+      const url = this.getApiUrl("accept-terms");
       return this.http
         .post(url, null, { withCredentials: true })
         .toPromise()
@@ -175,7 +175,7 @@ export class GeneralDataService {
 
   clearSurveyCache(name: string, key?: string, useLocal?: boolean) {
     if (!name) return Promise.reject("Cache name not defined");
-    let localKey = "survey-" + name;
+    const localKey = "survey-" + name;
     if (this.browserOnly) {
       return new Promise(resolve => {
         if (key) sessionStorage.removeItem(localKey + "-key");
@@ -209,7 +209,7 @@ export class GeneralDataService {
   }
 
   getLocalSurveyCache(name, key, session?) {
-    let localKey = "survey-" + name;
+    const localKey = "survey-" + name;
     let cached;
     if (session) {
       if (key === "clear") {
@@ -234,13 +234,13 @@ export class GeneralDataService {
   }
 
   saveLocalSurveyCache(name, data, key, session?) {
-    let localKey = "survey-" + name;
+    const localKey = "survey-" + name;
     if (session) {
       if (!key) key = "" + Math.random();
       sessionStorage.setItem(localKey + "-" + key, JSON.stringify(data));
       let index = this.getLocalSurveyCache(name, "index", true);
       index = index ? index.result.filter(x => x.key !== key) : [];
-      let idxCopy = Object.assign({}, data);
+      const idxCopy = Object.assign({}, data);
       delete idxCopy["data"];
       idxCopy["key"] = key;
       index.push(idxCopy);
@@ -278,8 +278,8 @@ export class GeneralDataService {
     }
     let url = this.getApiUrl("survey-cache/" + encodeURIComponent(name));
     if (key) url += "/" + encodeURIComponent(key);
-    let headers = { "Content-Type": "application/json" };
-    let postData = data === null ? "" : JSON.stringify(data);
+    const headers = { "Content-Type": "application/json" };
+    const postData = data === null ? "" : JSON.stringify(data);
     let savedLocal = false;
     if (useLocal && postData) {
       this.saveLocalSurveyCache(name, data, key);

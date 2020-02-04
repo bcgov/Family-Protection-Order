@@ -2,7 +2,7 @@
 
 // survey styles
 
-.survey-container {
+.sv_main {
   font-size: 16px;
   .sv_page_description {
     margin-bottom: 10px;
@@ -67,6 +67,9 @@
       }
     }*/
   }
+  .sv_q {
+    padding: 0 0.25em; // avoid cutting off focus indicator
+  }
   .sv_q_title {
     color: #556077;
     font-size: 1.5em;
@@ -95,12 +98,17 @@
   }
 }
 
+.svd_container survey-widget .form-inline .form-control {
+  // fix override in surveyjs css
+  width: auto;
+}
+
 .sv_p_container {
   // survey panel
   background: $gov-white;
   border: 1px solid $gov-light-grey;
   border-radius: 8px;
-  padding: 1em 0.5em 0.5em;
+  padding: 0.25em 0.85em;
   margin: 0.5em 0;
   // when a container is inside another one;
   .sv_p_container {
