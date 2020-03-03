@@ -27,7 +27,7 @@ export class GeneralDataService {
   }
 
   getApiUrl(action: string): string {
-    return "http://localhost:8081/api/v1/" + action;
+    return this.getBaseHref() + "api/" + action;
   }
 
   getBrowserUser() {
