@@ -391,7 +391,6 @@ function initYesNo(Survey) {
   };
 
   Survey.CustomWidgetCollection.Instance.addCustomWidget(widget, "type");
-  console.log(Survey.CustomWidgetCollection);
 }
 
 function initAddressBlock(Survey) {
@@ -1163,7 +1162,6 @@ function initCustomDate(Survey) {
         if (question.value) {
           const m = question.value.match(/^(\d{4})-(\d{2})-(\d{2})$/);
           const dt = new Date(m[1], m[2] - 1, m[3]);
-          console.log(dt);
           if (dt) {
             yearVal = "" + dt.getFullYear();
             monthVal = "" + (dt.getMonth() + 1);

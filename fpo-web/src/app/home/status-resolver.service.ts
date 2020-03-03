@@ -25,7 +25,8 @@ export class UserStatusResolver implements Resolve<any> {
     );
   }
 
-  handleLoadError() {
-    this.router.navigate(["prv/status"]);
+  handleLoadError(err) {
+    console.log("Status load error", err);
+    this.router.navigate(["/prv/status"]);
   }
 }

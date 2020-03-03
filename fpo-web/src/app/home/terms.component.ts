@@ -1,12 +1,9 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'terms-view',
-  templateUrl: './terms.component.html',
+  selector: "app-terms-view",
+  templateUrl: "./terms.component.html"
 })
 export class TermsViewComponent {
-
-  constructor(
-  ) {}
-
+  constructor() {}
 }
