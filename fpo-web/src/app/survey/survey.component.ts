@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { BehaviorSubject } from "rxjs";
 import * as Survey from "survey-angular";
 import * as showdown from "showdown";
@@ -9,7 +9,7 @@ import { InsertService } from "../insert/insert.service";
 import { addQuestionTypes } from "./question-types";
 
 @Component({
-  selector: "survey-view",
+  selector: "app-survey-view",
   templateUrl: "./survey.component.html",
   styleUrls: ["./survey.component.scss"]
 })
@@ -38,12 +38,14 @@ export class SurveyComponent implements OnInit {
   private showMissingTerms = true;
   private missingRequired = true;
   private prevPageIndex = null;
+  private surveyCollection = "default";
 
   constructor(
     private dataService: GeneralDataService,
     private insertService: InsertService,
     private glossaryService: GlossaryService,
-    private _router: Router
+    private _router: Router,
+    private _route: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -51,7 +53,12 @@ export class SurveyComponent implements OnInit {
       this.surveyMode = this.initialMode;
     }
     this.initSurvey();
-    this.glossaryService.onLoaded(() => this.loadSurvey(true));
+    this.glossaryService.onLoaded(() => {
+      this._route.params.subscribe(params => {
+        this.cacheKey = params.id || null;
+      });
+      this.loadSurvey(true);
+    });
     if (this.showSidebar) {
       this.insertService.updateInsert("sidebar-left", {
         type: "survey-sidebar",
@@ -231,7 +238,8 @@ export class SurveyComponent implements OnInit {
       this.surveyModel.data = {};
       this.surveyModel.currentPageNo = 0;
     }
-    this.dataService.clearSurveyCache(
+    this.dataService.clearSurveyResult(
+      this.surveyCollection,
       this.cacheName,
       this.cacheKey,
       this.useLocalCache
@@ -241,9 +249,18 @@ export class SurveyComponent implements OnInit {
   }
 
   loadCache() {
-    this.dataService
-      .loadSurveyCache(this.cacheName, this.cacheKey, this.useLocalCache)
-      .then(this.doneLoadCache.bind(this));
+    if (this.cacheKey) {
+      this.dataService
+        .loadSurveyResult(
+          this.surveyCollection,
+          this.cacheName,
+          this.cacheKey,
+          this.useLocalCache
+        )
+        .then(this.doneLoadCache.bind(this));
+    } else {
+      this.surveyModel.data = {};
+    }
   }
 
   doneLoadCache(response) {
@@ -258,7 +275,7 @@ export class SurveyComponent implements OnInit {
         this.surveyModel.currentPageNo = this.prevPageIndex;
         this.surveyModel.data = cache.data;
         this.cacheLoadTime = cache.time;
-        this.cacheKey = response.key;
+        this.cacheKey = response.id || response.key;
         if (this.surveyMode === "print" && this.surveyCompleted)
           this.complete();
         else if (prevPg === this.surveyModel.currentPageNo)
@@ -275,15 +292,21 @@ export class SurveyComponent implements OnInit {
       completed: this.surveyCompleted
     };
     this.dataService
-      .saveSurveyCache(this.cacheName, cache, this.cacheKey, this.useLocalCache)
+      .saveSurveyResult(
+        this.surveyCollection,
+        this.cacheName,
+        cache,
+        this.cacheKey,
+        this.useLocalCache
+      )
       .then(this.doneSaveCache.bind(this))
       .catch(err => this.doneSaveCache(null, err));
   }
 
   doneSaveCache(response, err?) {
-    if (response && response.status === "ok" && response.result) {
-      this.cacheLoadTime = response.result.time;
-      this.cacheKey = response.key;
+    if (response && response.status === "ok") {
+      if (response.result) this.cacheLoadTime = response.result.time;
+      this.cacheKey = response.id || response.key;
     }
   }
 

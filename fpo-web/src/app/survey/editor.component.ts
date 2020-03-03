@@ -6,7 +6,7 @@ import { addQuestionTypes, addToolboxOptions } from "./question-types";
 import { GeneralDataService } from "../general-data.service";
 
 @Component({
-  selector: "survey-editor",
+  selector: "app-survey-editor",
   templateUrl: "./editor.component.html",
   encapsulation: ViewEncapsulation.None,
   styleUrls: [
@@ -142,7 +142,8 @@ export class SurveyEditorComponent implements OnInit {
   }
 
   resetCache() {
-    this.dataService.clearSurveyCache(
+    this.dataService.clearSurveyResult(
+      "editor",
       this.cacheName,
       this.cacheKey,
       this.useLocalCache
@@ -154,7 +155,12 @@ export class SurveyEditorComponent implements OnInit {
 
   loadCache() {
     return this.dataService
-      .loadSurveyCache(this.cacheName, this.cacheKey, this.useLocalCache)
+      .loadSurveyResult(
+        "editor",
+        this.cacheName,
+        this.cacheKey,
+        this.useLocalCache
+      )
       .then(this.doneLoadCache.bind(this))
       .catch(err => this.doneLoadCache(null, err));
   }
@@ -179,7 +185,13 @@ export class SurveyEditorComponent implements OnInit {
       data: survey
     };
     this.dataService
-      .saveSurveyCache(this.cacheName, cache, this.cacheKey, this.useLocalCache)
+      .saveSurveyResult(
+        "editor",
+        this.cacheName,
+        cache,
+        this.cacheKey,
+        this.useLocalCache
+      )
       .then(
         result => this.doneSaveCache(result, null, saveNo, callback),
         err => this.doneSaveCache(null, err, saveNo, callback)

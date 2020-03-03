@@ -15,7 +15,7 @@ export class GeneralDataService {
   private onUserInfo: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   private userInfo: any = null;
   // restrict to browser cache - not database
-  private browserOnly = true;
+  private browserOnly = false;
 
   constructor(
     private http: HttpClient,
@@ -27,7 +27,7 @@ export class GeneralDataService {
   }
 
   getApiUrl(action: string): string {
-    return this.getBaseHref() + 'api/' + action;
+    return this.getBaseHref() + "api/" + action;
   }
 
   getBrowserUser() {
@@ -104,7 +104,7 @@ export class GeneralDataService {
     } else {
       let headers = null;
       if (demo_login !== undefined) {
-        headers = new Headers({ "X-DEMO-LOGIN": demo_login });
+        headers = { "X-DEMO-LOGIN": demo_login };
       }
       const url = this.getApiUrl("user-info");
       return this.loadJson(url, { t: new Date().getTime() }, headers)
@@ -172,13 +172,18 @@ export class GeneralDataService {
     }
   }
 
-  clearSurveyCache(name: string, key?: string, useLocal?: boolean) {
-    if (!name) return Promise.reject("Cache name not defined");
-    const localKey = "survey-" + name;
+  clearSurveyResult(
+    collection: string,
+    name: string,
+    key: string,
+    useLocal?: boolean
+  ) {
+    if (!name) return Promise.reject("Survey type not defined");
+    const localKey = "survey-" + collection + "-" + name;
     if (this.browserOnly) {
       return new Promise(resolve => {
         if (key) sessionStorage.removeItem(localKey + "-key");
-        let index = this.getLocalSurveyCache(name, "index", true);
+        let index = this.getLocalSurveyCache(collection, name, "index", true);
         index = index ? index.result.filter(x => x.key !== key) : [];
         sessionStorage.setItem(localKey + "-index", JSON.stringify(index));
         resolve(null);
@@ -187,28 +192,93 @@ export class GeneralDataService {
     if (useLocal) {
       localStorage.removeItem(localKey);
     }
-    return this.saveSurveyCache(name, null, key);
+    const url = this.getApiUrl(
+      "survey-result/" +
+        encodeURIComponent(collection) +
+        "/" +
+        encodeURIComponent(name) +
+        "/" +
+        encodeURIComponent(key)
+    );
+    return this.http
+      .delete(url, { withCredentials: true })
+      .pipe(
+        map((result: any) => {
+          return result;
+        })
+      )
+      .toPromise()
+      .catch((error: any) => {
+        return Promise.reject(error.message || error);
+      });
+    // return this.saveSurveyResult(collection, name, null, key);
   }
 
-  loadSurveyCache(name: string, key?: string, useLocal?: boolean) {
-    if (!name) return Promise.reject("Cache name not defined");
+  loadSurveyResultIndex(collection: string, name: string, useLocal?: boolean) {
+    if (!collection) return Promise.reject("Survey collection not defined");
+    if (!name) return Promise.reject("Survey type not defined");
+    if (this.browserOnly) {
+      return this.loadSurveyResult(collection, name, "index", true);
+    }
+    const url = this.getApiUrl(
+      "survey-result/" +
+        encodeURIComponent(collection) +
+        "/" +
+        encodeURIComponent(name)
+    );
+    return this.loadJson(url, { t: new Date().getTime() })
+      .then(result =>
+        this.returnSurveyResult(
+          collection,
+          name,
+          "index",
+          result,
+          null,
+          useLocal
+        )
+      )
+      .catch(err =>
+        this.returnSurveyResult(collection, name, "index", null, err, useLocal)
+      );
+  }
+
+  loadSurveyResult(
+    collection: string,
+    name: string,
+    key: string,
+    useLocal?: boolean
+  ) {
+    if (!name) return Promise.reject("Survey type not defined");
     if (this.browserOnly) {
       return this.loadUserInfo().then(info => {
         if (!info.accepted_terms_at && key !== "index") {
           return { accept_terms: true };
         }
-        return this.getLocalSurveyCache(name, key, true);
+        return this.getLocalSurveyCache(collection, name, key, true);
       });
     }
-    let url = this.getApiUrl("survey-cache/" + encodeURIComponent(name));
-    if (key) url += "/" + encodeURIComponent(key);
+    if (!key) {
+      return Promise.reject("Survey id not defined");
+    }
+    const url = this.getApiUrl(
+      "survey-result/" +
+        encodeURIComponent(collection) +
+        "/" +
+        encodeURIComponent(name) +
+        "/" +
+        encodeURIComponent(key)
+    );
     return this.loadJson(url, { t: new Date().getTime() })
-      .then(result => this.returnSurveyCache(name, key, result, null, useLocal))
-      .catch(err => this.returnSurveyCache(name, key, null, err, useLocal));
+      .then(result =>
+        this.returnSurveyResult(collection, name, key, result, null, useLocal)
+      )
+      .catch(err =>
+        this.returnSurveyResult(collection, name, key, null, err, useLocal)
+      );
   }
 
-  getLocalSurveyCache(name, key, session?) {
-    const localKey = "survey-" + name;
+  getLocalSurveyCache(collection: string, name: string, key: string, session?) {
+    const localKey = "survey-" + collection + "-" + name;
     let cached;
     if (session) {
       if (key === "clear") {
@@ -232,12 +302,18 @@ export class GeneralDataService {
     return result;
   }
 
-  saveLocalSurveyCache(name, data, key, session?) {
-    const localKey = "survey-" + name;
+  saveLocalSurveyCache(
+    collection: string,
+    name: string,
+    data,
+    key?: string,
+    session?
+  ) {
+    const localKey = "survey-" + collection + "-" + name;
     if (session) {
-      if (!key) key = "" + Math.random();
+      if (!key) key = "" + Math.round(Math.random() * 10000000);
       sessionStorage.setItem(localKey + "-" + key, JSON.stringify(data));
-      let index = this.getLocalSurveyCache(name, "index", true);
+      let index = this.getLocalSurveyCache(collection, name, "index", true);
       index = index ? index.result.filter(x => x.key !== key) : [];
       const idxCopy = Object.assign({}, data);
       delete idxCopy["data"];
@@ -251,37 +327,50 @@ export class GeneralDataService {
     }
   }
 
-  returnSurveyCache(name, key, result, err, useLocal?: boolean) {
+  returnSurveyResult(
+    collection: string,
+    name: string,
+    key: string,
+    result,
+    err,
+    useLocal?: boolean
+  ) {
     if ((!result || !result.key) && useLocal) {
-      result = this.getLocalSurveyCache(name, key);
+      result = this.getLocalSurveyCache(collection, name, key);
     }
     return result;
   }
 
-  saveSurveyCache(
+  saveSurveyResult(
+    collection: string,
     name: string,
     data: object,
     key?: string,
     useLocal?: boolean
   ) {
-    if (!name) return Promise.reject("Cache name not defined");
+    if (!name) return Promise.reject("Survey type not defined");
     if (this.browserOnly) {
-      key = this.saveLocalSurveyCache(name, data, key, true);
+      key = this.saveLocalSurveyCache(collection, name, data, key, true);
       return Promise.resolve({
-        uid: null,
+        user_id: null,
         local: true,
         key: key,
         status: "ok",
         result: data
       });
     }
-    let url = this.getApiUrl("survey-cache/" + encodeURIComponent(name));
+    let url = this.getApiUrl(
+      "survey-result/" +
+        encodeURIComponent(collection) +
+        "/" +
+        encodeURIComponent(name)
+    );
     if (key) url += "/" + encodeURIComponent(key);
     const headers = { "Content-Type": "application/json" };
     const postData = data === null ? "" : JSON.stringify(data);
     let savedLocal = false;
     if (useLocal && postData) {
-      this.saveLocalSurveyCache(name, data, key);
+      this.saveLocalSurveyCache(collection, name, data, key);
       savedLocal = true;
     }
     return this.http
@@ -296,7 +385,7 @@ export class GeneralDataService {
       .catch((error: any) => {
         if (savedLocal) {
           return Promise.resolve({
-            uid: null,
+            user_id: null,
             local: true,
             key: null,
             status: "ok",
