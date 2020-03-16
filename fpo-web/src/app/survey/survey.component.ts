@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, OnDestroy } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BehaviorSubject } from "rxjs";
 import * as Survey from "survey-angular";
@@ -13,9 +13,11 @@ import { addQuestionTypes } from "./question-types";
   templateUrl: "./survey.component.html",
   styleUrls: ["./survey.component.scss"]
 })
-export class SurveyComponent implements OnInit {
+export class SurveyComponent implements OnInit, OnDestroy {
+  private _active = false;
   private _jsonData: any;
   private _ready = false;
+  private _lastSavedData: any;
   @Input() cacheName: string;
   @Input() onComplete: Function;
   @Input() showSidebar = true;
@@ -65,6 +67,8 @@ export class SurveyComponent implements OnInit {
         inputs: { survey: this }
       });
     }
+    this._active = true;
+    this.autoSave(true);
   }
 
   initSurvey() {
@@ -88,6 +92,18 @@ export class SurveyComponent implements OnInit {
     Survey.defaultBootstrapCss.radiogroup.controlLabel = "sv-checkbox-label";
     Survey.defaultBootstrapCss.radiogroup.materialDecorator = "";
     Survey.StylesManager.applyTheme("bootstrap");
+  }
+
+  ngOnDestroy() {
+    this._active = false;
+  }
+
+  autoSave(init?) {
+    if (!this._active) return;
+    if (!init) {
+      this.saveCache(true);
+    }
+    setTimeout(() => this.autoSave(), 120000);
   }
 
   get surveyJson() {
@@ -284,13 +300,18 @@ export class SurveyComponent implements OnInit {
     }
   }
 
-  saveCache() {
+  saveCache(auto?: boolean) {
     const cache = {
       time: new Date().getTime(),
       data: this.surveyModel.data,
       page: this.surveyModel.currentPageNo,
       completed: this.surveyCompleted
     };
+    const cmpCache = JSON.stringify(cache.data);
+    if (auto && cmpCache === this._lastSavedData) {
+      return;
+    }
+    this._lastSavedData = cmpCache;
     this.dataService
       .saveSurveyResult(
         this.surveyCollection,
