@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { GeneralDataService } from "../general-data.service";
+import { MatomoTracker } from "@ambroise-rabier/ngx-matomo";
 
 declare var window: any;
 
@@ -24,7 +25,8 @@ export class SurveyPrimaryComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private dataService: GeneralDataService
+    private dataService: GeneralDataService,
+    private matomoTracker: MatomoTracker
   ) {}
 
   ngOnInit() {
@@ -564,5 +566,9 @@ export class SurveyPrimaryComponent implements OnInit {
     this.printUrl = this.dataService.getApiUrl(
       "survey-print/" + this.cacheName
     );
+  }
+
+  onPrint() {
+    this.matomoTracker.trackEvent("Survey", "Printed");
   }
 }

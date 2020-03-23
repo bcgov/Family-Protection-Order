@@ -18,6 +18,7 @@
         target="_blank"
         ngNoForm
         class="mrgn-tp-lg"
+        (submit)="(onPrint)"
       >
         <input name="data" type="hidden" [value]="resultJson" />
         <button type="submit" class="btn btn-primary btn-lg">
