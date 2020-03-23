@@ -1,43 +1,56 @@
-import { Component, OnInit, Renderer2 } from "@angular/core";
+import { AfterViewInit, Component, Renderer2 } from "@angular/core";
 import { LocationStrategy } from "@angular/common";
 import { NavigationEnd, Router } from "@angular/router";
 import { BreadcrumbComponent } from "./breadcrumb/breadcrumb.component";
 import { GeneralDataService } from "./general-data.service";
 import { InsertService } from "./insert/insert.service";
+import { MatomoInjector } from "@ambroise-rabier/ngx-matomo";
+import { environment } from "../environments/environment";
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"]
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements AfterViewInit {
   title = "";
-  previousUrl: string;
-  isPopState: boolean;
   _isPrv = false;
 
   constructor(
     private renderer: Renderer2,
     private router: Router,
     private locStrat: LocationStrategy,
-    private dataService: GeneralDataService
+    private dataService: GeneralDataService,
+    private matomoInjector: MatomoInjector
   ) {}
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
+    let isPopState = false;
+    let prevSlug: string;
+    let prevUrl: string;
+    let matomoEnabled: boolean;
+
     this.locStrat.onPopState(() => {
-      this.isPopState = true;
+      isPopState = true;
     });
+
+    if (environment.matomoUrl && environment.matomoSiteId) {
+      this.matomoInjector.init({
+        url: environment.matomoUrl,
+        id: environment.matomoSiteId
+      });
+      matomoEnabled = true;
+    }
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        if (!this.isPopState) {
+        if (!isPopState) {
           // scroll to page top only when navigating to a new page (not via history state)
           window.scrollTo(0, 0);
-          this.isPopState = false;
+          isPopState = false;
         }
-        this.isPopState = false;
+        isPopState = false;
 
-        const prevSlug = this.previousUrl;
         let nextSlug = event.url.slice(1);
         if (nextSlug.match(/^prv(\/|$)/)) {
           this._isPrv = true;
@@ -52,7 +65,15 @@ export class AppComponent implements OnInit {
         if (nextSlug) {
           this.renderer.addClass(document.body, "ctx-" + nextSlug);
         }
-        this.previousUrl = nextSlug;
+        prevSlug = nextSlug;
+
+        if (matomoEnabled) {
+          // init() handles the first URL, so only trigger on subsequent pages
+          if (prevUrl) {
+            this.matomoInjector.onPageChange({ referrer: prevUrl });
+          }
+          prevUrl = window.location.href;
+        }
       }
     });
   }

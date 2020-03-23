@@ -12,6 +12,7 @@
   },
   "private": true,
   "dependencies": {
+    "@ambroise-rabier/ngx-matomo": "1.0.10",
     "@angular/animations": "^8.2.14",
     "@angular/common": "^8.2.14",
     "@angular/compiler": "^8.2.14",
