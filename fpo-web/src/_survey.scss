@@ -101,6 +101,10 @@
     // font-size: 16px;
     font-weight: normal;
   }
+  .sv-checkbox > label,
+  .sv-radio > label {
+    display: block; // fix alignment on checkbox row
+  }
 }
 
 .svd_container survey-widget .form-inline .form-control {
