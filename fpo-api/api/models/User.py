@@ -8,7 +8,6 @@ class User(AbstractUser):
     # Siteminder headers
     authorization_id = models.CharField(max_length=500, blank=True, null=True)
     authorization_guid = models.UUIDField(unique=True, default=None, null=True)
-    authorization_directory = models.CharField(max_length=100, blank=True,
-                                               null=True)
+    authorization_directory = models.CharField(max_length=100, blank=True, null=True)
     authorization_email = models.EmailField(blank=True, null=True)
     display_name = models.CharField(max_length=500, blank=True, null=True)

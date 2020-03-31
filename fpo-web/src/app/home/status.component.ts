@@ -1,5 +1,5 @@
-import { Component, Input, OnDestroy, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 import { GeneralDataService } from "../general-data.service";
 
 @Component({
@@ -13,18 +13,23 @@ export class UserStatusComponent implements OnInit, OnDestroy {
   private _preAccept = false;
   private _surveyIndex = [];
   public status: any;
-  private statusSub = null;
+  private _statusSub = null;
+  private _loginRedirect: string = null;
 
   constructor(
     private dataService: GeneralDataService,
+    private route: ActivatedRoute,
     private router: Router
   ) {}
 
   ngOnInit() {
-    this.statusSub = this.dataService.subscribeUserInfo(
+    this._statusSub = this.dataService.subscribeUserInfo(
       this.updateInfo.bind(this)
     );
-    this.finishLogin(this.dataService.requireLogin(true));
+    this.route.queryParams.subscribe(params => {
+      this._loginRedirect = params.login_redirect;
+      this.finishLogin(this.dataService.getUserInfo());
+    });
   }
 
   updateInfo(status) {
@@ -32,7 +37,7 @@ export class UserStatusComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.statusSub) this.statusSub.unsubscribe();
+    if (this._statusSub) this._statusSub.unsubscribe();
   }
 
   get acceptedTerms(): boolean {
@@ -59,7 +64,15 @@ export class UserStatusComponent implements OnInit, OnDestroy {
     return request
       .then(result => {
         this.loading = false;
-        this.loadSurveyIndex();
+        if (this._loginRedirect) {
+          if (result && result.user_id) {
+            this.router.navigateByUrl(this._loginRedirect);
+          } else {
+            console.error("Login session not found after redirect");
+          }
+        } else {
+          this.loadSurveyIndex();
+        }
       })
       .catch(err => {
         this.loading = false;

@@ -13,8 +13,6 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 import os
 import posixpath
 
-# import logging.config
-
 from corsheaders.defaults import default_headers
 
 from . import database
@@ -54,18 +52,19 @@ INSTALLED_APPS = [
     "auditable",
     "api",
     "corsheaders",
+    "oidc_rp",
 ]
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.auth.middleware.SessionAuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "oidc_rp.middleware.OIDCRefreshIDTokenMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
@@ -76,7 +75,6 @@ ROOT_URLCONF = "fpo_api.urls"
 CORS_URLS_REGEX = r"^/api/v1/.*$"
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
-
 CORS_ALLOW_HEADERS = default_headers + ("x-demo-login",)
 
 TEMPLATES = [
@@ -90,6 +88,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "oidc_rp.context_processors.oidc",
             ]
         },
     }
@@ -120,12 +119,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL = "api.User"
 
-REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": (
-        "api.auth.SiteMinderAuth",
-        "rest_framework.authentication.SessionAuthentication",
-    )
-}
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "oidc_rp.backends.OIDCAuthBackend",
+)
 
 
 # Internationalization
@@ -193,7 +190,48 @@ LOGGING = {
     },
 }
 
-# For development (when no SiteMinder available)
-OVERRIDE_USER_ID = os.getenv("OVERRIDE_USER_ID")
+OIDC_ENABLED = False
 
-DEMO_LOGIN = True
+# Settings for django-oidc-rp
+OIDC_RP_PROVIDER_ENDPOINT = os.getenv(
+    "OIDC_RP_PROVIDER_ENDPOINT",
+    # FIXME no default here
+    "https://sso-dev.pathfinder.gov.bc.ca/auth/realms/tz0e228w",
+)
+
+if OIDC_RP_PROVIDER_ENDPOINT:
+    OIDC_RP_PROVIDER_AUTHORIZATION_ENDPOINT = (
+        f"{OIDC_RP_PROVIDER_ENDPOINT}/protocol/openid-connect/auth"
+    )
+    OIDC_RP_PROVIDER_TOKEN_ENDPOINT = (
+        f"{OIDC_RP_PROVIDER_ENDPOINT}/protocol/openid-connect/token"
+    )
+    OIDC_RP_PROVIDER_JWKS_ENDPOINT = (
+        f"{OIDC_RP_PROVIDER_ENDPOINT}/protocol/openid-connect/certs"
+    )
+    OIDC_RP_PROVIDER_USERINFO_ENDPOINT = (
+        f"{OIDC_RP_PROVIDER_ENDPOINT}/protocol/openid-connect/userinfo"
+    )
+    OIDC_RP_CLIENT_ID = os.getenv("OIDC_RP_CLIENT_ID", "fpo-api")
+    OIDC_RP_CLIENT_SECRET = os.getenv("OIDC_RP_CLIENT_SECRET")
+    OIDC_RP_PROVIDER_SIGNATURE_ALG = "RS256"
+    OIDC_RP_SCOPES = "openid profile email"  # address phone
+    OIDC_RP_ID_TOKEN_INCLUDE_USERINFO = True
+    OIDC_RP_AUTHENTICATION_FAILURE_REDIRECT_URI = os.getenv("OIDC_RP_FAILURE_URI", "/")
+    OIDC_RP_USER_DETAILS_HANDLER = "api.auth.sync_keycloak_user"
+
+    DRF_AUTH_CLASS = (
+        "oidc_rp.contrib.rest_framework.authentication.BearerTokenAuthentication"
+    )
+    OIDC_ENABLED = True
+else:
+    DRF_AUTH_CLASS = "api.auth.DemoAuth"
+    del AUTHENTICATION_BACKENDS
+
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        DRF_AUTH_CLASS,
+        "rest_framework.authentication.SessionAuthentication",
+    )
+}

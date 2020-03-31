@@ -27,7 +27,7 @@ export class GeneralDataService {
   }
 
   getApiUrl(action: string): string {
-    return this.getBaseHref() + "api/" + action;
+    return "http://localhost:8081/api/v1/" + action;
   }
 
   getBrowserUser() {
@@ -106,7 +106,7 @@ export class GeneralDataService {
       if (demo_login !== undefined) {
         headers = { "X-DEMO-LOGIN": demo_login };
       }
-      const url = this.getApiUrl("user-info");
+      const url = this.getApiUrl("user-info/");
       return this.loadJson(url, { t: new Date().getTime() }, headers)
         .then(result => {
           this.returnUserInfo(result);
@@ -120,6 +120,17 @@ export class GeneralDataService {
     }
   }
 
+  currentUserInfo(): UserInfo {
+    return this.userInfo;
+  }
+
+  getUserInfo(demo_login?: string): Promise<UserInfo | null> {
+    if (this.userInfo) {
+      return Promise.resolve(this.userInfo);
+    }
+    return this.loadUserInfo(demo_login);
+  }
+
   logout() {
     if (this.browserOnly) {
       this.clearSession();
@@ -129,9 +140,8 @@ export class GeneralDataService {
       this.loadUserInfo("").then(() => {
         window.location.replace(this.getBaseHref());
       });
-    } else {
-      // redirect to siteminder logout URL
-      // ...
+    } else if (this.userInfo && this.userInfo.logout_uri) {
+      window.location.replace(this.userInfo.logout_uri);
     }
   }
 
@@ -145,18 +155,12 @@ export class GeneralDataService {
     return this.onUserInfo.subscribe(callb);
   }
 
-  requireLogin(no_terms?) {
-    if (
-      this.userInfo &&
-      this.userInfo.user_id &&
-      (no_terms || this.userInfo.accepted_terms_at)
-    ) {
-      return Promise.resolve(this.userInfo);
-    }
-    return this.loadUserInfo().then(result => {
-      if (result && result.user_id) return Promise.resolve(result);
-      return Promise.reject("Not logged in");
-    });
+  isLoggedIn(): boolean {
+    return !!(this.userInfo && this.userInfo.user_id);
+  }
+
+  loginUri(): string {
+    return this.userInfo && this.userInfo.login_uri;
   }
 
   acceptTerms() {
@@ -164,7 +168,7 @@ export class GeneralDataService {
       this.updateBrowserUser({ accepted_terms_at: new Date().toString() });
       return this.loadUserInfo();
     } else {
-      const url = this.getApiUrl("accept-terms");
+      const url = this.getApiUrl("accept-terms/");
       return this.http
         .post(url, null, { withCredentials: true })
         .toPromise()

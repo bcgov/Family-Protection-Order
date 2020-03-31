@@ -1,4 +1,3 @@
-import json
 import logging
 
 from django.http import (
@@ -84,11 +83,7 @@ class SurveyResultView(APIView):
         uid = self.get_request_user_id(request)
         if not uid:
             return HttpResponseForbidden("Missing user ID")
-        body = request.body
-        try:
-            body = json.loads(request.body)
-        except json.JSONDecodeError:
-            return HttpResponseBadRequest("Invalid JSON")
+        body = request.data
         if not body:
             return HttpResponseBadRequest("Missing survey results")
         key = kwargs.get("id")

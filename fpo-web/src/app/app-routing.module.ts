@@ -43,7 +43,8 @@ const routes: Routes = [
     data: {
       breadcrumb: "Provincial Family Test",
       cache_name: "primary",
-      survey_path: "assets/survey-primary.json"
+      survey_path: "assets/survey-primary.json",
+      accept_terms: true
     }
   },
   {
@@ -57,7 +58,8 @@ const routes: Routes = [
     data: {
       breadcrumb: "Provincial Family Test",
       cache_name: "primary",
-      survey_path: "assets/survey-primary.json"
+      survey_path: "assets/survey-primary.json",
+      accept_terms: true
     }
   },
   {
@@ -97,6 +99,9 @@ const routes: Routes = [
   {
     path: "prv/status",
     component: UserStatusComponent,
+    resolve: {
+      userInfo: UserStatusResolver
+    },
     data: {
       breadcrumb: "Status"
     }
@@ -111,6 +116,9 @@ const routes: Routes = [
   {
     path: "prv/terms",
     component: TermsViewComponent,
+    resolve: {
+      userInfo: UserStatusResolver
+    },
     data: {
       breadcrumb: "Terms and Conditions"
     }
