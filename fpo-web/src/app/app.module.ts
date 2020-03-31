@@ -1,7 +1,12 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import {
+  HttpClientModule,
+  HttpClientXsrfModule,
+  HTTP_INTERCEPTORS
+} from "@angular/common/http";
+import { HttpCsrfInterceptor } from "./csrf-interceptor.provider";
 import { MatomoModule } from "@ambroise-rabier/ngx-matomo";
 
 import { AppRoutingModule } from "./app-routing.module";
@@ -50,6 +55,10 @@ import { ResultComponent } from "./result/result.component";
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    HttpClientXsrfModule.withOptions({
+      cookieName: "csrftoken",
+      headerName: "X-CSRFToken"
+    }),
     AppRoutingModule,
     AdminModule,
     MatomoModule
@@ -58,7 +67,8 @@ import { ResultComponent } from "./result/result.component";
     GeneralDataService,
     GlossaryService,
     InsertService,
-    UserStatusResolver
+    UserStatusResolver,
+    { provide: HTTP_INTERCEPTORS, useClass: HttpCsrfInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

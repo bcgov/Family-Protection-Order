@@ -17,12 +17,14 @@
     limitations under the License.
 """
 
-from django.conf.urls import url
+from django.urls import include, path
+from django.conf import settings
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.schemas import SchemaGenerator
 from rest_framework.views import APIView
-from rest_framework.urlpatterns import format_suffix_patterns
+
+# from rest_framework.urlpatterns import format_suffix_patterns
 from rest_framework_swagger import renderers
 
 # generated views
@@ -48,21 +50,14 @@ class SwaggerSchemaView(APIView):
 urlpatterns = [
     # Swagger documentation
     # url(r'^$', SwaggerSchemaView.as_view()),
-    url(r"^accept-terms$", views.AcceptTermsView.as_view()),
-    url(
-        r"^survey-result/(?P<collection>[a-zA-Z0-9_\-:]+)/(?P<type>[a-zA-Z0-9_\-:]+)$",
-        survey.SurveyResultView.as_view(),
-    ),
-    url(
-        r"^survey-result/(?P<collection>[a-zA-Z0-9_\-:]+)/(?P<type>[a-zA-Z0-9_\-:]+)/"
-        r"(?P<id>[a-zA-Z0-9_\-:]+)$",
-        survey.SurveyResultView.as_view(),
-    ),
-    url(
-        r"^survey-print/(?P<collection>[a-zA-Z0-9_\-:])/(?P<type>[a-zA-Z0-9_\-:]+)$",
-        views.SurveyPdfView.as_view(),
-    ),
-    url(r"^user-info$", views.UserStatusView.as_view()),
+    path("accept-terms/", views.AcceptTermsView.as_view()),
+    path("survey-result/<collection>/<type>", survey.SurveyResultView.as_view()),
+    path("survey-result/<collection>/<type>/<id>", survey.SurveyResultView.as_view()),
+    path("survey-print/<collection>/<type>", views.SurveyPdfView.as_view()),
+    path("user-info/", views.UserStatusView.as_view()),
 ]
 
-urlpatterns = format_suffix_patterns(urlpatterns)
+if settings.OIDC_ENABLED:
+    urlpatterns.append(path("oidc/", include("oidc_rp.urls")))
+
+# urlpatterns = format_suffix_patterns(urlpatterns)

@@ -1,0 +1,21 @@
+{% extends "rest_framework/base.html" %}
+{% load login_uri %}
+{% load rest_framework %}
+
+{% block userlinks %}
+{% if user.is_authenticated %}
+  {% logout_uri request as logout %}
+  {% if logout %}
+    <li><a href="{{ logout }}">Logout</a></li>
+  {% else %}
+    {% optional_logout request user %}
+  {% endif %}
+{% else %}
+  {% login_uri request as login %}
+  {% if login %}
+    <li><a href="{{ login }}">Login</a></li>
+  {% else %}
+    {% optional_login request %}
+  {% endif %}
+{% endif %}
+{% endblock %}

@@ -11,4 +11,6 @@ class SurveyResult(models.Model):
     survey_type = models.CharField(max_length=100)
     result = JSONField(blank=True)
 
-    user = models.ForeignKey("User", related_name="survey_results")
+    user = models.ForeignKey(
+        "User", related_name="survey_results", on_delete=models.CASCADE
+    )
