@@ -27,7 +27,7 @@ export class GeneralDataService {
   }
 
   getApiUrl(action: string): string {
-    return this.getBaseHref() + "api/" + action;
+    return this.getBaseHref() + "api/v1/" + action;
   }
 
   getBrowserUser() {
