@@ -76,7 +76,8 @@ http {
         add_header X-Frame-Options DENY;
 
         # Forward URL if not using path prefix
-        if ($request_uri !~ "^/protection-order/") {
+
+        if ($request_uri !~ "^/protection-order/|^/nginx_status") {
             return 301 $proxy_scheme://$host/protection-order$request_uri;
         }
 
