@@ -22,21 +22,16 @@ export class UserStatusResolver implements Resolve<any> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<any> {
-    const extUri =
-      window.location.origin +
-      this.location.prepareExternalUrl(
-        "/prv/status?login_redirect=" + encodeURIComponent(state.url)
-      );
     const reqTerms = route.data.accept_terms;
     const res = new Observable(sub => {
       this.dataService
         .getUserInfo()
         .then(result => {
-          if (this.handleLogin(result, extUri, reqTerms)) sub.next();
+          if (this.handleLogin(result, state.url, reqTerms)) sub.next();
           // otherwise - observable has no result, navigation paused
         })
         .catch(err => {
-          this.handleLoadError(err);
+          this.handleLoadError(err, state.url);
           sub.next();
         })
         .then(() => sub.complete());
@@ -44,20 +39,30 @@ export class UserStatusResolver implements Resolve<any> {
     return res;
   }
 
-  handleLogin(user: UserInfo, extUri: string, reqTerms: boolean) {
+  handleLogin(user: UserInfo, navPath: string, reqTerms: boolean) {
+    const extUri =
+      window.location.origin +
+      this.location.prepareExternalUrl(
+        "/prv/status?login_redirect=" + encodeURIComponent(navPath)
+      );
     if (user && !user.user_id && user.login_uri) {
       window.location.replace(
         user.login_uri + "?next=" + encodeURIComponent(extUri)
       );
       return false;
     } else if (user && reqTerms && !user.accepted_terms_at) {
-      this.router.navigate(["/prv/status"]);
+      this.redirectStatus(navPath);
     }
     return true;
   }
 
-  handleLoadError(err) {
+  handleLoadError(err, navPath: string) {
     console.log("Status load error", err);
-    this.router.navigate(["/prv/status"]);
+    this.redirectStatus(navPath);
+  }
+
+  redirectStatus(navPath?: string) {
+    if (!navPath || navPath.indexOf("/prv/status") === -1)
+      this.router.navigate(["/prv/status"]);
   }
 }
