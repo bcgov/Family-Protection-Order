@@ -77,7 +77,7 @@ http {
 
         # Forward URL if not using path prefix
         if ($request_uri !~ "^/protection-order/") {
-            return 301 $real_scheme://$http_host/protection-order$request_uri;
+            return 301 $proxy_scheme://$host/protection-order$request_uri;
         }
 
         # Remove path prefix when handling files
