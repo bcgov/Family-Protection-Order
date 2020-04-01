@@ -27,7 +27,7 @@ export class GeneralDataService {
   }
 
   getApiUrl(action: string): string {
-    return "http://localhost:8081/api/v1/" + action;
+    return this.getBaseHref() + "api/" + action;
   }
 
   getBrowserUser() {
@@ -99,6 +99,8 @@ export class GeneralDataService {
           resolve(user);
         } catch (e) {
           console.error(e);
+          this.returnUserInfo(null);
+          return Promise.reject(e);
         }
       });
     } else {
@@ -124,8 +126,8 @@ export class GeneralDataService {
     return this.userInfo;
   }
 
-  getUserInfo(demo_login?: string): Promise<UserInfo | null> {
-    if (this.userInfo) {
+  getUserInfo(demo_login?: string, reload?: boolean): Promise<UserInfo | null> {
+    if (this.userInfo && !reload) {
       return Promise.resolve(this.userInfo);
     }
     return this.loadUserInfo(demo_login);

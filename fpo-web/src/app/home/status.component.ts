@@ -34,6 +34,9 @@ export class UserStatusComponent implements OnInit, OnDestroy {
 
   updateInfo(status) {
     this.status = status;
+    this.error = this.status
+      ? null
+      : "User information could not be loaded. Please refresh the page or try again later.";
   }
 
   ngOnDestroy() {
