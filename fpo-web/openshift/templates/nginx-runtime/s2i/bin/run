@@ -9,7 +9,7 @@ getApiProxyConfigSection (){
 # API_URL:
 #  - The URL for the API endpoint.
 # ================================================================================
-proxyUrl=${1%/}
+proxyUrl=${1}
 
 read -r -d '' _FORWARDED_HEADERS << EOF
 
