@@ -29,7 +29,7 @@
        "type": "text",
        "name": "disputantPhoneNumber",
        "title": "Phone Number",
-       "description": "Include the area code.",
+       "description": "This should be your primary contact number on weekdays between 10am-4pm.\n<br>\nInclude the area code.\n",
        "isRequired": true,
        "inputType": "tel"
       },
@@ -58,7 +58,6 @@
        "type": "text",
        "name": "disputantEmail",
        "title": "Email Address",
-       "description": "Is this required or optional?",
        "isRequired": true
       }
      ]
@@ -117,11 +116,11 @@
        "choices": [
         {
          "value": "allegation",
-         "text": "I am disputing the ticket because I did not commit the office"
+         "text": "I am disputing the ticket because I did not commit the offence"
         },
         {
          "value": "fineAmount",
-         "text": "I did commit the office but I am asking for a reduced fine"
+         "text": "I did commit the offence but I am asking for a reduced fine"
         }
        ]
       },
@@ -173,7 +172,7 @@
        "visible": false,
        "visibleIf": "{disputeType} = \"fineAmount\" and {disputeInWriting} = \"y\"",
        "title": "Why do you think you the fine amount for your Violation Ticket #{ticketNumber} should be reduced?",
-       "description": "This section must not contain an explanation about how you did not commit the office.\n<br>\nMust not contain a defence of the allegation.",
+       "description": "This section must not contain an explanation about how you did not commit the offence.\n<br>\nMust not contain a defence of the allegation.",
        "isRequired": true
       },
       {
@@ -190,7 +189,7 @@
        "visible": false,
        "visibleIf": "{disputeType} = \"fineAmount\" and {disputeInWriting} = \"y\" and {moreTimeToPay} = \"y\"",
        "title": "Why do you need more time to pay the fine for Violation Ticket #{ticketNumber}?",
-       "description": "This section must not contain an explanation about how you did not commit the office.\n<br>\nMust not contain a defence of the allegation.",
+       "description": "This section must not contain an explanation about how you did not commit the offence.\n<br>\nMust not contain a defence of the allegation.",
        "isRequired": true
       },
       {
@@ -231,7 +230,7 @@
        "name": "hearingAttendancePhone",
        "visible": false,
        "visibleIf": "({disputeType} = \"allegation\" or ({disputeType} = \"fineAmount\" and {disputeInWriting} = \"n\")) and {hearingAttendance} = \"remotely\"",
-       "title": "Do you have the ability to attend your remote hearing by phone?",
+       "title": "Do you have the ability to attend your remote Court hearing by phone?",
        "isRequired": true
       },
       {
@@ -239,7 +238,7 @@
        "name": "hearingAttendanceVideo",
        "visible": false,
        "visibleIf": "({disputeType} = \"allegation\" or ({disputeType} = \"fineAmount\" and {disputeInWriting} = \"n\")) and {hearingAttendance} = \"remotely\"",
-       "title": "Do you have the ability to attend your remote hearing by videoconference?",
+       "title": "Do you have the ability to attend your remote Court hearing by videoconference?",
        "description": "examples of video conference are Microsoft Teams, Zoom, Skype, etc.",
        "isRequired": true
       },
@@ -248,7 +247,7 @@
        "name": "hearingAttendanceRemotelyError",
        "visible": false,
        "visibleIf": "({disputeType} = \"allegation\" or \n({disputeType} = \"fineAmount\" and {disputeInWriting} = \"n\")) and {hearingAttendance} = \"remotely\" and {hearingAttendancePhone} = \"n\" and {hearingAttendanceVideo} = \"n\"",
-       "title": "It appears that you are not able to attend your hearing remotely. You will have to attend your hearing in person. \n<br><br>",
+       "title": "It appears that you are not able to attend your Court hearing remotely. You will have to attend your hearing in person. \n<br><br>",
        "isRequired": true,
        "titleLocation": "hidden",
        "messageStyle": "error"
@@ -268,7 +267,7 @@
       {
        "type": "yesno",
        "name": "interpreter",
-       "title": "English is the usual language of Court hearings in British Columbia. Do you need an interpreter at the hearing to help with English?",
+       "title": "English is the usual language of Court hearings in British Columbia. Do you need an interpreter at your hearing to help with English?",
        "description": "What if someone can bring their own interpreter? Should we ask about this?",
        "isRequired": true
       },
@@ -277,13 +276,13 @@
        "name": "interpreterLanguage",
        "visible": false,
        "visibleIf": "{interpreter} = \"y\"",
-       "title": "What language interpreter would you need for the hearing?",
+       "title": "What language interpreter would you need for your Court hearing?",
        "isRequired": true
       },
       {
        "type": "yesno",
        "name": "witnesses",
-       "title": "Will you be calling Witnesses at this hearing?",
+       "title": "Will you be calling Witnesses at you Court hearing?",
        "description": "Witnesses are people (other than yourself) who were there when you were given the Violation Ticket.",
        "isRequired": true
       },
@@ -292,7 +291,7 @@
        "name": "witnessesAmount",
        "visible": false,
        "visibleIf": "{witnesses} = \"y\"",
-       "title": "How many Witnesses do you plan on calling at your hearing?",
+       "title": "How many Witnesses do you plan on calling at your Court hearing?",
        "isRequired": true,
        "inputType": "number"
       },
