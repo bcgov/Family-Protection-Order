@@ -194,6 +194,20 @@
        "isRequired": true
       },
       {
+       "type": "checkbox",
+       "name": "disputantWritingAgreement",
+       "visible": false,
+       "visibleIf": "{disputeType} = \"fineAmount\" and {disputeInWriting} = \"y\"",
+       "title": "I agree that I committed this offence and I do not want to appear in person for a Court hearing. I want to request a reduction in the fine portion of the ticketed amount(s) and/or time to pay the ticketed amount(s).",
+       "isRequired": true,
+       "choices": [
+        {
+         "value": "item1",
+         "text": "I agree with the statement above"
+        }
+       ]
+      },
+      {
        "type": "radiogroup",
        "name": "hearingAttendance",
        "visible": false,
@@ -297,6 +311,18 @@
        "description": "Note to Jack - This is just an extra form; still generate the form from this service. The charter form takes them out of the stream to see a judge so the VTC will need to schedule that.",
        "isRequired": true,
        "titleLocation": "hidden"
+      },
+      {
+       "type": "checkbox",
+       "name": "disputantAcknowledgement",
+       "title": "I acknowledge that I am the disputant and am submitting this information which will be used to schedule my Violation Ticket for a {hearingAttendance} Court hearing.",
+       "isRequired": true,
+       "choices": [
+        {
+         "value": "item1",
+         "text": "I acknowledge the statement above"
+        }
+       ]
       }
      ],
      "visible": false,
