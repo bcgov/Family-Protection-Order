@@ -282,7 +282,7 @@
       {
        "type": "yesno",
        "name": "witnesses",
-       "title": "Will you be calling Witnesses at you Court hearing?",
+       "title": "Will you be calling Witnesses at your Court hearing?",
        "description": "Witnesses are people (other than yourself) who were there when you were given the Violation Ticket.",
        "isRequired": true
       },
@@ -308,7 +308,6 @@
        "visibleIf": "{charter} = \"y\"",
        "title": "You will be filing the required notice in addition to using this service.<br><br>\n[URL for form here]. ",
        "description": "Note to Jack - This is just an extra form; still generate the form from this service. The charter form takes them out of the stream to see a judge so the VTC will need to schedule that.",
-       "isRequired": true,
        "titleLocation": "hidden"
       },
       {
