@@ -1,8 +1,8 @@
 {
- "title": "Provincial Court Family Law Act Protection Order",
+ "title": "Violation Ticket Centre",
  "pages": [
   {
-   "name": "Your Information",
+   "name": "Disputant Response",
    "elements": [
     {
      "type": "panel",
@@ -130,7 +130,7 @@
        "name": "disputeTypeFineAmountExplanation",
        "visible": false,
        "visibleIf": "{disputeType} = \"fineAmount\"",
-       "title": "<br>Did you know?</b> You can ask to reduce the fine amount in writing instead of going to a court hearing. You can also ask for more time to pay.",
+       "title": "<br>Did you know?</b> You can ask to reduce the fine amount in writing instead of going to a Court hearing. You can also ask for more time to pay.",
        "isRequired": true,
        "titleLocation": "hidden"
       },
@@ -139,7 +139,7 @@
        "name": "disputeInWriting",
        "visible": false,
        "visibleIf": "{disputeType} = \"fineAmount\" and {disputeTypeFineAmountExplanation} > 0",
-       "title": "Do you want to ask to reduce the fine in writing instead of going to a court hearing?",
+       "title": "Do you want to ask to reduce the fine in writing instead of going to a Court hearing?",
        "isRequired": true
       },
       {
@@ -172,7 +172,7 @@
        "name": "reasonForFineReduction",
        "visible": false,
        "visibleIf": "{disputeType} = \"fineAmount\" and {disputeInWriting} = \"y\"",
-       "title": "What do you think you the fine amount for your Violation Ticket #{ticketNumber} should be reduced?",
+       "title": "Why do you think you the fine amount for your Violation Ticket #{ticketNumber} should be reduced?",
        "description": "This section must not contain an explanation about how you did not commit the office.\n<br>\nMust not contain a defence of the allegation.",
        "isRequired": true
       },
@@ -198,7 +198,7 @@
        "name": "hearingAttendance",
        "visible": false,
        "visibleIf": "{disputeType} = \"allegation\" or ({disputeType} = \"fineAmount\" and {disputeInWriting} = \"n\")",
-       "title": "I am choosing to attend my traffic court hearing for Violation Ticket #{ticketNumber}:",
+       "title": "I am choosing to attend my Traffic Court hearing for Violation Ticket #{ticketNumber}:",
        "description": "Remotely means by phone or by videoconference",
        "isRequired": true,
        "choices": [
