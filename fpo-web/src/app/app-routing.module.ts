@@ -134,6 +134,30 @@ const routes: Routes = [
       survey_path: "assets/survey-sandbox.json",
       show_sidebar: true
     }
+  },
+  {
+    path: "sandbox2",
+    component: SurveyPrimaryComponent,
+    resolve: {
+      // survey: SurveyResolver,
+    },
+    data: {
+      breadcrumb: "Survey Sandbox 2",
+      survey_path: "assets/survey-sandbox-2.json",
+      show_sidebar: true
+    }
+  },
+  {
+    path: "sandbox3",
+    component: SurveyPrimaryComponent,
+    resolve: {
+      // survey: SurveyResolver,
+    },
+    data: {
+      breadcrumb: "Survey Sandbox 3",
+      survey_path: "assets/survey-sandbox-3.json",
+      show_sidebar: true
+    }
   }
 ];
 
