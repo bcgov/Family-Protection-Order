@@ -218,7 +218,7 @@ if OIDC_RP_PROVIDER_ENDPOINT:
     OIDC_RP_CLIENT_SECRET = os.getenv("OIDC_RP_CLIENT_SECRET")
     OIDC_RP_PROVIDER_SIGNATURE_ALG = "RS256"
     OIDC_RP_SCOPES = "openid profile email"  # address phone
-    OIDC_RP_PROMPT = "login"
+    OIDC_RP_PROMPT = "login consent select_account"
     OIDC_RP_ID_TOKEN_INCLUDE_USERINFO = True
     OIDC_RP_AUTHENTICATION_FAILURE_REDIRECT_URI = os.getenv("OIDC_RP_FAILURE_URI", "/")
     OIDC_RP_USER_DETAILS_HANDLER = "api.auth.sync_keycloak_user"
