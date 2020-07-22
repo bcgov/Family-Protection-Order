@@ -29,7 +29,10 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework import generics, permissions
 
-from api.auth import get_login_uri, get_logout_uri
+from api.auth import (
+    get_login_uri,
+    get_logout_uri
+)
 from api.models import User
 from api.pdf import render as render_pdf
 
