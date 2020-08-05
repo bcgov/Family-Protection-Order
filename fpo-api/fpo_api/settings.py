@@ -216,7 +216,7 @@ if OIDC_RP_PROVIDER_ENDPOINT:
     OIDC_RP_PROVIDER_USERINFO_ENDPOINT = (
         f"{OIDC_RP_PROVIDER_ENDPOINT}/protocol/openid-connect/userinfo"
     )
-    OIDC_RP_CLIENT_ID = os.getenv("OIDC_RP_CLIENT_ID", "vdf-api")
+    OIDC_RP_CLIENT_ID = os.getenv("OIDC_RP_CLIENT_ID", "fpo-api")
     OIDC_RP_CLIENT_SECRET = os.getenv("OIDC_RP_CLIENT_SECRET")
     OIDC_RP_PROVIDER_SIGNATURE_ALG = "RS256"
     OIDC_RP_SCOPES = "openid profile email"  # address phone
