@@ -1,333 +1,563 @@
 {
- "title": "Violation Ticket Centre",
+ "title": "Court of Appeal Prototypes",
  "pages": [
   {
-   "name": "Disputant Response",
+   "name": "Form1/Form4",
    "elements": [
     {
      "type": "panel",
-     "name": "disputantPanel",
+     "name": "lowerCourtInfoPanel",
      "elements": [
       {
-       "type": "personname",
-       "name": "disputantName",
-       "title": "Name",
+       "type": "radiogroup",
+       "name": "supremeOrTribunal",
+       "title": "From what kind of Court are you appeal the order",
+       "hasOther": true,
+       "choices": [
+        {
+         "value": "item1",
+         "text": "Supreme Court"
+        },
+        {
+         "value": "item2",
+         "text": "A Tribunal"
+        }
+       ],
+       "otherText": "Provincial Court in some cases??"
+      }
+     ]
+    },
+    {
+     "type": "panel",
+     "name": "supremeInfoPanel",
+     "elements": [
+      {
+       "type": "dropdown",
+       "name": "supremeLocation",
+       "visible": false,
+       "title": "Supreme Court Registry Location",
+       "choices": [
+        {
+         "value": "item1",
+         "text": "Supreme Court Location 1"
+        },
+        {
+         "value": "item2",
+         "text": "Supreme Court Location 2"
+        },
+        {
+         "value": "item3",
+         "text": "Supreme Court Location 3"
+        }
+       ]
+      },
+      {
+       "type": "text",
+       "name": "supremeFileNumber",
+       "visible": false,
+       "title": "Supreme Court File Number"
+      },
+      {
+       "type": "infotext",
+       "name": "question1",
+       "title": "Display relevant orders based on Supreme Court File Number and Location.\n<br><br>\nAlso list when the order was made (look for 30 day time limit or other time limit which may have an effect on leave vs right to appeal)",
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "infotext",
+       "name": "JIRALowerCourtInfo",
+       "visible": false,
+       "title": "[JIRA] pull data from CEIS. Confirm selection of Supreme File. \n<br>\n<br>\nFor Supreme Court, we know:\n<br>Who made the order {supremeOrderMaker}\n<br>Date the order was pronounced {supremeDatePronounced}\n<br>City where the order was pronounced {supremeLocation}\n<br>Length of lower court hearing?? (depends on data quality and procedures from court clerk)\n<br>What type of proceeding are you appealing from??\n<br>Sealing Order?? (do we care if there is a sealing order but maybe not for the specific judgment being appealed?\n<br>\n<br>\n<br>\nWe can display this an enable the appellant to make corrections if needed",
        "isRequired": true,
-       "defaultSubstitution": "(Applicant Name)",
-       "descFirstName": "First Name is also known as Given Name",
-       "descMiddleName": "If you have more than one Middle Name, write them all in this box with spaces separating your Middle Names",
-       "descLastName": "Last Name is also known as Family Name or Surname"
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "radiogroup",
+       "name": "supremeJudgmentType",
+       "title": "What type of proceeding are you appealing from?? (Should come from CEIS - double check about consistency among court clerks)",
+       "choices": [
+        {
+         "value": "item1",
+         "text": "Trial Judgment"
+        },
+        {
+         "value": "item2",
+         "text": "Summary Trial Judgment"
+        },
+        {
+         "value": "item3",
+         "text": "Chambers Judgment"
+        }
+       ]
+      },
+      {
+       "type": "text",
+       "name": "supremeHearingDuration",
+       "title": "Length of lower court hearing?",
+       "description": "Indicate in days or hours the length of the hearing that led to the order you are appealing from. For example, if you are\nappealing a judgment from a trial that took two hours, enter “two hours.”"
+      },
+      {
+       "type": "yesno",
+       "name": "sealingOrder",
+       "title": "Is there an order sealing any part of the Supreme Court file?  (Should come from CEIS - double check about consistency among court clerks)"
+      },
+      {
+       "type": "paneldynamic",
+       "name": "sealingOrderDatesPanel",
+       "visible": false,
+       "templateElements": [
+        {
+         "type": "text",
+         "name": "sealingOrderDate",
+         "title": "Sealing Order Dates",
+         "inputType": "date"
+        },
+        {
+         "type": "yesno",
+         "name": "question15",
+         "title": "Anonymity Order/Publication Bans?",
+         "description": "Are there orders that protect a party or parties identity? If yes, add date(s)."
+        },
+        {
+         "type": "paneldynamic",
+         "name": "question16",
+         "visible": false,
+         "templateElements": [
+          {
+           "type": "text",
+           "name": "sealingOrderDate",
+           "title": "Anonymity Order/Publication Ban Dates",
+           "inputType": "date"
+          }
+         ],
+         "panelCount": 1
+        }
+       ],
+       "panelCount": 1
+      },
+      {
+       "type": "yesno",
+       "name": "question18",
+       "title": "Does this appeal involve the rights or interests of a child?"
+      }
+     ]
+    },
+    {
+     "type": "panel",
+     "name": "tribunalCourtInfoPanel",
+     "elements": [
+      {
+       "type": "dropdown",
+       "name": "tribunalName",
+       "visible": false,
+       "title": "Tribunal Name",
+       "choices": [
+        {
+         "value": "item1",
+         "text": "Tribunal 1"
+        },
+        {
+         "value": "item2",
+         "text": "Tribunal 2"
+        },
+        {
+         "value": "item3",
+         "text": "Tribunal 3"
+        }
+       ]
+      },
+      {
+       "type": "text",
+       "name": "tribunalLocation",
+       "title": "[Is this already known through tribunal address?] City where the order was pronounced"
+      },
+      {
+       "type": "text",
+       "name": "tribunalOrderMaker",
+       "title": "Who made the order?",
+       "description": "Name the justice or other decision maker who pronounced the order you are appealing."
+      },
+      {
+       "type": "text",
+       "name": "tribunalDatePronounced",
+       "title": "Date the order was pronounced",
+       "description": "Include the day, month and year that the order being appealed was pronounced (not the date the order was entered)"
+      },
+      {
+       "type": "text",
+       "name": "tribunalHearingDuration",
+       "title": "Length of Tribunal hearing?",
+       "description": "Indicate in days or hours the length of the hearing that led to the order you are appealing from. For example, if you are\nappealing a judgment from a trial that took two hours, enter “two hours.”"
+      },
+      {
+       "type": "checkbox",
+       "name": "question20",
+       "title": "Areas of law raised in the appeal",
+       "description": "You may check more than one box if appropriate. For example, you should check “motor vehicle accidents” and\n“torts” for a personal injury claim involving a motor vehicle accident.",
+       "isRequired": true,
+       "choices": [
+        {
+         "value": "item1",
+         "text": "Constitutional/Administrative"
+        },
+        "item2",
+        "item3"
+       ]
+      },
+      {
+       "type": "yesno",
+       "name": "question2",
+       "title": "Is there an order sealing any part of the Tribunal Hearing?"
+      },
+      {
+       "type": "yesno",
+       "name": "question14",
+       "title": "Anonymity Order/Publication Bans?",
+       "description": "Are there orders that protect a party or parties identity? If yes, add date(s)."
+      },
+      {
+       "type": "yesno",
+       "name": "question19",
+       "title": "Does this appeal involve the rights or interests of a child?"
+      },
+      {
+       "type": "paneldynamic",
+       "name": "question17",
+       "visible": false,
+       "templateElements": [
+        {
+         "type": "text",
+         "name": "sealingOrderDate",
+         "title": "Anonymity Order/Publication Ban Dates",
+         "inputType": "date"
+        }
+       ],
+       "panelCount": 1
+      }
+     ]
+    },
+    {
+     "type": "panel",
+     "name": "partiesPanel",
+     "elements": [
+      {
+       "type": "imagepicker",
+       "name": "JIRAstyleOfProceedingBuilder",
+       "title": "[JIRA] For Supreme Court - Style of Proceeding Builder from Form7 app",
+       "choices": [
+        {
+         "value": "lion",
+         "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
+        }
+       ]
+      },
+      {
+       "type": "infotext",
+       "name": "question10",
+       "title": "For each Appellant...\nPull up CEIS contact information",
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "yesno",
+       "name": "question6",
+       "title": "[for Appellant] Is {partyName} representing themselves?"
+      },
+      {
+       "type": "helptext",
+       "name": "question11",
+       "title": "What if I plan to get a lawyer but I haven't done that yet?",
+       "titleLocation": "hidden",
+       "body": "You do not have a lawyer that has agreed to receive court documents for you.\n<br>\n<br>\nAfter you get your lawyer, they may help you change the address for receiving court documents to their address."
+      },
+      {
+       "type": "helptext",
+       "name": "FAQLawyer2",
+       "title": "What if I used to have a lawyer but not anymore?",
+       "titleLocation": "hidden",
+       "body": "You do not have a lawyer that has agreed to receive court documents for you.\n<br>\n<br>\nYou will need to give an address where it is safe for you to receive court documents.\n<br>\n<br>\nIf you already have a Provincial Court Family Law file and you don't have a lawyer anymore, you may need to update your address for service.\n<br>\n<br>\n<a href=\"https://www2.gov.bc.ca/assets/gov/law-crime-and-justice/courthouse-services/court-files-records/court-forms/family/pfa053.pdf?forcedownload=true\" target=\"_blank\">Click here to download the form.</a> (This link will open in a new tab.)"
+      },
+      {
+       "type": "text",
+       "name": "question26",
+       "title": "Lawyer Name"
       },
       {
        "type": "address",
-       "name": "disputantAddress",
-       "title": "Mailing address",
-       "isRequired": true,
-       "referLabel": "Applicant's Address"
+       "name": "question13",
+       "title": "Address for Service in BC [Shelley to check if addresses for Respondents are required]",
+       "description": "Is this address for a law firm is asked for Appellant but not respondent yet"
       },
       {
-       "type": "text",
-       "name": "disputantPhoneNumber",
-       "title": "Phone Number",
-       "description": "This should be your primary contact number on weekdays between 10am-4pm.\n<br>\nInclude the area code.\n",
-       "isRequired": true,
-       "inputType": "tel"
-      },
-      {
-       "type": "checkbox",
-       "name": "disputantPhoneType",
-       "startWithNewLine": false,
-       "title": "This is my phone number for:",
-       "isRequired": true,
-       "choices": [
+       "type": "paneldynamic",
+       "name": "question3",
+       "title": "Add a new Party (auto add to centre column of Style of Proceeding Builder)",
+       "templateElements": [
         {
-         "value": "item1",
-         "text": "Cell"
+         "type": "text",
+         "name": "question4",
+         "title": "Name of Party"
         },
         {
-         "value": "item2",
-         "text": "Home"
+         "type": "radiogroup",
+         "name": "question5",
+         "title": "Role in Lower Court/Tribunal",
+         "choices": [
+          {
+           "value": "item1",
+           "text": "Plaintiff"
+          },
+          {
+           "value": "item2",
+           "text": "Petitionner"
+          },
+          {
+           "value": "item3",
+           "text": "Defendant"
+          },
+          {
+           "value": "item4",
+           "text": "Laywer"
+          },
+          {
+           "value": "item5",
+           "text": "no role in the lower court"
+          }
+         ]
         },
         {
-         "value": "item3",
-         "text": "Work"
+         "type": "yesno",
+         "name": "question7",
+         "title": "[for Appellant] Is {partyName} representing themselves?"
+        },
+        {
+         "type": "helptext",
+         "name": "FAQLawyer1",
+         "title": "What if I plan to get a lawyer but I haven't done that yet?",
+         "titleLocation": "hidden",
+         "body": "You do not have a lawyer that has agreed to receive court documents for you.\n<br>\n<br>\nAfter you get your lawyer, they may help you change the address for receiving court documents to their address."
+        },
+        {
+         "type": "helptext",
+         "name": "question12",
+         "title": "What if I used to have a lawyer but not anymore?",
+         "titleLocation": "hidden",
+         "body": "You do not have a lawyer that has agreed to receive court documents for you.\n<br>\n<br>\nYou will need to give an address where it is safe for you to receive court documents.\n<br>\n<br>\nIf you already have a Provincial Court Family Law file and you don't have a lawyer anymore, you may need to update your address for service.\n<br>\n<br>\n<a href=\"https://www2.gov.bc.ca/assets/gov/law-crime-and-justice/courthouse-services/court-files-records/court-forms/family/pfa053.pdf?forcedownload=true\" target=\"_blank\">Click here to download the form.</a> (This link will open in a new tab.)"
+        },
+        {
+         "type": "text",
+         "name": "question27",
+         "title": "Lawyer Name"
         }
-       ]
+       ],
+       "panelAddText": "Add a new Party",
+       "panelRemoveText": "Remove this Party"
       },
       {
-       "type": "text",
-       "name": "disputantEmail",
-       "title": "Email Address",
-       "isRequired": true
+       "type": "address",
+       "name": "question8",
+       "title": "Address for Service in BC [Shelley to check if addresses for Respondents are required]",
+       "description": "Is this address for a law firm is asked for Appellant but not respondent yet"
+      },
+      {
+       "type": "contactinfo",
+       "name": "question9",
+       "title": "Contact Information [Shelley to check if contact information for Respondents is required]"
       }
      ]
     },
     {
      "type": "panel",
-     "name": "ticketInfoPanel",
+     "name": "appealPanel",
      "elements": [
       {
-       "type": "text",
-       "name": "ticketNumber",
-       "title": "Violation Ticket Number",
-       "description": "You can find this number at the top of your ticket",
-       "isRequired": true
-      },
-      {
-       "type": "text",
-       "name": "ticketDate",
-       "title": "Date of Ticket",
-       "description": "You can find this number at the top of your ticket",
-       "isRequired": true,
-       "inputType": "date"
-      },
-      {
-       "type": "dropdown",
-       "name": "hearingLocation",
-       "title": "Hearing Location",
-       "description": "You can find this number at the top of your ticket",
-       "isRequired": true,
-       "choices": [
-        {
-         "value": "item1",
-         "text": "Provincial Courthouse 1"
-        },
-        {
-         "value": "item2",
-         "text": "Provincial Courthouse 2"
-        },
-        {
-         "value": "item3",
-         "text": "Provincial Courthouse 3"
-        }
-       ]
-      }
-     ]
-    },
-    {
-     "type": "panel",
-     "name": "attendanceChoicePanel",
-     "elements": [
-      {
-       "type": "radiogroup",
-       "name": "disputeType",
-       "title": "Are you disputing the allegation or disputing the fine amount?",
-       "isRequired": true,
-       "choices": [
-        {
-         "value": "allegation",
-         "text": "I am disputing the ticket because I did not commit the offence"
-        },
-        {
-         "value": "fineAmount",
-         "text": "I did commit the offence but I am asking for a reduced fine"
-        }
-       ]
-      },
-      {
-       "type": "infotext",
-       "name": "disputeTypeFineAmountExplanation",
-       "visible": false,
-       "visibleIf": "{disputeType} = \"fineAmount\"",
-       "title": "<br>Did you know?</b> You can ask to reduce the fine amount in writing instead of going to a Court hearing. You can also ask for more time to pay.",
-       "isRequired": true,
-       "titleLocation": "hidden"
+       "type": "yesno",
+       "name": "leaveRequired",
+       "title": "Is leave to appeal required?",
+       "description": "Court of Appeal Rule X explains when you need leave to appeal. If you are unsure, check “Yes.”"
       },
       {
        "type": "yesno",
-       "name": "disputeInWriting",
-       "visible": false,
-       "visibleIf": "{disputeType} = \"fineAmount\" and {disputeTypeFineAmountExplanation} > 0",
-       "title": "Do you want to ask to reduce the fine in writing instead of going to a Court hearing?",
-       "isRequired": true
-      },
-      {
-       "type": "text",
-       "name": "disputantDOB",
-       "visible": false,
-       "visibleIf": "{disputeType} = \"fineAmount\" and {disputeInWriting} = \"y\"",
-       "title": "Date of Birth",
-       "isRequired": true,
-       "inputType": "date"
-      },
-      {
-       "type": "text",
-       "name": "disputantLicenseNumber",
-       "visible": false,
-       "visibleIf": "{disputeType} = \"fineAmount\" and {disputeInWriting} = \"y\"",
-       "title": "Driver's License Number",
-       "isRequired": true
-      },
-      {
-       "type": "text",
-       "name": "disputantLicenseIssuer",
-       "visible": false,
-       "visibleIf": "{disputeType} = \"fineAmount\" and {disputeInWriting} = \"y\"",
-       "title": "Province or State that issued your Driver's License ",
-       "isRequired": true
+       "name": "question21",
+       "title": "Are you appealing the whole order or just a part of it?"
       },
       {
        "type": "comment",
-       "name": "reasonForFineReduction",
+       "name": "leaveNotRequiredPartOfOrder",
        "visible": false,
-       "visibleIf": "{disputeType} = \"fineAmount\" and {disputeInWriting} = \"y\"",
-       "title": "Why do you think you the fine amount for your Violation Ticket #{ticketNumber} should be reduced?",
-       "description": "This section must not contain an explanation about how you did not commit the offence.\n<br>\nMust not contain a defence of the allegation.",
-       "isRequired": true
-      },
-      {
-       "type": "yesno",
-       "name": "moreTimeToPay",
-       "visible": false,
-       "visibleIf": "{disputeType} = \"fineAmount\" and {disputeInWriting} = \"y\"",
-       "title": "Do you need more time to pay for Violation Ticket #{ticketNumber}?",
-       "isRequired": true
+       "title": "Part of the order being appealed",
+       "description": "If you only want to appeal one part of a judgment, enter the part that is being appealed."
       },
       {
        "type": "comment",
-       "name": "reasonForTimeToPay",
+       "name": "leaveNotRequiredReliefSought",
        "visible": false,
-       "visibleIf": "{disputeType} = \"fineAmount\" and {disputeInWriting} = \"y\" and {moreTimeToPay} = \"y\"",
-       "title": "Why do you need more time to pay the fine for Violation Ticket #{ticketNumber}?",
-       "description": "This section must not contain an explanation about how you did not commit the offence.\n<br>\nMust not contain a defence of the allegation.",
-       "isRequired": true
-      },
-      {
-       "type": "checkbox",
-       "name": "disputantWritingAgreement",
-       "visible": false,
-       "visibleIf": "{disputeType} = \"fineAmount\" and {disputeInWriting} = \"y\"",
-       "title": "I agree that I committed this offence and I do not want to appear in person for a Court hearing. I want to request a reduction in the fine portion of the ticketed amount(s) and/or time to pay the ticketed amount(s).",
-       "isRequired": true,
-       "choices": [
-        {
-         "value": "item1",
-         "text": "I agree with the statement above"
-        }
-       ]
-      },
-      {
-       "type": "radiogroup",
-       "name": "hearingAttendance",
-       "visible": false,
-       "visibleIf": "{disputeType} = \"allegation\" or ({disputeType} = \"fineAmount\" and {disputeInWriting} = \"n\")",
-       "title": "I am choosing to attend my Traffic Court hearing for Violation Ticket #{ticketNumber}:",
-       "description": "Remotely means by phone or by videoconference",
-       "isRequired": true,
-       "choices": [
-        {
-         "value": "remotely",
-         "text": "Remotely"
-        },
-        {
-         "value": "in-person",
-         "text": "In-Person"
-        }
-       ]
+       "title": "Order you are seeking on appeal",
+       "description": "Briefly list the order(s) you will ask this Court to make on appeal, for example: “Set aside the trial judgment and order a new trial.” Include any order as to costs."
       },
       {
        "type": "yesno",
-       "name": "hearingAttendancePhone",
-       "visible": false,
-       "visibleIf": "({disputeType} = \"allegation\" or ({disputeType} = \"fineAmount\" and {disputeInWriting} = \"n\")) and {hearingAttendance} = \"remotely\"",
-       "title": "Do you have the ability to attend your remote Court hearing by phone?",
-       "isRequired": true
+       "name": "question22",
+       "title": "Are you appealing the whole order or just a part of it?"
       },
       {
-       "type": "yesno",
-       "name": "hearingAttendanceVideo",
+       "type": "comment",
+       "name": "leaveRequiredPartOfOrder",
        "visible": false,
-       "visibleIf": "({disputeType} = \"allegation\" or ({disputeType} = \"fineAmount\" and {disputeInWriting} = \"n\")) and {hearingAttendance} = \"remotely\"",
-       "title": "Do you have the ability to attend your remote Court hearing by videoconference?",
-       "description": "examples of video conference are Microsoft Teams, Zoom, Skype, etc.",
-       "isRequired": true
+       "title": "Part of the order being appealed",
+       "description": "If you are only seeking leave to appeal one part of the judgment, enter the part that you are seeking leave to appeal."
       },
       {
-       "type": "infotext",
-       "name": "hearingAttendanceRemotelyError",
+       "type": "comment",
+       "name": "leaveRequiredGrounds",
        "visible": false,
-       "visibleIf": "({disputeType} = \"allegation\" or \n({disputeType} = \"fineAmount\" and {disputeInWriting} = \"n\")) and {hearingAttendance} = \"remotely\" and {hearingAttendancePhone} = \"n\" and {hearingAttendanceVideo} = \"n\"",
-       "title": "It appears that you are not able to attend your Court hearing remotely. You will have to attend your hearing in person. \n<br><br>",
-       "isRequired": true,
-       "titleLocation": "hidden",
-       "messageStyle": "error"
+       "title": "Grounds for leave to appeal",
+       "description": "Be as specific as possible. For example, if you believe the trial judge used an incorrect legal test or otherwise misapplied the law, indicate that here."
       }
      ]
-    },
-    {
-     "type": "panel",
-     "name": "schedulingInfoPanel",
-     "elements": [
-      {
-       "type": "yesno",
-       "name": "french",
-       "title": "English is the usual language of Court hearings in British Columbia. Do you want this hearing to be in French?",
-       "isRequired": true
-      },
-      {
-       "type": "yesno",
-       "name": "interpreter",
-       "title": "English is the usual language of Court hearings in British Columbia. Do you need an interpreter at your hearing to help with English?",
-       "description": "What if someone can bring their own interpreter? Should we ask about this?",
-       "isRequired": true
-      },
-      {
-       "type": "text",
-       "name": "interpreterLanguage",
-       "visible": false,
-       "visibleIf": "{interpreter} = \"y\"",
-       "title": "What language interpreter would you need for your Court hearing?",
-       "isRequired": true
-      },
-      {
-       "type": "yesno",
-       "name": "witnesses",
-       "title": "Will you be calling Witnesses at your Court hearing?",
-       "description": "Witnesses are people (other than yourself) who were there when you were given the Violation Ticket.",
-       "isRequired": true
-      },
-      {
-       "type": "text",
-       "name": "witnessesAmount",
-       "visible": false,
-       "visibleIf": "{witnesses} = \"y\"",
-       "title": "How many Witnesses do you plan on calling at your Court hearing?",
-       "isRequired": true,
-       "inputType": "number"
-      },
-      {
-       "type": "yesno",
-       "name": "charter",
-       "title": "Will you be making an application under the Charter of Rights and Freedom for this Violation Ticket #{ticketNumber}?",
-       "isRequired": true
-      },
-      {
-       "type": "infotext",
-       "name": "charterYesExplanation",
-       "visible": false,
-       "visibleIf": "{charter} = \"y\"",
-       "title": "You will be filing the required notice in addition to using this service.<br><br>\n[URL for form here]. ",
-       "description": "Note to Jack - This is just an extra form; still generate the form from this service. The charter form takes them out of the stream to see a judge so the VTC will need to schedule that.",
-       "titleLocation": "hidden"
-      },
-      {
-       "type": "checkbox",
-       "name": "disputantAcknowledgement",
-       "title": "I acknowledge that I am the disputant and am submitting this information which will be used to schedule my Violation Ticket for a {hearingAttendance} Court hearing.",
-       "isRequired": true,
-       "choices": [
-        {
-         "value": "item1",
-         "text": "I acknowledge the statement above"
-        }
-       ]
-      }
-     ],
-     "visible": false,
-     "visibleIf": "({disputeType} = \"allegation\" or \n({disputeType} = \"fineAmount\" and {disputeInWriting} = \"n\")) and ({hearingAttendance} = \"in-person\" or\n{hearingAttendance} = \"remotely\" and (({hearingAttendancePhone} = \"y\" or {hearingAttendanceVideo} = \"y\") or ({hearingAttendancePhone} = \"n\" and {hearingAttendanceVideo} = \"n\" and {hearingAttendanceRemotelyError} > 0)))"
     }
    ],
-   "title": "Response from Disputant"
+   "title": "Form 1"
+  },
+  {
+   "name": "Form2/Form3",
+   "elements": [
+    {
+     "type": "infotext",
+     "name": "question23",
+     "title": "Pull data from WebCATS from Form 1\n<br><br>\nDo we want each respondent to have to fill out this service separately? Or can all respondents fill out one service at the same time? Hybrid option?",
+     "titleLocation": "hidden"
+    },
+    {
+     "type": "yesno",
+     "name": "question25",
+     "title": "[For each respondent] Are you responding for [respodentA]?"
+    },
+    {
+     "type": "infotext",
+     "name": "question24",
+     "title": "For each respondent\n<br>\nConfirm\n<br>\nName<br>\nLawyer or not<br>\nLawyer Name<br>\nAddress<br>\nContact Info<br>\n",
+     "titleLocation": "hidden"
+    },
+    {
+     "type": "yesno",
+     "name": "question28",
+     "title": "Do any of the respondents want to cross appealing order terms from the same order?"
+    },
+    {
+     "type": "checkbox",
+     "name": "question31",
+     "title": "Select which respondents are cross-appealing",
+     "description": "Assume one cross-appeal per form representing multiple respondents.  [only list of respondents that are selectable are those part of this instance of the form]",
+     "choices": [
+      "item1",
+      "item2",
+      "item3"
+     ]
+    },
+    {
+     "type": "infotext",
+     "name": "question29",
+     "title": "Copy leave to appeal format from Form 1",
+     "titleLocation": "hidden"
+    }
+   ]
+  },
+  {
+   "name": "Form4"
+  },
+  {
+   "name": "Form5",
+   "elements": [
+    {
+     "type": "infotext",
+     "name": "question32",
+     "title": "Appellants or maybe Respondents propose hearing time when CoA give hearing date.",
+     "titleLocation": "hidden"
+    },
+    {
+     "type": "infotext",
+     "name": "question33",
+     "title": "Appellants or maybe Respondents propose hearing time when CoA give hearing date.",
+     "titleLocation": "hidden"
+    }
+   ]
+  },
+  {
+   "name": "Form6",
+   "elements": [
+    {
+     "type": "infotext",
+     "name": "question34",
+     "title": "Withdraw/End Appeal. Maybe this isn't its own page but is accessed through the dashboard that tracks the appeal process",
+     "titleLocation": "hidden"
+    }
+   ]
+  },
+  {
+   "name": "Form8",
+   "elements": [
+    {
+     "type": "infotext",
+     "name": "question35",
+     "title": "Appeals a CoA Chambers Judgement (pre-appeal with 1 Judge)",
+     "titleLocation": "hidden"
+    }
+   ]
+  },
+  {
+   "name": "Form9",
+   "elements": [
+    {
+     "type": "infotext",
+     "name": "question36",
+     "title": "Ask to appear in the PM instead of AM. Other issues. Adjournments. ",
+     "titleLocation": "hidden"
+    }
+   ]
+  },
+  {
+   "name": "Form18/Form19/Form20",
+   "elements": [
+    {
+     "type": "infotext",
+     "name": "question30",
+     "title": "Accessed through Dashboard. Might not make sense to group them based on who is coming in to the app. Lawyer vs SRL arguing about lawyer",
+     "titleLocation": "hidden"
+    }
+   ]
+  },
+  {
+   "name": "AppealBook",
+   "elements": [
+    {
+     "type": "infotext",
+     "name": "question37",
+     "title": "Can we help people make a book?",
+     "titleLocation": "hidden"
+    }
+   ]
+  },
+  {
+   "name": "AppealFactum",
+   "elements": [
+    {
+     "type": "infotext",
+     "name": "question39",
+     "title": "Can we help people make a book?",
+     "titleLocation": "hidden"
+    }
+   ]
+  },
+  {
+   "name": "AppealRecords",
+   "elements": [
+    {
+     "type": "infotext",
+     "name": "question38",
+     "title": "Can we help people make a book?",
+     "titleLocation": "hidden"
+    }
+   ]
   }
  ],
  "showQuestionNumbers": "off",
