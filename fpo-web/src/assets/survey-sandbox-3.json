@@ -16,22 +16,44 @@
       {
        "type": "personname",
        "name": "socialWorkerName",
-       "title": "Name of Social Worker"
+       "title": "Name of Social Worker",
+       "defaultValue": {
+        "first": "Socia",
+        "middle": "",
+        "last": "Werka"
+       }
       },
       {
        "type": "address",
        "name": "socialWorkerAddress",
-       "title": "{socialWorkerName}'s Office"
+       "title": "{socialWorkerName}'s Office",
+       "defaultValue": {
+        "street": "123 Office Street",
+        "city": "Vancouver",
+        "state": "British Columbia",
+        "country": "Canada",
+        "postcode": "V1V 1V1"
+       }
       },
       {
        "type": "contactinfo",
        "name": "socialWorkerContact",
-       "title": "{socialWorkerName}'s Contact Information"
+       "title": "{socialWorkerName}'s Contact Information",
+       "defaultValue": {
+        "phone": "604-123-4567",
+        "email": "",
+        "fax": "604-123-4568"
+       }
       },
       {
        "type": "personname",
        "name": "directorsCounselName",
-       "title": "Name of the Director's Counsel"
+       "title": "Name of the Director's Counsel",
+       "defaultValue": {
+        "first": "Bob",
+        "middle": "",
+        "last": "Loblaw"
+       }
       }
      ]
     },
@@ -70,14 +92,14 @@
       {
        "type": "yesno",
        "name": "childIsIndigenous",
-       "title": "Is {panel.childName} Indigenous?"
+       "title": "Is {panel.childName} indigenous?"
       },
       {
        "type": "text",
        "name": "childBandName",
        "visible": false,
        "visibleIf": "{panel.childIsIndigenous} = \"y\"",
-       "title": "Name of {panel.childName}'s Band"
+       "title": "Name of {panel.childName}'s Nation, aboriginal community or Indian band."
       },
       {
        "type": "paneldynamic",
@@ -86,7 +108,17 @@
         {
          "type": "personname",
          "name": "childParentName",
-         "title": "Name of {panel.childInfoPanel.childName}'s Parent (click Add Parent to add more parents)"
+         "title": "Name of {panel.childInfoPanel.childName}'s Parent"
+        },
+        {
+         "type": "radiogroup",
+         "name": "question23",
+         "title": "Role of this parent",
+         "choices": [
+          "item1",
+          "item2",
+          "item3"
+         ]
         }
        ],
        "panelCount": 1,
@@ -110,15 +142,21 @@
        "type": "text",
        "name": "childPreviousCourtNumber",
        "visible": false,
-       "visibleIf": "{panel.childPreviousProceedings} = \"y\" and {panel.childPreviousProceedingsSameJurisdiction} = \"n\"",
-       "title": "Court File Number"
+       "visibleIf": "{panel.childPreviousProceedings} = \"y\" and {panel.childPreviousProceedingsSameJurisdiction} = \"y\"",
+       "title": "Existing Court File Number"
+      },
+      {
+       "type": "infotext",
+       "name": "question24",
+       "title": "[Ability to search CEIS for siblings to find court file number]",
+       "titleLocation": "hidden"
       },
       {
        "type": "dropdown",
        "name": "childPreviousCourtLocation",
        "visible": false,
-       "visibleIf": "{panel.childPreviousProceedings} = \"y\" and {panel.childPreviousProceedingsSameJurisdiction} = \"n\"",
-       "title": "Court Location",
+       "visibleIf": "{panel.childPreviousProceedings} = \"y\" and {panel.childPreviousProceedingsSameJurisdiction} = \"y\"",
+       "title": "Court Location of previous proceedings",
        "choices": [
         {
          "value": "item1",
@@ -150,78 +188,29 @@
      "name": "orderSoughtPanel",
      "elements": [
       {
-       "type": "matrixdropdown",
-       "name": "question2",
-       "columns": [
-        {
-         "name": "Choose only 1 option",
-         "cellType": "radiogroup",
-         "choices": [
-          {
-           "value": "s29",
-           "text": "s.29.1 - A supervision order"
-          },
-          {
-           "value": "s30",
-           "text": "s.30 - The child(ren) were removed"
-          },
-          {
-           "value": "s36",
-           "text": "s.36 (1) - The child(ren) were removed because an order made under s. 33.2(2) or 35(2) (b) or (d) or36(3) no longer protects the child or a person has not complied with a term or condition of the order "
-          },
-          {
-           "value": "s42",
-           "text": "s.42 - The child(ren) were removed because an order made under s. 41(1) (a) or (b), 41(1.1) or (2.1),42.2(4) (a) or (c), 46(3), 49(8) or 54.01(10) or an interim order made under s. 42.1 no longer protects the child or a person has not complied with a term or condition of the order and the director is required to remove the child"
-          }
-         ]
-        },
-        {
-         "name": "2",
-         "cellType": "radiogroup",
-         "visibleIf": "{question2.orderSought.Choose only 1 option} = 's30'",
-         "choices": [
-          {
-           "value": "item1",
-           "text": "the child's health or safety is in immediate danger"
-          },
-          {
-           "value": "item2",
-           "text": "no less disruptive available measure is adequate to protect the child.)"
-          }
-         ]
-        }
-       ],
-       "rows": [
-        {
-         "value": "orderSought",
-         "text": "Order Sought"
-        }
-       ]
-      },
-      {
        "type": "radiogroup",
        "name": "orderSought",
-       "title": "What does the Director believe? / What decision has the Director made?",
+       "title": "What is the Director applying for? / What authority of CFCSA were the children removed under?",
        "choices": [
         {
          "value": "s29",
-         "text": "s.29.1 - A supervision order will be adequate for the child(ren) to remain in the care of the parent(s)"
+         "text": "`s.29.1` - A supervision order will be adequate for the child(ren) to remain in the care of the parent(s)"
         },
         {
          "value": "s30health",
-         "text": "s.30 - The child(ren) were removed because their health or safety were in immediate danger"
+         "text": "`s.30` - The child(ren) were removed because their health or safety were in immediate danger"
         },
         {
          "value": "s30adequatemeasure",
-         "text": "s.30 - The child(ren) were removed because no less disruptive available measure is adequate to protect them"
+         "text": "`s.30` - The child(ren) were removed because no less disruptive available measure is adequate to protect them"
         },
         {
          "value": "s36",
-         "text": "s.36 (1) - The child(ren) were removed because an order made under s. 33.2(2) or 35(2) (b) or (d) or36(3) no longer protects the child(ren) "
+         "text": "`s.36` (1) - The child(ren) were removed because an order made under s. 33.2(2) or 35(2) (b) or (d) or36(3) no longer protects the child(ren) "
         },
         {
          "value": "s42",
-         "text": "s.42 - The child(ren) were removed because an order made under s. 41(1) (a) or (b), 41(1.1) or (2.1),42.2(4) (a) or (c), 46(3), 49(8) or 54.01(10) or an interim order made under s. 42.1 no longer protects the child(ren)"
+         "text": "`s.42` - The child(ren) were removed because an order made under s. 41(1) (a) or (b), 41(1.1) or (2.1),42.2(4) (a) or (c), 46(3), 49(8) or 54.01(10) or an interim order made under s. 42.1 no longer protects the child(ren)"
         }
        ]
       },
@@ -230,9 +219,15 @@
        "name": "childrenReturned",
        "visible": false,
        "visibleIf": "{orderSought} = \"s30health\" or {orderSought} = \"s30adequatemeasure\" or {orderSought} = \"s36\" or {orderSought} = \"s42\"",
-       "title": "Have the child(ren) been returned to the parents [if we want to ask this question directly to each children, we would need to ask the above question to each individual child]"
+       "title": "Have the child(ren) been returned to the parents [if we want to ask this question directly to each children, we would need to ask the above question to each individual child] If the social worker selects 29.1, this question could be invisble and the form would say \"children were never removed\" / \"children have been returned\" (even if they were never taken)"
       }
      ]
+    },
+    {
+     "type": "yesno",
+     "name": "question25",
+     "title": "Have the children been removed?",
+     "description": "Selecting NO means that you the director is apply for s 29.1"
     },
     {
      "type": "panel",
@@ -241,7 +236,7 @@
       {
        "type": "text",
        "name": "hearingDate",
-       "title": "What date will the hearing take place?",
+       "title": "Hearing Date",
        "inputType": "date",
        "dateYearsAhead": 1,
        "dateYearsBehind": 0
@@ -249,7 +244,7 @@
       {
        "type": "radiogroup",
        "name": "hearingTime",
-       "title": "What time will the hearing take place? [set defaults per location based on set hearing times]",
+       "title": "Hearing Time",
        "choices": [
         {
          "value": "item1",
@@ -264,7 +259,7 @@
       {
        "type": "dropdown",
        "name": "hearingLocation",
-       "title": "Where will the hearing take place? [default to user's location]",
+       "title": "Hearing Location [default to user's location]",
        "choices": [
         "item1",
         "item2",
@@ -274,9 +269,31 @@
      ]
     },
     {
+     "type": "infotext",
+     "name": "question26",
+     "title": "This service will validate that all questions have been answered and will then enable eFiling",
+     "isRequired": true,
+     "titleLocation": "hidden"
+    },
+    {
      "type": "panel",
      "name": "reportReadinessPanel",
      "elements": [
+      {
+       "type": "radiogroup",
+       "name": "reportLaterType",
+       "title": "Which Report to Court are you planning to bring to the presentation hearing? [would not need to ask this question?]",
+       "choices": [
+        {
+         "value": "a",
+         "text": "Form A"
+        },
+        {
+         "value": "f",
+         "text": "Form F"
+        }
+       ]
+      },
       {
        "type": "radiogroup",
        "name": "reportNowOrLater",
@@ -291,26 +308,258 @@
          "text": "I want to file the Presentation Form 1 first and fill out the Report to Court separately"
         }
        ]
-      },
-      {
-       "type": "radiogroup",
-       "name": "reportLaterType",
-       "visibleIf": "{reportNowOrLater} = \"later\"",
-       "title": "Which Report to Court are you planning to bring to the presentation hearing?",
-       "choices": [
-        {
-         "value": "a",
-         "text": "Form A"
-        },
-        {
-         "value": "f",
-         "text": "Form F"
-        }
-       ]
       }
      ]
     }
    ]
+  },
+  {
+   "name": "Form A s. 30",
+   "elements": [
+    {
+     "type": "panel",
+     "name": "panel3",
+     "elements": [
+      {
+       "type": "personname",
+       "name": "question19",
+       "title": "Name of Social Worker (Director's delegate)",
+       "defaultValue": {
+        "first": "Socia",
+        "middle": "",
+        "last": "Werka"
+       }
+      },
+      {
+       "type": "address",
+       "name": "question20",
+       "defaultValue": {
+        "street": "123 Office Street",
+        "city": "Vancouver",
+        "state": "British Columbia",
+        "country": "Canada",
+        "postcode": "V1V 1V1"
+       }
+      },
+      {
+       "type": "text",
+       "name": "question21",
+       "title": "Business hours phone",
+       "defaultValue": "604-123-4567",
+       "inputType": "tel"
+      },
+      {
+       "type": "text",
+       "name": "question22",
+       "title": "After-hours emergency phone",
+       "defaultValue": "604-123-4569"
+      }
+     ]
+    },
+    {
+     "type": "panel",
+     "name": "panel2",
+     "elements": [
+      {
+       "type": "text",
+       "name": "question1",
+       "title": "Parent's phone number (home) [should this question only be for the Report to Court or Form 1 as well?]"
+      },
+      {
+       "type": "text",
+       "name": "question3",
+       "title": "Parent's phone number (work)"
+      }
+     ]
+    },
+    {
+     "type": "panel",
+     "name": "removalFactsPanel",
+     "elements": [
+      {
+       "type": "text",
+       "name": "question4",
+       "title": "What date was the child removed?",
+       "inputType": "datetime",
+       "dateYearsBehind": 1
+      },
+      {
+       "type": "text",
+       "name": "question5",
+       "title": "What time was the child removed?",
+       "inputType": "time"
+      },
+      {
+       "type": "text",
+       "name": "question6",
+       "title": "Location of Removal"
+      },
+      {
+       "type": "comment",
+       "name": "question7",
+       "title": "Who was present when the child was removed?",
+       "description": "(first list the person removing the child and then any other person(s) present at the time of the removal)"
+      },
+      {
+       "type": "comment",
+       "name": "question8",
+       "title": "The circumstances that caused the director to remove the child are as follows:"
+      }
+     ]
+    },
+    {
+     "type": "panel",
+     "name": "panel1",
+     "elements": [
+      {
+       "type": "yesno",
+       "name": "question10",
+       "title": "Is/was the child is living in a situation where there is domestic violence by or towards a person with whom the child lives?",
+       "description": "Domestic Violence The likelihood of physical harm to a child increases when the child is living in a situation where there is domestic violence by or towards a person with whom the child resides (section 13(1.2))."
+      },
+      {
+       "type": "checkbox",
+       "name": "question9",
+       "title": "The child was removed in accordance with the following: [add the letters back?]",
+       "description": "section 30 of the Child, Family and Community Service Act in the following circumstance(s) as described by section 13 of the Act:",
+       "choices": [
+        {
+         "value": "item1",
+         "text": "(a) the child has been, or is likely to be, physically harmed by the child's parent"
+        },
+        {
+         "value": "item2",
+         "text": "(b) the child has been, or is likely to be, sexually abused or exploited by the child's parent"
+        },
+        {
+         "value": "item3",
+         "text": "(c) the child has been, or is likely to be, physically harmed, sexually abused or sexually exploited by another person and the child's parent is unwilling or unable to protect the child"
+        },
+        {
+         "value": "item4",
+         "text": "(d) the child has been, or is likely to be, physically harmed because of neglect by the child's parent"
+        },
+        {
+         "value": "item5",
+         "text": "(e)(i) the child is emotionally harmed by the parent's conduct"
+        },
+        {
+         "value": "item6",
+         "text": "(e)(ii) the child is emotionally harmed by living in a situation where there is domestic violence by or towards a person with whom the child resides"
+        },
+        {
+         "value": "item7",
+         "text": "(f) the child is deprived of necessary health care"
+        },
+        {
+         "value": "item8",
+         "text": "(g) the child's development is likely to be seriously impaired by a treatable condition and the child's parent refuses to provide or consent to treatment"
+        },
+        {
+         "value": "item9",
+         "text": "(h) the child's parent is unable or unwilling to care for the child and has not made adequate provision for the child's care"
+        },
+        {
+         "value": "item10",
+         "text": "(i) the child is or has been absent from home in circumstances that endanger the child's safety or wellbeing"
+        },
+        {
+         "value": "item11",
+         "text": "(j) the child's parent is dead and adequate provision has not been made for the child's care"
+        },
+        {
+         "value": "item12",
+         "text": "(k) the child has been abandoned and adequate provision has not been made for the child's care"
+        },
+        {
+         "value": "item13",
+         "text": "(i) the child is in the care of a director or another person by agreement and the child's parent is unwilling or unable to resume care when the agreement is no longer in force"
+        }
+       ]
+      },
+      {
+       "type": "comment",
+       "name": "question13",
+       "title": "If the child was removed under section 30, the following less disruptive measures were considered before removing the [yes/no or comment?]"
+      },
+      {
+       "type": "comment",
+       "name": "question14",
+       "title": "Interim Plan of Care",
+       "description": "The child's current living arrangement is as follows:"
+      },
+      {
+       "type": "comment",
+       "name": "question15",
+       "title": "Steps taken to preserve the child's aboriginal identity are: [hide if not indigenous?]"
+      },
+      {
+       "type": "yesno",
+       "name": "question16",
+       "title": "The child's views on the interim plan of care been considered?"
+      },
+      {
+       "type": "yesno",
+       "name": "question17",
+       "title": "Have the parents been involved in the development of the plan?"
+      },
+      {
+       "type": "comment",
+       "name": "question18",
+       "title": "Director's Recommendations About Care and Supervision and Access",
+       "description": "The director recommends the following with regard to care and supervision of the child and access by any person to the child"
+      }
+     ]
+    }
+   ],
+   "visible": false,
+   "visibleIf": "{orderSought} = \"s30health\" or {orderSought} = \"s30adequatemeasure\""
+  },
+  {
+   "name": "Form A s. 36 (1)",
+   "elements": [
+    {
+     "type": "checkbox",
+     "name": "question11",
+     "title": "section 36 (1) of the Act, which requires a director to remove the child if the director has reasonable grounds to believe that either or both of the following apply:",
+     "choices": [
+      {
+       "value": "item1",
+       "text": "(i) an order made under section 33.2, 35 (2) (b) or 36 (3) of the Act no longer protects the child;"
+      },
+      {
+       "value": "item2",
+       "text": "(ii) a person has not complied with a term or condition of an order under section 33.2, 35 (2) (b) or (d) or 36 (3) of the Act and a director is required by that order to remove the child in the event of non-compliance."
+      }
+     ]
+    }
+   ],
+   "visible": false
+  },
+  {
+   "name": "Form A s. 42",
+   "elements": [
+    {
+     "type": "checkbox",
+     "name": "question12",
+     "title": "section 42 (1) of the Act, which requires a director to remove the child if the director has reasonable grounds to believe that either or both of the following apply:",
+     "choices": [
+      {
+       "value": "item1",
+       "text": "(i) that a supervision order made under section 41 (1) (a) or (b), (1.1) or (2.1), 42.2 (4) (a) or (c), 46 (3), 49 (8) or 54.01 (10) of the Act or an interim order made under section 42.1 of the Act no longer protects the child;"
+      },
+      {
+       "value": "item2",
+       "text": "(ii) a person has not complied with a term or condition of the supervision or interim order and a director is required by that order to remove the child in the event of non-compliance."
+      }
+     ]
+    }
+   ],
+   "visible": false
+  },
+  {
+   "name": "Form F",
+   "visible": false
   }
  ],
  "showQuestionNumbers": "off",
