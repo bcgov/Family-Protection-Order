@@ -194,23 +194,23 @@
        "choices": [
         {
          "value": "s29",
-         "text": "`s.29.1` - A supervision order will be adequate for the child(ren) to remain in the care of the parent(s)"
+         "text": "`s .29.1`"
         },
         {
          "value": "s30health",
-         "text": "`s.30` - The child(ren) were removed because their health or safety were in immediate danger"
+         "text": "`s. 30 health and safety in immediate danger`"
         },
         {
          "value": "s30adequatemeasure",
-         "text": "`s.30` - The child(ren) were removed because no less disruptive available measure is adequate to protect them"
+         "text": "`s. 30 no less disruptive available measure is adequate`"
         },
         {
          "value": "s36",
-         "text": "`s.36` (1) - The child(ren) were removed because an order made under s. 33.2(2) or 35(2) (b) or (d) or36(3) no longer protects the child(ren) "
+         "text": "`s. 36 (1)`"
         },
         {
          "value": "s42",
-         "text": "`s.42` - The child(ren) were removed because an order made under s. 41(1) (a) or (b), 41(1.1) or (2.1),42.2(4) (a) or (c), 46(3), 49(8) or 54.01(10) or an interim order made under s. 42.1 no longer protects the child(ren)"
+         "text": "`s. 42`"
         }
        ]
       },
@@ -380,7 +380,7 @@
        "type": "text",
        "name": "question4",
        "title": "What date was the child removed?",
-       "inputType": "datetime",
+       "inputType": "date",
        "dateYearsBehind": 1
       },
       {
