@@ -527,7 +527,7 @@
        "name": "question15",
        "visible": false,
        "visibleIf": "{childInfoPanel[0].childIsIndigenous} = 'y'",
-       "title": "Steps taken to preserve the child(ren)'s aboriginal identity are:"
+       "title": "Steps taken to preserve the child(ren)'s Indigenous identity are:"
       },
       {
        "type": "yesno",
@@ -704,7 +704,7 @@
        "name": "question86",
        "visible": false,
        "visibleIf": "{childInfoPanel[0].childIsIndigenous} = 'y'",
-       "title": "Steps taken to preserve the child(ren)'s aboriginal identity are:"
+       "title": "Steps taken to preserve the child(ren)'s Indigenous identity are:"
       },
       {
        "type": "comment",
@@ -888,7 +888,7 @@
        "name": "question87",
        "visible": false,
        "visibleIf": "{childInfoPanel[0].childIsIndigenous} = 'y'",
-       "title": "Steps taken to preserve the child(ren)'s aboriginal identity are:"
+       "title": "Steps taken to preserve the child(ren)'s Indigenous identity are:"
       },
       {
        "type": "comment",
