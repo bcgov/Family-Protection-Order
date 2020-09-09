@@ -701,6 +701,13 @@
       },
       {
        "type": "comment",
+       "name": "question86",
+       "visible": false,
+       "visibleIf": "{childInfoPanel[0].childIsIndigenous} = 'y'",
+       "title": "Steps taken to preserve the child(ren)'s aboriginal identity are:"
+      },
+      {
+       "type": "comment",
        "name": "question65",
        "visible": false,
        "visibleIf": "{childInfoPanel[0].childIsIndigenous} = 'y'",
@@ -878,6 +885,13 @@
       },
       {
        "type": "comment",
+       "name": "question87",
+       "visible": false,
+       "visibleIf": "{childInfoPanel[0].childIsIndigenous} = 'y'",
+       "title": "Steps taken to preserve the child(ren)'s aboriginal identity are:"
+      },
+      {
+       "type": "comment",
        "name": "question70",
        "visible": false,
        "visibleIf": "{childInfoPanel[0].childIsIndigenous} = 'y'",
@@ -911,7 +925,7 @@
     {
      "type": "infotext",
      "name": "question31",
-     "title": "Moving from Form 1 to Form A, only new question are being asked. The social worker will not have to duplicate data entry. ",
+     "title": "Moving from Form 1 to Form F, only new question are being asked. The social worker will not have to duplicate data entry. ",
      "descriptionLocation": "underTitle",
      "titleLocation": "hidden"
     },
@@ -958,6 +972,32 @@
     },
     {
      "type": "panel",
+     "name": "panel17",
+     "elements": [
+      {
+       "type": "infotext",
+       "name": "question74",
+       "title": "For each parent listed in Form 1, ask for address and phone numbers."
+      },
+      {
+       "type": "address",
+       "name": "question75",
+       "title": "Parent's Address"
+      },
+      {
+       "type": "text",
+       "name": "question76",
+       "title": "Parent's phone number (home)"
+      },
+      {
+       "type": "text",
+       "name": "question77",
+       "title": "Parent's phone number (work)"
+      }
+     ]
+    },
+    {
+     "type": "panel",
      "name": "panel7",
      "elements": [
       {
@@ -967,10 +1007,14 @@
        "description": "Domestic Violence The likelihood of physical harm to a child increases when the child is living in a situation where there is domestic violence by or towards a person with whom the child resides (section 13(1.2))."
       },
       {
+       "type": "comment",
+       "name": "question30",
+       "title": "Grounds for Making the Application"
+      },
+      {
        "type": "checkbox",
        "name": "question2",
-       "title": "The child was removed in accordance with the following:",
-       "description": "as described by section 13 of the Act:",
+       "title": "The director has reasonable grounds to believe that the child(ren) need(s) protection due to the existence of the following circumstance(s) as described by s. 13 of the CFCSA Act:",
        "choices": [
         {
          "value": "item1",
@@ -1029,9 +1073,56 @@
      ]
     },
     {
-     "type": "comment",
-     "name": "question30",
-     "title": "Grounds for Making the Application"
+     "type": "panel",
+     "name": "panel18",
+     "elements": [
+      {
+       "type": "comment",
+       "name": "question78",
+       "title": "The director has reasonable grounds to believe that a supervision order would be adequate to protect the child(ren) for the following reasons:"
+      },
+      {
+       "type": "comment",
+       "name": "question79",
+       "title": "Interim Plan of Care",
+       "description": "The child's current living arrangement is as follows:"
+      },
+      {
+       "type": "comment",
+       "name": "question84",
+       "visible": false,
+       "visibleIf": "{childInfoPanel[0].childIsIndigenous} = 'y'",
+       "title": "Steps to be taken to support the child(ren) to learn about and practice the child(ren)'s Indigenous traditions, customs and language and to belong to the children's Indigenous community are: "
+      },
+      {
+       "type": "comment",
+       "name": "question85",
+       "title": "The director recommends the following with regards to the care and supervision of the child(ren) and access to any person to the child(ren):"
+      },
+      {
+       "type": "comment",
+       "name": "question80",
+       "visible": false,
+       "visibleIf": "{childInfoPanel[0].childIsIndigenous} = 'y'",
+       "title": "Steps taken to preserve the child(ren)'s aboriginal identity are:"
+      },
+      {
+       "type": "yesno",
+       "name": "question81",
+       "title": "The child's views on the interim plan of care been considered?"
+      },
+      {
+       "type": "yesno",
+       "name": "question82",
+       "title": "Have the parents been involved in the development of the plan?"
+      },
+      {
+       "type": "yesno",
+       "name": "question83",
+       "visibleIf": "{childInfoPanel[0].childIsIndigenous} = 'y'",
+       "title": "The Indigenous community has been involved in the development of the plan?"
+      }
+     ]
     }
    ],
    "visible": false,
