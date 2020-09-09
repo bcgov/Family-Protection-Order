@@ -114,17 +114,19 @@
        "title": "Were the previous proceedings in the same jurisdiction?"
       },
       {
+       "type": "infotext",
+       "name": "question24",
+       "visible": false,
+       "visibleIf": "{panel.childPreviousProceedings} = \"y\" and {panel.childPreviousProceedingsSameJurisdiction} = \"y\"",
+       "title": "[Ability to search CEIS for siblings to find court file number]",
+       "titleLocation": "hidden"
+      },
+      {
        "type": "text",
        "name": "childPreviousCourtNumber",
        "visible": false,
        "visibleIf": "{panel.childPreviousProceedings} = \"y\" and {panel.childPreviousProceedingsSameJurisdiction} = \"y\"",
        "title": "Existing Court File Number"
-      },
-      {
-       "type": "infotext",
-       "name": "question24",
-       "title": "[Ability to search CEIS for siblings to find court file number]",
-       "titleLocation": "hidden"
       },
       {
        "type": "dropdown",
@@ -171,18 +173,24 @@
        "type": "radiogroup",
        "name": "childParentRole",
        "title": "Role of this parent",
+       "hasOther": true,
        "choices": [
         {
          "value": "item1",
-         "text": "Parent"
+         "text": "Father"
         },
         {
          "value": "item2",
-         "text": "Step-Parent"
+         "text": "Mother"
         },
-        "item3",
-        "item4",
-        "item5"
+        {
+         "value": "item3",
+         "text": "Step-Father"
+        },
+        {
+         "value": "item4",
+         "text": "Step-Mother"
+        }
        ]
       }
      ],
@@ -196,19 +204,13 @@
      "name": "orderSoughtPanel",
      "elements": [
       {
-       "type": "yesno",
-       "name": "question25",
-       "title": "Have the children been removed?",
-       "description": "Selecting NO means that you the director is apply for s 29.1"
-      },
-      {
        "type": "radiogroup",
        "name": "orderSought",
        "title": "What is the Director applying for? / What authority of CFCSA were the children removed under?",
        "choices": [
         {
          "value": "s29",
-         "text": "`s .29.1`"
+         "text": "`s. 29.1`"
         },
         {
          "value": "s30health",
@@ -233,7 +235,7 @@
        "name": "childrenReturned",
        "visible": false,
        "visibleIf": "{orderSought} = \"s30health\" or {orderSought} = \"s30adequatemeasure\" or {orderSought} = \"s36\" or {orderSought} = \"s42\"",
-       "title": "Have the child(ren) been returned to the parents [if we want to ask this question directly to each children, we would need to ask the above question to each individual child] If the social worker selects 29.1, this question could be invisble and the form would say \"children were never removed\" / \"children have been returned\" (even if they were never taken)"
+       "title": "Have the child(ren) been returned to the parents\n<br><br>\n[If the social worker selects s. 29.1, this question would stay invisible and the form would say \"children remain in the care of the parents\"]\n<br><br>[This question can be asked for each child individually if preferred.]"
       }
      ]
     },
@@ -260,7 +262,7 @@
         },
         {
          "value": "item2",
-         "text": "2pm"
+         "text": "2:00pm"
         }
        ]
       },
@@ -279,7 +281,7 @@
     {
      "type": "infotext",
      "name": "question26",
-     "title": "This service will validate that all questions have been answered. (Form A vs Form F has already been chosen through the logic within the electronic service).\n<br><br>\nThe social worker can now eFile the Presentation Form 1.",
+     "title": "This service will validate that all questions have been answered. (Form A vs Form F has already been chosen through the options selected on Form 1).\n<br><br>\nThe social worker can now eFile the Presentation Form 1.",
      "isRequired": true,
      "titleLocation": "hidden"
     },
@@ -326,6 +328,12 @@
    "name": "Form A s. 30",
    "elements": [
     {
+     "type": "infotext",
+     "name": "demoExplanationS30",
+     "title": "Moving from Form 1 to Form A, only new question are being asked. The social worker will not have to duplicate data entry. ",
+     "titleLocation": "hidden"
+    },
+    {
      "type": "panel",
      "name": "panel3",
      "elements": [
@@ -371,9 +379,19 @@
      "name": "panel2",
      "elements": [
       {
+       "type": "infotext",
+       "name": "question23",
+       "title": "For each parent listed in Form 1, ask for address and phone numbers."
+      },
+      {
+       "type": "address",
+       "name": "question29",
+       "title": "Parent's Address"
+      },
+      {
        "type": "text",
        "name": "question1",
-       "title": "Parent's phone number (home) [should this question only be for the Report to Court or Form 1 as well?]"
+       "title": "Parent's phone number (home)"
       },
       {
        "type": "text",
@@ -490,7 +508,7 @@
       {
        "type": "comment",
        "name": "question13",
-       "title": "If the child was removed under section 30, the following less disruptive measures were considered before removing the [yes/no or comment?]"
+       "title": "The following less disruptive measures were considered before removing the child(ren)"
       },
       {
        "type": "comment",
@@ -501,7 +519,9 @@
       {
        "type": "comment",
        "name": "question15",
-       "title": "Steps taken to preserve the child's aboriginal identity are: [hide if not indigenous?]"
+       "visible": false,
+       "visibleIf": "{childInfoPanel[0].childIsIndigenous} = 'y'",
+       "title": "Steps taken to preserve the child(ren)'s aboriginal identity are:"
       },
       {
        "type": "yesno",
@@ -548,6 +568,12 @@
        ]
       }
      ]
+    },
+    {
+     "type": "yesno",
+     "name": "question25",
+     "title": "Is/was the child is living in a situation where there is domestic violence by or towards a person with whom the child lives?",
+     "description": "Domestic Violence The likelihood of physical harm to a child increases when the child is living in a situation where there is domestic violence by or towards a person with whom the child resides (section 13(1.2))."
     }
    ],
    "visible": false,
@@ -570,6 +596,12 @@
        "text": "(ii) a person has not complied with a term or condition of the supervision or interim order and a director is required by that order to remove the child in the event of non-compliance."
       }
      ]
+    },
+    {
+     "type": "yesno",
+     "name": "question27",
+     "title": "Is/was the child is living in a situation where there is domestic violence by or towards a person with whom the child lives?",
+     "description": "Domestic Violence The likelihood of physical harm to a child increases when the child is living in a situation where there is domestic violence by or towards a person with whom the child resides (section 13(1.2))."
     }
    ],
    "visible": false,
@@ -579,10 +611,21 @@
    "name": "Form F",
    "elements": [
     {
+     "type": "yesno",
+     "name": "question28",
+     "title": "Is/was the child is living in a situation where there is domestic violence by or towards a person with whom the child lives?",
+     "description": "Domestic Violence The likelihood of physical harm to a child increases when the child is living in a situation where there is domestic violence by or towards a person with whom the child resides (section 13(1.2))."
+    },
+    {
+     "type": "comment",
+     "name": "question30",
+     "title": "Grounds for Making the Application"
+    },
+    {
      "type": "checkbox",
      "name": "question2",
      "title": "The child was removed in accordance with the following:",
-     "description": "section 30 of the Child, Family and Community Service Act in the following circumstance(s) as described by section 13 of the Act:",
+     "description": "as described by section 13 of the Act:",
      "choices": [
       {
        "value": "item1",
