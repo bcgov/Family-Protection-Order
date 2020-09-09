@@ -509,7 +509,13 @@
        "type": "comment",
        "name": "question13",
        "title": "The following less disruptive measures were considered before removing the child(ren)"
-      },
+      }
+     ]
+    },
+    {
+     "type": "panel",
+     "name": "panel5",
+     "elements": [
       {
        "type": "comment",
        "name": "question14",
@@ -549,9 +555,123 @@
    "name": "Form A s. 36 (1)",
    "elements": [
     {
+     "type": "infotext",
+     "name": "question33",
+     "title": "Moving from Form 1 to Form A, only new question are being asked. The social worker will not have to duplicate data entry. ",
+     "titleLocation": "hidden"
+    },
+    {
+     "type": "panel",
+     "name": "panel8",
+     "elements": [
+      {
+       "type": "personname",
+       "name": "question34",
+       "title": "Name of Social Worker (Director's delegate)",
+       "defaultValue": {
+        "first": "Socia",
+        "middle": "",
+        "last": "Werka"
+       }
+      },
+      {
+       "type": "address",
+       "name": "question35",
+       "title": "Social Worker's Office",
+       "defaultValue": {
+        "street": "123 Office Street",
+        "city": "Vancouver",
+        "state": "British Columbia",
+        "country": "Canada",
+        "postcode": "V1V 1V1"
+       }
+      },
+      {
+       "type": "text",
+       "name": "question36",
+       "title": "Social Worker's Business hours phone",
+       "defaultValue": "604-123-4567",
+       "inputType": "tel"
+      },
+      {
+       "type": "text",
+       "name": "question37",
+       "title": "After-hours emergency phone",
+       "defaultValue": "604-123-4569"
+      }
+     ]
+    },
+    {
+     "type": "panel",
+     "name": "panel11",
+     "elements": [
+      {
+       "type": "infotext",
+       "name": "question46",
+       "title": "For each parent listed in Form 1, ask for address and phone numbers."
+      },
+      {
+       "type": "address",
+       "name": "question47",
+       "title": "Parent's Address"
+      },
+      {
+       "type": "text",
+       "name": "question48",
+       "title": "Parent's phone number (home)"
+      },
+      {
+       "type": "text",
+       "name": "question49",
+       "title": "Parent's phone number (work)"
+      }
+     ]
+    },
+    {
+     "type": "panel",
+     "name": "panel13",
+     "elements": [
+      {
+       "type": "text",
+       "name": "question54",
+       "title": "What date was/were the child(ren) removed?",
+       "inputType": "date",
+       "dateYearsBehind": 1
+      },
+      {
+       "type": "text",
+       "name": "question55",
+       "title": "What time was/were the child(ren) removed?",
+       "inputType": "time"
+      },
+      {
+       "type": "text",
+       "name": "question56",
+       "title": "Location of Removal"
+      },
+      {
+       "type": "comment",
+       "name": "question57",
+       "title": "Who was present when the child(ren) was/were removed?",
+       "description": "(first list the person removing the child and then any other person(s) present at the time of the removal)"
+      },
+      {
+       "type": "comment",
+       "name": "question58",
+       "title": "The circumstances that caused the director to remove the child(ren) are as follows:"
+      }
+     ]
+    },
+    {
      "type": "panel",
      "name": "panel4",
      "elements": [
+      {
+       "type": "yesno",
+       "name": "question25",
+       "title": "Is/was the child is living in a situation where there is domestic violence by or towards a person with whom the child lives?",
+       "description": "Domestic Violence The likelihood of physical harm to a child increases when the child is living in a situation where there is domestic violence by or towards a person with whom the child resides (section 13(1.2))."
+      },
       {
        "type": "checkbox",
        "name": "question11",
@@ -570,10 +690,39 @@
      ]
     },
     {
-     "type": "yesno",
-     "name": "question25",
-     "title": "Is/was the child is living in a situation where there is domestic violence by or towards a person with whom the child lives?",
-     "description": "Domestic Violence The likelihood of physical harm to a child increases when the child is living in a situation where there is domestic violence by or towards a person with whom the child resides (section 13(1.2))."
+     "type": "panel",
+     "name": "panel15",
+     "elements": [
+      {
+       "type": "comment",
+       "name": "question64",
+       "title": "Interim Plan of Care",
+       "description": "The child's current living arrangement is as follows:"
+      },
+      {
+       "type": "comment",
+       "name": "question65",
+       "visible": false,
+       "visibleIf": "{childInfoPanel[0].childIsIndigenous} = 'y'",
+       "title": "Steps taken to preserve the child(ren)'s aboriginal identity are:"
+      },
+      {
+       "type": "yesno",
+       "name": "question66",
+       "title": "The child's views on the interim plan of care been considered?"
+      },
+      {
+       "type": "yesno",
+       "name": "question67",
+       "title": "Have the parents been involved in the development of the plan?"
+      },
+      {
+       "type": "comment",
+       "name": "question68",
+       "title": "Director's Recommendations About Care and Supervision and Access",
+       "description": "The director recommends the following with regard to care and supervision of the child and access by any person to the child"
+      }
+     ]
     }
    ],
    "visible": false,
@@ -583,25 +732,174 @@
    "name": "Form A s. 42",
    "elements": [
     {
-     "type": "checkbox",
-     "name": "question12",
-     "title": "section 42 (1) of the Act, which requires a director to remove the child if the director has reasonable grounds to believe that either or both of the following apply:",
-     "choices": [
+     "type": "infotext",
+     "name": "question32",
+     "title": "Moving from Form 1 to Form A, only new question are being asked. The social worker will not have to duplicate data entry. ",
+     "titleLocation": "hidden"
+    },
+    {
+     "type": "panel",
+     "name": "panel9",
+     "elements": [
       {
-       "value": "item1",
-       "text": "(i) that a supervision order made under section 41 (1) (a) or (b), (1.1) or (2.1), 42.2 (4) (a) or (c), 46 (3), 49 (8) or 54.01 (10) of the Act or an interim order made under section 42.1 of the Act no longer protects the child;"
+       "type": "personname",
+       "name": "question38",
+       "title": "Name of Social Worker (Director's delegate)",
+       "defaultValue": {
+        "first": "Socia",
+        "middle": "",
+        "last": "Werka"
+       }
       },
       {
-       "value": "item2",
-       "text": "(ii) a person has not complied with a term or condition of the supervision or interim order and a director is required by that order to remove the child in the event of non-compliance."
+       "type": "address",
+       "name": "question39",
+       "title": "Social Worker's Office",
+       "defaultValue": {
+        "street": "123 Office Street",
+        "city": "Vancouver",
+        "state": "British Columbia",
+        "country": "Canada",
+        "postcode": "V1V 1V1"
+       }
+      },
+      {
+       "type": "text",
+       "name": "question40",
+       "title": "Social Worker's Business hours phone",
+       "defaultValue": "604-123-4567",
+       "inputType": "tel"
+      },
+      {
+       "type": "text",
+       "name": "question41",
+       "title": "After-hours emergency phone",
+       "defaultValue": "604-123-4569"
       }
      ]
     },
     {
-     "type": "yesno",
-     "name": "question27",
-     "title": "Is/was the child is living in a situation where there is domestic violence by or towards a person with whom the child lives?",
-     "description": "Domestic Violence The likelihood of physical harm to a child increases when the child is living in a situation where there is domestic violence by or towards a person with whom the child resides (section 13(1.2))."
+     "type": "panel",
+     "name": "panel12",
+     "elements": [
+      {
+       "type": "infotext",
+       "name": "question50",
+       "title": "For each parent listed in Form 1, ask for address and phone numbers."
+      },
+      {
+       "type": "address",
+       "name": "question51",
+       "title": "Parent's Address"
+      },
+      {
+       "type": "text",
+       "name": "question52",
+       "title": "Parent's phone number (home)"
+      },
+      {
+       "type": "text",
+       "name": "question53",
+       "title": "Parent's phone number (work)"
+      }
+     ]
+    },
+    {
+     "type": "panel",
+     "name": "panel14",
+     "elements": [
+      {
+       "type": "text",
+       "name": "question59",
+       "title": "What date was/were the child(ren) removed?",
+       "inputType": "date",
+       "dateYearsBehind": 1
+      },
+      {
+       "type": "text",
+       "name": "question60",
+       "title": "What time was/were the child(ren) removed?",
+       "inputType": "time"
+      },
+      {
+       "type": "text",
+       "name": "question61",
+       "title": "Location of Removal"
+      },
+      {
+       "type": "comment",
+       "name": "question62",
+       "title": "Who was present when the child(ren) was/were removed?",
+       "description": "(first list the person removing the child and then any other person(s) present at the time of the removal)"
+      },
+      {
+       "type": "comment",
+       "name": "question63",
+       "title": "The circumstances that caused the director to remove the child(ren) are as follows:"
+      }
+     ]
+    },
+    {
+     "type": "panel",
+     "name": "panel6",
+     "elements": [
+      {
+       "type": "yesno",
+       "name": "question27",
+       "title": "Is/was the child is living in a situation where there is domestic violence by or towards a person with whom the child lives?",
+       "description": "Domestic Violence The likelihood of physical harm to a child increases when the child is living in a situation where there is domestic violence by or towards a person with whom the child resides (section 13(1.2))."
+      },
+      {
+       "type": "checkbox",
+       "name": "question12",
+       "title": "section 42 (1) of the Act, which requires a director to remove the child if the director has reasonable grounds to believe that either or both of the following apply:",
+       "choices": [
+        {
+         "value": "item1",
+         "text": "(i) that a supervision order made under section 41 (1) (a) or (b), (1.1) or (2.1), 42.2 (4) (a) or (c), 46 (3), 49 (8) or 54.01 (10) of the Act or an interim order made under section 42.1 of the Act no longer protects the child;"
+        },
+        {
+         "value": "item2",
+         "text": "(ii) a person has not complied with a term or condition of the supervision or interim order and a director is required by that order to remove the child in the event of non-compliance."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "panel",
+     "name": "panel16",
+     "elements": [
+      {
+       "type": "comment",
+       "name": "question69",
+       "title": "Interim Plan of Care",
+       "description": "The child's current living arrangement is as follows:"
+      },
+      {
+       "type": "comment",
+       "name": "question70",
+       "visible": false,
+       "visibleIf": "{childInfoPanel[0].childIsIndigenous} = 'y'",
+       "title": "Steps taken to preserve the child(ren)'s aboriginal identity are:"
+      },
+      {
+       "type": "yesno",
+       "name": "question71",
+       "title": "The child's views on the interim plan of care been considered?"
+      },
+      {
+       "type": "yesno",
+       "name": "question72",
+       "title": "Have the parents been involved in the development of the plan?"
+      },
+      {
+       "type": "comment",
+       "name": "question73",
+       "title": "Director's Recommendations About Care and Supervision and Access",
+       "description": "The director recommends the following with regard to care and supervision of the child and access by any person to the child"
+      }
+     ]
     }
    ],
    "visible": false,
@@ -611,75 +909,129 @@
    "name": "Form F",
    "elements": [
     {
-     "type": "yesno",
-     "name": "question28",
-     "title": "Is/was the child is living in a situation where there is domestic violence by or towards a person with whom the child lives?",
-     "description": "Domestic Violence The likelihood of physical harm to a child increases when the child is living in a situation where there is domestic violence by or towards a person with whom the child resides (section 13(1.2))."
+     "type": "infotext",
+     "name": "question31",
+     "title": "Moving from Form 1 to Form A, only new question are being asked. The social worker will not have to duplicate data entry. ",
+     "descriptionLocation": "underTitle",
+     "titleLocation": "hidden"
+    },
+    {
+     "type": "panel",
+     "name": "panel10",
+     "elements": [
+      {
+       "type": "personname",
+       "name": "question42",
+       "title": "Name of Social Worker (Director's delegate)",
+       "defaultValue": {
+        "first": "Socia",
+        "middle": "",
+        "last": "Werka"
+       }
+      },
+      {
+       "type": "address",
+       "name": "question43",
+       "title": "Social Worker's Office",
+       "defaultValue": {
+        "street": "123 Office Street",
+        "city": "Vancouver",
+        "state": "British Columbia",
+        "country": "Canada",
+        "postcode": "V1V 1V1"
+       }
+      },
+      {
+       "type": "text",
+       "name": "question44",
+       "title": "Social Worker's Business hours phone",
+       "defaultValue": "604-123-4567",
+       "inputType": "tel"
+      },
+      {
+       "type": "text",
+       "name": "question45",
+       "title": "After-hours emergency phone",
+       "defaultValue": "604-123-4569"
+      }
+     ]
+    },
+    {
+     "type": "panel",
+     "name": "panel7",
+     "elements": [
+      {
+       "type": "yesno",
+       "name": "question28",
+       "title": "Is/was the child is living in a situation where there is domestic violence by or towards a person with whom the child lives?",
+       "description": "Domestic Violence The likelihood of physical harm to a child increases when the child is living in a situation where there is domestic violence by or towards a person with whom the child resides (section 13(1.2))."
+      },
+      {
+       "type": "checkbox",
+       "name": "question2",
+       "title": "The child was removed in accordance with the following:",
+       "description": "as described by section 13 of the Act:",
+       "choices": [
+        {
+         "value": "item1",
+         "text": "(a) the child has been, or is likely to be, physically harmed by the child's parent"
+        },
+        {
+         "value": "item2",
+         "text": "(b) the child has been, or is likely to be, sexually abused or exploited by the child's parent"
+        },
+        {
+         "value": "item3",
+         "text": "(c) the child has been, or is likely to be, physically harmed, sexually abused or sexually exploited by another person and the child's parent is unwilling or unable to protect the child"
+        },
+        {
+         "value": "item4",
+         "text": "(d) the child has been, or is likely to be, physically harmed because of neglect by the child's parent"
+        },
+        {
+         "value": "item5",
+         "text": "(e)(i) the child is emotionally harmed by the parent's conduct"
+        },
+        {
+         "value": "item6",
+         "text": "(e)(ii) the child is emotionally harmed by living in a situation where there is domestic violence by or towards a person with whom the child resides"
+        },
+        {
+         "value": "item7",
+         "text": "(f) the child is deprived of necessary health care"
+        },
+        {
+         "value": "item8",
+         "text": "(g) the child's development is likely to be seriously impaired by a treatable condition and the child's parent refuses to provide or consent to treatment"
+        },
+        {
+         "value": "item9",
+         "text": "(h) the child's parent is unable or unwilling to care for the child and has not made adequate provision for the child's care"
+        },
+        {
+         "value": "item10",
+         "text": "(i) the child is or has been absent from home in circumstances that endanger the child's safety or wellbeing"
+        },
+        {
+         "value": "item11",
+         "text": "(j) the child's parent is dead and adequate provision has not been made for the child's care"
+        },
+        {
+         "value": "item12",
+         "text": "(k) the child has been abandoned and adequate provision has not been made for the child's care"
+        },
+        {
+         "value": "item13",
+         "text": "(i) the child is in the care of a director or another person by agreement and the child's parent is unwilling or unable to resume care when the agreement is no longer in force"
+        }
+       ]
+      }
+     ]
     },
     {
      "type": "comment",
      "name": "question30",
      "title": "Grounds for Making the Application"
-    },
-    {
-     "type": "checkbox",
-     "name": "question2",
-     "title": "The child was removed in accordance with the following:",
-     "description": "as described by section 13 of the Act:",
-     "choices": [
-      {
-       "value": "item1",
-       "text": "(a) the child has been, or is likely to be, physically harmed by the child's parent"
-      },
-      {
-       "value": "item2",
-       "text": "(b) the child has been, or is likely to be, sexually abused or exploited by the child's parent"
-      },
-      {
-       "value": "item3",
-       "text": "(c) the child has been, or is likely to be, physically harmed, sexually abused or sexually exploited by another person and the child's parent is unwilling or unable to protect the child"
-      },
-      {
-       "value": "item4",
-       "text": "(d) the child has been, or is likely to be, physically harmed because of neglect by the child's parent"
-      },
-      {
-       "value": "item5",
-       "text": "(e)(i) the child is emotionally harmed by the parent's conduct"
-      },
-      {
-       "value": "item6",
-       "text": "(e)(ii) the child is emotionally harmed by living in a situation where there is domestic violence by or towards a person with whom the child resides"
-      },
-      {
-       "value": "item7",
-       "text": "(f) the child is deprived of necessary health care"
-      },
-      {
-       "value": "item8",
-       "text": "(g) the child's development is likely to be seriously impaired by a treatable condition and the child's parent refuses to provide or consent to treatment"
-      },
-      {
-       "value": "item9",
-       "text": "(h) the child's parent is unable or unwilling to care for the child and has not made adequate provision for the child's care"
-      },
-      {
-       "value": "item10",
-       "text": "(i) the child is or has been absent from home in circumstances that endanger the child's safety or wellbeing"
-      },
-      {
-       "value": "item11",
-       "text": "(j) the child's parent is dead and adequate provision has not been made for the child's care"
-      },
-      {
-       "value": "item12",
-       "text": "(k) the child has been abandoned and adequate provision has not been made for the child's care"
-      },
-      {
-       "value": "item13",
-       "text": "(i) the child is in the care of a director or another person by agreement and the child's parent is unwilling or unable to resume care when the agreement is no longer in force"
-      }
-     ]
     }
    ],
    "visible": false,
