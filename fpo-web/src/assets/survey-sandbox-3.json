@@ -548,6 +548,13 @@
        "description": "The director recommends the following with regard to care and supervision of the child and access by any person to the child"
       }
      ]
+    },
+    {
+     "type": "infotext",
+     "name": "question88",
+     "title": "Send to the Director's Inbox / Director's Counsel Inbox",
+     "isRequired": true,
+     "titleLocation": "hidden"
     }
    ],
    "visible": false,
@@ -732,6 +739,13 @@
        "description": "The director recommends the following with regard to care and supervision of the child and access by any person to the child"
       }
      ]
+    },
+    {
+     "type": "infotext",
+     "name": "question89",
+     "title": "Send to the Director's Inbox / Director's Counsel Inbox",
+     "isRequired": true,
+     "titleLocation": "hidden"
     }
    ],
    "visible": false,
@@ -916,6 +930,13 @@
        "description": "The director recommends the following with regard to care and supervision of the child and access by any person to the child"
       }
      ]
+    },
+    {
+     "type": "infotext",
+     "name": "question90",
+     "title": "Send to the Director's Inbox / Director's Counsel Inbox",
+     "isRequired": true,
+     "titleLocation": "hidden"
     }
    ],
    "visible": false,
@@ -1125,6 +1146,13 @@
        "title": "The Indigenous community has been involved in the development of the plan?"
       }
      ]
+    },
+    {
+     "type": "infotext",
+     "name": "question91",
+     "title": "Send to the Director's Inbox / Director's Counsel Inbox",
+     "isRequired": true,
+     "titleLocation": "hidden"
     }
    ],
    "visible": false,
