@@ -60,6 +60,7 @@
     {
      "type": "paneldynamic",
      "name": "childInfoPanel",
+     "title": "Children Information",
      "templateElements": [
       {
        "type": "personname",
@@ -163,6 +164,7 @@
     {
      "type": "paneldynamic",
      "name": "childParentsPanel",
+     "title": "Parent Information",
      "templateElements": [
       {
        "type": "personname",
