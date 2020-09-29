@@ -16,7 +16,7 @@
       {
        "type": "personname",
        "name": "socialWorkerName",
-       "title": "Name of Social Worker",
+       "title": "Social Worker",
        "defaultValue": {
         "first": "Socia",
         "middle": "",
@@ -48,7 +48,7 @@
       {
        "type": "personname",
        "name": "directorsCounselName",
-       "title": "Name of the Director's Counsel",
+       "title": "Director's Counsel",
        "defaultValue": {
         "first": "Bob",
         "middle": "",
@@ -65,7 +65,7 @@
       {
        "type": "personname",
        "name": "childName",
-       "title": "Name of the Child"
+       "title": "Child"
       },
       {
        "type": "text",
@@ -119,7 +119,7 @@
        "name": "question24",
        "visible": false,
        "visibleIf": "{panel.childPreviousProceedings} = \"y\" and {panel.childPreviousProceedingsSameJurisdiction} = \"y\"",
-       "title": "[Ability to search CEIS for siblings to find court file number]",
+       "title": "[Ability to search CEIS for previous removals or siblings to find court file number]",
        "titleLocation": "hidden"
       },
       {
@@ -155,11 +155,13 @@
        "name": "childPreviousProceedingsDetails",
        "visible": false,
        "visibleIf": "{panel.childPreviousProceedings} = \"y\" and {panel.childPreviousProceedingsSameJurisdiction} notempty",
-       "title": "Details for the previous proceedings."
+       "title": "Details for the previous proceedings"
       }
      ],
      "panelCount": 1,
-     "minPanelCount": 1
+     "minPanelCount": 1,
+     "panelAddText": "Add a new Child",
+     "panelRemoveText": "Remove this Child"
     },
     {
      "type": "paneldynamic",
@@ -169,7 +171,7 @@
       {
        "type": "personname",
        "name": "childParentName",
-       "title": "Name of the Child(ren)'s Parents"
+       "title": "Child(ren)'s Parents"
       },
       {
        "type": "radiogroup",
@@ -198,7 +200,7 @@
      ],
      "panelCount": 1,
      "minPanelCount": 1,
-     "panelAddText": "Add a Parent",
+     "panelAddText": "Add a new Parent",
      "panelRemoveText": "Remove this Parent"
     },
     {
@@ -237,7 +239,7 @@
        "name": "childrenReturned",
        "visible": false,
        "visibleIf": "{orderSought} = \"s30health\" or {orderSought} = \"s30adequatemeasure\" or {orderSought} = \"s36\" or {orderSought} = \"s42\"",
-       "title": "Have the child(ren) been returned to the parents\n<br><br>\n[If the social worker selects s. 29.1, this question would stay invisible and the form would say \"children remain in the care of the parents\"]\n<br><br>[This question can be asked for each child individually if preferred.]"
+       "title": "Have the child(ren) been returned to the parents?<br><br>[If the social worker selects s. 29.1, this question would stay invisible and the form would say \"children remain in the care of the parents\"]<br><br>[This question can be asked for each child individually if preferred.]"
       }
      ]
     },
@@ -342,7 +344,7 @@
       {
        "type": "personname",
        "name": "question19",
-       "title": "Name of Social Worker (Director's delegate)",
+       "title": "Social Worker",
        "defaultValue": {
         "first": "Socia",
         "middle": "",
@@ -445,12 +447,12 @@
        "type": "yesno",
        "name": "question10",
        "title": "Is/was the child is living in a situation where there is domestic violence by or towards a person with whom the child lives?",
-       "description": "Domestic Violence The likelihood of physical harm to a child increases when the child is living in a situation where there is domestic violence by or towards a person with whom the child resides (section 13(1.2))."
+       "description": "The likelihood of physical harm to a child increases when the child is living in a situation where there is domestic violence by or towards a person with whom the child resides (section 13(1.2))."
       },
       {
        "type": "checkbox",
        "name": "question9",
-       "title": "The child was removed in accordance with the following:",
+       "title": "The child(ren) was removed in accordance with the following:",
        "description": "section 30 of the Child, Family and Community Service Act in the following circumstance(s) as described by section 13 of the Act:",
        "choices": [
         {
@@ -552,7 +554,14 @@
     {
      "type": "infotext",
      "name": "question88",
-     "title": "Send to the Director's Inbox / Director's Counsel Inbox",
+     "title": "Send to the Director's Counsel Inbox",
+     "isRequired": true,
+     "titleLocation": "hidden"
+    },
+    {
+     "type": "infotext",
+     "name": "question92",
+     "title": "eFile this Report to Court",
      "isRequired": true,
      "titleLocation": "hidden"
     }
@@ -571,12 +580,12 @@
     },
     {
      "type": "panel",
-     "name": "panel8",
+     "name": "panel",
      "elements": [
       {
        "type": "personname",
        "name": "question34",
-       "title": "Name of Social Worker (Director's delegate)",
+       "title": "Social Worker",
        "defaultValue": {
         "first": "Socia",
         "middle": "",
@@ -679,12 +688,12 @@
        "type": "yesno",
        "name": "question25",
        "title": "Is/was the child is living in a situation where there is domestic violence by or towards a person with whom the child lives?",
-       "description": "Domestic Violence The likelihood of physical harm to a child increases when the child is living in a situation where there is domestic violence by or towards a person with whom the child resides (section 13(1.2))."
+       "description": "The likelihood of physical harm to a child increases when the child is living in a situation where there is domestic violence by or towards a person with whom the child resides (section 13(1.2))."
       },
       {
        "type": "checkbox",
        "name": "question11",
-       "title": "section 36 (1) of the Act, which requires a director to remove the child if the director has reasonable grounds to believe that either or both of the following apply:",
+       "title": "section 36 (1) of the Act, which requires a director to remove the child(ren) if the director has reasonable grounds to believe that either or both of the following apply:",
        "choices": [
         {
          "value": "item1",
@@ -743,7 +752,14 @@
     {
      "type": "infotext",
      "name": "question89",
-     "title": "Send to the Director's Inbox / Director's Counsel Inbox",
+     "title": "Send to the Director's Counsel Inbox",
+     "isRequired": true,
+     "titleLocation": "hidden"
+    },
+    {
+     "type": "infotext",
+     "name": "question95",
+     "title": "eFile this Report to Court",
      "isRequired": true,
      "titleLocation": "hidden"
     }
@@ -767,7 +783,7 @@
       {
        "type": "personname",
        "name": "question38",
-       "title": "Name of Social Worker (Director's delegate)",
+       "title": "Social Worker",
        "defaultValue": {
         "first": "Socia",
         "middle": "",
@@ -870,7 +886,7 @@
        "type": "yesno",
        "name": "question27",
        "title": "Is/was the child is living in a situation where there is domestic violence by or towards a person with whom the child lives?",
-       "description": "Domestic Violence The likelihood of physical harm to a child increases when the child is living in a situation where there is domestic violence by or towards a person with whom the child resides (section 13(1.2))."
+       "description": "The likelihood of physical harm to a child increases when the child is living in a situation where there is domestic violence by or towards a person with whom the child resides (section 13(1.2))."
       },
       {
        "type": "checkbox",
@@ -934,7 +950,14 @@
     {
      "type": "infotext",
      "name": "question90",
-     "title": "Send to the Director's Inbox / Director's Counsel Inbox",
+     "title": "Send to the Director's Counsel Inbox",
+     "isRequired": true,
+     "titleLocation": "hidden"
+    },
+    {
+     "type": "infotext",
+     "name": "question94",
+     "title": "eFile this Report to Court",
      "isRequired": true,
      "titleLocation": "hidden"
     }
@@ -959,7 +982,7 @@
       {
        "type": "personname",
        "name": "question42",
-       "title": "Name of Social Worker (Director's delegate)",
+       "title": "Social Worker",
        "defaultValue": {
         "first": "Socia",
         "middle": "",
@@ -1027,7 +1050,7 @@
        "type": "yesno",
        "name": "question28",
        "title": "Is/was the child is living in a situation where there is domestic violence by or towards a person with whom the child lives?",
-       "description": "Domestic Violence The likelihood of physical harm to a child increases when the child is living in a situation where there is domestic violence by or towards a person with whom the child resides (section 13(1.2))."
+       "description": "The likelihood of physical harm to a child increases when the child is living in a situation where there is domestic violence by or towards a person with whom the child resides (section 13(1.2))."
       },
       {
        "type": "comment",
@@ -1132,7 +1155,7 @@
       {
        "type": "yesno",
        "name": "question81",
-       "title": "The child's views on the interim plan of care been considered?"
+       "title": "The child(ren)'s views on the interim plan of care been considered?"
       },
       {
        "type": "yesno",
@@ -1150,7 +1173,14 @@
     {
      "type": "infotext",
      "name": "question91",
-     "title": "Send to the Director's Inbox / Director's Counsel Inbox",
+     "title": "Send to the Director's Counsel Inbox",
+     "isRequired": true,
+     "titleLocation": "hidden"
+    },
+    {
+     "type": "infotext",
+     "name": "question93",
+     "title": "eFile this Report to Court",
      "isRequired": true,
      "titleLocation": "hidden"
     }
