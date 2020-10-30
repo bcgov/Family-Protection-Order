@@ -284,7 +284,7 @@
       {
        "type": "address",
        "name": "question13",
-       "title": "Address for Service in BC [Shelley to check if addresses for Respondents are required]",
+       "title": "Address for Service in BC [addresses for Respondents are not required]",
        "description": "Is this address for a law firm is asked for Appellant but not respondent yet"
       },
       {
@@ -463,68 +463,7 @@
    ]
   },
   {
-   "name": "Form4"
-  },
-  {
-   "name": "Form5",
-   "elements": [
-    {
-     "type": "infotext",
-     "name": "question32",
-     "title": "Appellants or maybe Respondents propose hearing time when CoA give hearing date.",
-     "titleLocation": "hidden"
-    },
-    {
-     "type": "infotext",
-     "name": "question33",
-     "title": "Appellants or maybe Respondents propose hearing time when CoA give hearing date.",
-     "titleLocation": "hidden"
-    }
-   ]
-  },
-  {
-   "name": "Form6",
-   "elements": [
-    {
-     "type": "infotext",
-     "name": "question34",
-     "title": "Withdraw/End Appeal. Maybe this isn't its own page but is accessed through the dashboard that tracks the appeal process",
-     "titleLocation": "hidden"
-    }
-   ]
-  },
-  {
-   "name": "Form8",
-   "elements": [
-    {
-     "type": "infotext",
-     "name": "question35",
-     "title": "Appeals a CoA Chambers Judgement (pre-appeal with 1 Judge)",
-     "titleLocation": "hidden"
-    }
-   ]
-  },
-  {
-   "name": "Form9",
-   "elements": [
-    {
-     "type": "infotext",
-     "name": "question36",
-     "title": "Ask to appear in the PM instead of AM. Other issues. Adjournments. ",
-     "titleLocation": "hidden"
-    }
-   ]
-  },
-  {
-   "name": "Form18/Form19/Form20",
-   "elements": [
-    {
-     "type": "infotext",
-     "name": "question30",
-     "title": "Accessed through Dashboard. Might not make sense to group them based on who is coming in to the app. Lawyer vs SRL arguing about lawyer",
-     "titleLocation": "hidden"
-    }
-   ]
+   "name": "Form4 possibly Form 7??"
   },
   {
    "name": "AppealBook",
@@ -558,6 +497,765 @@
      "titleLocation": "hidden"
     }
    ]
+  },
+  {
+   "name": "Form5/Form9",
+   "elements": [
+    {
+     "type": "infotext",
+     "name": "question45",
+     "title": "Appellants or maybe Respondents propose hearing time when CoA give hearing date.\n<br><br>\nDirections for parties to discuss details with CoA Registrar before hand.\n<br><br>\nHere is a URL with updated availability to consider before talk to the associate registrar.",
+     "titleLocation": "hidden"
+    },
+    {
+     "type": "infotext",
+     "name": "question68",
+     "title": "Desirable future is electronic schedule where parties see available dates and locations ahead of time and click on what is available. Then Associate Registrar will confirm or deny.",
+     "titleLocation": "hidden"
+    },
+    {
+     "type": "yesno",
+     "name": "question49",
+     "title": "[Obsolete if app has live schedule info] Have you already discussed hearing details with the CoA Associate Registrar?"
+    },
+    {
+     "type": "infotext",
+     "name": "question54",
+     "title": "Go do that. Talk about date, court location and how much time you think it will take.\n<br><br>\nHere is a URL with updated availability to consider before talk to the associate registrar.",
+     "titleLocation": "hidden",
+     "messageStyle": "error"
+    },
+    {
+     "type": "panel",
+     "name": "panel2",
+     "elements": [
+      {
+       "type": "yesno",
+       "name": "question53",
+       "title": "Have you already discussed hearing details with the other party(ies)? [Does it make sense to pull in their names?]"
+      },
+      {
+       "type": "infotext",
+       "name": "question50",
+       "title": "Go do that. Talk about date, court location and how much time you think it will take.",
+       "titleLocation": "hidden",
+       "messageStyle": "error"
+      }
+     ]
+    },
+    {
+     "type": "panel",
+     "name": "panel1",
+     "elements": [
+      {
+       "type": "yesno",
+       "name": "question57",
+       "title": "Have you come to an agreement about the time estimate?"
+      },
+      {
+       "type": "text",
+       "name": "question44",
+       "title": "Estimated length of appeal (Appellant's estimate) whoever fills out the form is responsible for providing both times",
+       "description": "The default length for an appeal is half a day."
+      },
+      {
+       "type": "radiogroup",
+       "name": "question51",
+       "title": "switch to this style for time estimate",
+       "hasOther": true,
+       "choices": [
+        {
+         "value": "item1",
+         "text": "1/2 day"
+        },
+        {
+         "value": "item2",
+         "text": "1 day"
+        },
+        {
+         "value": "item3",
+         "text": "2 days"
+        },
+        {
+         "value": "item4",
+         "text": "3 days"
+        },
+        {
+         "value": "item5",
+         "text": "4 days"
+        },
+        {
+         "value": "item6",
+         "text": "5 days"
+        }
+       ],
+       "otherText": "More than 5 days. Indicate how many days"
+      },
+      {
+       "type": "text",
+       "name": "question43",
+       "title": "Estimated length of appeal (Respondent’s estimate) whoever fills out the form is responsible for providing both times",
+       "description": "The default length for an appeal is half a day."
+      },
+      {
+       "type": "text",
+       "name": "question58",
+       "title": "Estimated length of appeal (agreed upon)",
+       "description": "The default length for an appeal is half a day."
+      }
+     ]
+    },
+    {
+     "type": "panel",
+     "name": "panel3",
+     "elements": [
+      {
+       "type": "yesno",
+       "name": "question61",
+       "title": "Have you come to an agreement to whether do a remote hearing or an in-person remote hearing?"
+      },
+      {
+       "type": "infotext",
+       "name": "question62",
+       "title": "Go do that.",
+       "titleLocation": "hidden",
+       "messageStyle": "error"
+      },
+      {
+       "type": "radiogroup",
+       "name": "question60",
+       "title": "Remote or in-person hearing? [What calendar options are open to remote hearings? Vancouver-only or all available times?]",
+       "description": "Remote could be by phone or video (Microsoft Teams/Zoom)",
+       "choices": [
+        {
+         "value": "item1",
+         "text": "Remote"
+        },
+        {
+         "value": "item2",
+         "text": "In-person"
+        }
+       ]
+      },
+      {
+       "type": "yesno",
+       "name": "question64",
+       "title": "Are all parties capable of video hearing?"
+      },
+      {
+       "type": "yesno",
+       "name": "question63",
+       "title": "Are all parties capable of phone hearing?"
+      },
+      {
+       "type": "infotext",
+       "name": "question65",
+       "title": "Looks like you have to do in-person because no phone no video.",
+       "titleLocation": "hidden",
+       "messageStyle": "error"
+      },
+      {
+       "type": "infotext",
+       "name": "question66",
+       "title": "If the order from lower court is from Interior region, appeal must be heard in either Kamloops or Kelowna unless registrar allows Vancouver. ",
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "yesno",
+       "name": "question32",
+       "title": "Have you come to an agreement about the court location?"
+      },
+      {
+       "type": "infotext",
+       "name": "question52",
+       "title": "Go do that.",
+       "titleLocation": "hidden",
+       "messageStyle": "error"
+      },
+      {
+       "type": "yesno",
+       "name": "question67",
+       "title": "[Repeat default assignments for each region] The lower court order is from [Interior Court house]. Default location is Kelowna or Kamloops. Are you requesting a hearing to be in Vancouver or Victoria?"
+      },
+      {
+       "type": "radiogroup",
+       "name": "question40",
+       "title": "Interior Only Appeal ",
+       "choices": [
+        {
+         "value": "item2",
+         "text": "Kamloops"
+        },
+        {
+         "value": "item3",
+         "text": "Kelowna"
+        }
+       ]
+      },
+      {
+       "type": "radiogroup",
+       "name": "question69",
+       "title": "Courthouse where the appeal will be heard [template for Interior - recreate different templates for other regions] ",
+       "choices": [
+        {
+         "value": "item4",
+         "text": "Vancouver"
+        },
+        {
+         "value": "item5",
+         "text": "Victoria"
+        }
+       ]
+      },
+      {
+       "type": "yesno",
+       "name": "question75",
+       "title": "Do you already have approval from the CoA to have an in-person hearing at [location of choice]?"
+      },
+      {
+       "type": "infotext",
+       "name": "question73",
+       "title": "[For remote and default location hearings - Input date-time-location selector here - may be external link to WebCATS or directly through the app]\n<br><br>\nDate the first day/start date of appeal will be heard [Display upcoming options instead for a date input]",
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "yesno",
+       "name": "question56",
+       "title": "[only ask if this is a 1/2 day request] default is 10am? do you want to change the start time to 2pm? [yes will generate Form 9 as well]"
+      },
+      {
+       "type": "infotext",
+       "name": "question72",
+       "title": "Display whether Associate Registrar Inbox item for Associate Registrar to approve",
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "comment",
+       "name": "question70",
+       "title": "What are the reasons you are requesting a hearing outside of the default location",
+       "description": "Business letter format. Case info; Style of Proceedings; name of parties requesting. TBD additional help text"
+      },
+      {
+       "type": "infotext",
+       "name": "question76",
+       "title": "[Click to notify CoA about request - allow them to approve/deny]",
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "infotext",
+       "name": "question74",
+       "title": "[Upon approval/denial for location change - Input date-time-location selector here - may be external link to WebCATS or directly through the app]",
+       "titleLocation": "hidden"
+      }
+     ]
+    },
+    {
+     "type": "infotext",
+     "name": "question42",
+     "title": "[Lots of auto-filled documents already in WebCATS] You are required to attach a copy of the orders under appeal to this form. The Court will review any appeal set for one day or longer and may adjust the length.",
+     "titleLocation": "hidden"
+    },
+    {
+     "type": "checkbox",
+     "name": "question59",
+     "title": "I undertake to pay all hearing fees payable under Item 4, of Division 1 of Schedule 3 - Court Fees.",
+     "choices": [
+      {
+       "value": "item1",
+       "text": "I agree with the statement above"
+      }
+     ]
+    },
+    {
+     "type": "infotext",
+     "name": "question33",
+     "title": "Autofill based on who logged in -Name of lawyer or party authorizing filing of this Form and giving undertaking\n<br><br>\n[Pay fees]\n<br><br>\nAuto-accept form(s) and serve automatically.",
+     "titleLocation": "hidden"
+    }
+   ]
+  },
+  {
+   "name": "Form6",
+   "elements": [
+    {
+     "type": "infotext",
+     "name": "question34",
+     "title": "Withdraw/End Appeal. Maybe this isn't its own page but is accessed through the dashboard that tracks the appeal process\n<br><br>\nOnly for Form 1 and Form 3?? Not Form 4??",
+     "titleLocation": "hidden"
+    },
+    {
+     "type": "infotext",
+     "name": "question46",
+     "title": "Abandoning Appeal or Cross Appeal should be automatically determined by who is applying? Multiple appeals?",
+     "titleLocation": "hidden"
+    },
+    {
+     "type": "checkbox",
+     "name": "question48",
+     "title": "Which parties are you abandoning against? [List builder but only with respondents??]",
+     "choices": [
+      "item1",
+      "item2",
+      "item3"
+     ]
+    },
+    {
+     "type": "infotext",
+     "name": "question55",
+     "title": "Autofill based on who logged in -Name of lawyer or party authorizing filing of this Form and giving undertaking\n<br><br>\n[Pay fees]\n<br><br>\nAuto-accept form(s) and serve automatically.",
+     "titleLocation": "hidden"
+    }
+   ]
+  },
+  {
+   "name": "Form8",
+   "elements": [
+    {
+     "type": "infotext",
+     "name": "question35",
+     "title": "Appeals a CoA Chambers Judgement (pre-appeal with 1 Judge)\n<br><br>\nSimilar to Form 6 in that the app needs to know who is logged in and who are their friends.",
+     "titleLocation": "hidden"
+    }
+   ]
+  },
+  {
+   "name": "Form9",
+   "elements": [
+    {
+     "type": "infotext",
+     "name": "question36",
+     "title": "This isn't a mini-app on its own but rather modifications of previous decisions made about court location/date/time.\n<br><br>\nAsk to appear in the PM instead of AM. Other issues. Adjournments. ",
+     "titleLocation": "hidden"
+    },
+    {
+     "type": "infotext",
+     "name": "question47",
+     "title": "integrate as part of Form 5? Yes. Also leave it as a standalone.",
+     "titleLocation": "hidden"
+    },
+    {
+     "type": "yesno",
+     "name": "question71",
+     "title": "[Your Hearing date/time is at MMM/DD/YYYY at 10am. Do you want to switch to 2pm instead? "
+    },
+    {
+     "type": "yesno",
+     "name": "question77",
+     "title": "[Your Hearing date/time is at MMM/DD/YYYY. Do you want to adjourn to a different date?"
+    },
+    {
+     "type": "yesno",
+     "name": "question79",
+     "title": "[Your Hearing location is at LOCATION in-person. Do you want to remote instead? Phone/Video?",
+     "description": "Write a letter [instructions in Form5 app] to change physicals locations. "
+    },
+    {
+     "type": "comment",
+     "name": "question78",
+     "title": "Other issues relating to the your Hearing date on MMM/DD/YYYY"
+    }
+   ]
+  },
+  {
+   "name": "Appeal Hearing",
+   "elements": [
+    {
+     "type": "infotext",
+     "name": "question41",
+     "title": "The Appeal Hearing schedule with Form 5 happens",
+     "titleLocation": "hidden"
+    }
+   ]
+  },
+  {
+   "name": "Form18/Form19/Form20",
+   "elements": [
+    {
+     "type": "infotext",
+     "name": "question30",
+     "title": "Accessed through Dashboard. Might not make sense to group them based on who is coming in to the app. Lawyer vs SRL arguing about lawyer",
+     "titleLocation": "hidden"
+    },
+    {
+     "type": "panel",
+     "name": "panel5",
+     "elements": [
+      {
+       "type": "infotext",
+       "name": "question80",
+       "title": "Current Status: [If appellant is represented]\n<br>\nThe lawyer is: {appellantLawyerName}\nFirm name: {appellantFirmName}",
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "infotext",
+       "name": "question81",
+       "startWithNewLine": false,
+       "title": "I want to change from the current status",
+       "isRequired": true,
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "radiogroup",
+       "name": "question86",
+       "title": "What kind of change do you want to make?",
+       "choices": [
+        {
+         "value": "item1",
+         "text": "I don't want a lawyer anymore"
+        },
+        {
+         "value": "item2",
+         "text": "I want to change my lawyer or law firm to another"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "panel",
+     "name": "panel4",
+     "elements": [
+      {
+       "type": "infotext",
+       "name": "question88",
+       "title": "You don't want to have a lawyer anymore. The Court of Appeal will need to confirm what address you want court documents to be delivered to.\n<br><br>",
+       "isRequired": true,
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "checkbox",
+       "name": "question89",
+       "title": "Who doesn't want to be represented by {currentLawyerName} anymore?",
+       "description": "Pull names from WebCATS [only pull names from their side, not parties from other side as well.]",
+       "choices": [
+        {
+         "value": "item1",
+         "text": "party1"
+        },
+        {
+         "value": "item2",
+         "text": "party2"
+        },
+        {
+         "value": "item3",
+         "text": "party3"
+        }
+       ]
+      },
+      {
+       "type": "yesno",
+       "name": "question91",
+       "title": "Do all of the parties that just wanted to drop their lawyer still plan to work and file together?",
+       "description": "This means that you will be able to use service to include each other on future filings. [This needs a lot of work and future consideration for accessing each other's info]"
+      },
+      {
+       "type": "address",
+       "name": "question90",
+       "title": "For {party1 who doesn't a lawyer anymore} Where do you want court documents to be delivered? (address must be in BC)"
+      },
+      {
+       "type": "infotext",
+       "name": "question115",
+       "title": "[if App detects address outside of BC]. \nThe address you want to use is outside of BC. You will need to write a letter explaining why they court accept that address. This service will help you with that letter.\n(duplicate for all applicable) ",
+       "isRequired": true,
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "infotext",
+       "name": "question119",
+       "title": "[if App detects if PO Box]. \nNot allowed to use a PO Box. [What if the address just happens to include the letters, p-o-b-o-x in sequence??]\n<br><br>\nWhat about rural address that are only P.O. Boxes??",
+       "isRequired": true,
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "comment",
+       "name": "question118",
+       "title": "What address? why outside of BC versus inside of BC?",
+       "description": "[auto complete letter that says Reequest = address outside of BC]\n[Letter needs to include other people who want the same thing]"
+      },
+      {
+       "type": "contactinfo",
+       "name": "question92",
+       "title": "party1 contact info",
+       "description": "email optional but if you're filling it in, you consent to email service"
+      },
+      {
+       "type": "address",
+       "name": "question87",
+       "title": "For {party2++ who doesn't a lawyer anymore} Where do you want court documents to be delivered? (address must be in BC)"
+      },
+      {
+       "type": "contactinfo",
+       "name": "question93",
+       "title": "party2++ contact info",
+       "description": "email optional but if you're filling it in, you consent to email service"
+      }
+     ]
+    },
+    {
+     "type": "panel",
+     "name": "panel6",
+     "elements": [
+      {
+       "type": "infotext",
+       "name": "question95",
+       "title": "Your new lawyer or law firm can work from outside of B.C. but they must have an address for service be in B.C. according to the Court of Appeal rules.\n<br><br>\n[??Do we need a separate P18 to fire a lawyer and then another P18 to hire a new lawyer?]",
+       "isRequired": true,
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "radiogroup",
+       "name": "question98",
+       "title": "[Unnecessary?] Who are you? [Can we assume it is whoever is logged in that has their name on the P18 even if party1 gave their credentials to the new lawyer]",
+       "choices": [
+        {
+         "value": "item2",
+         "text": "party1 (app would know who you are)"
+        },
+        {
+         "value": "item3",
+         "text": "newLawyer (logged into app using party1's credentials)"
+        }
+       ]
+      },
+      {
+       "type": "yesno",
+       "name": "changeLawyer",
+       "title": "Do you want change your lawyer?"
+      },
+      {
+       "type": "text",
+       "name": "question83",
+       "title": "What is your new lawyer's name?"
+      },
+      {
+       "type": "yesno",
+       "name": "question84",
+       "title": "Is {newLawyerName} at the same law firm? (display {currentLawFirmName}) [what if law firms move locations??]"
+      },
+      {
+       "type": "text",
+       "name": "question99",
+       "title": "Name of new law firm"
+      },
+      {
+       "type": "address",
+       "name": "question100",
+       "title": "Address of new law firm"
+      },
+      {
+       "type": "contactinfo",
+       "name": "question97",
+       "title": "{newLaywerName}'s contact information [fax not required]",
+       "description": "email optional but if you're filling it in, you consent to email service"
+      },
+      {
+       "type": "yesno",
+       "name": "question96",
+       "title": "[no change lawyer only] Is {currentLawyerName} at a different law firm? (display {currentLawFirmName})"
+      },
+      {
+       "type": "text",
+       "name": "question103",
+       "title": "Name of new law firm"
+      },
+      {
+       "type": "address",
+       "name": "question104",
+       "title": "Address of new law firm"
+      },
+      {
+       "type": "yesno",
+       "name": "question102",
+       "title": "[no change lawyer and no change firm] Does {currentLawyerName} have new contact information?"
+      },
+      {
+       "type": "contactinfo",
+       "name": "question105",
+       "title": "new contact info for {currentLawyerName}",
+       "description": "email optional but inputting one = email service consent\n<br>\nfax not required"
+      },
+      {
+       "type": "infotext",
+       "name": "question101",
+       "title": "[no new lawyer, no new firm, no new contact info] You \n<br>\ndon't need to change anything then?\n<br>\n[may need 1 more question for if firm changed address]",
+       "titleLocation": "hidden",
+       "messageStyle": "error"
+      },
+      {
+       "type": "checkbox",
+       "name": "question94",
+       "title": "Who else wants to be represented by {newLawyerName}? [do not display for old lawyer]",
+       "description": "Pull names from WebCATS [only pull names represented by same lawyer, not parties from other side as well.] - Shelley to clarify whether 1 party can change a new lawyer for other parties if they're not already represented by the same lawyer.",
+       "choices": [
+        {
+         "value": "item4",
+         "text": "party1 (if who are you = new lawyer - or should we just assume this?)"
+        },
+        {
+         "value": "item2",
+         "text": "party2"
+        },
+        {
+         "value": "item3",
+         "text": "party3"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "panel",
+     "name": "panel7",
+     "elements": [
+      {
+       "type": "infotext",
+       "name": "question82",
+       "title": "Current Status: [If appellant is represented]\n<br>\nThe lawyer is: {appellantLawyerName}\nFirm name: {appellantFirmName}",
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "infotext",
+       "name": "question85",
+       "startWithNewLine": false,
+       "title": "I want to change from the current status",
+       "isRequired": true,
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "radiogroup",
+       "name": "question106",
+       "title": "What kind of change do you want to make?",
+       "choices": [
+        {
+         "value": "item1",
+         "text": "I want to change my address"
+        },
+        {
+         "value": "item2",
+         "text": "I have hired a lawyer and I need to give them access to this service"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "panel",
+     "name": "panel8",
+     "elements": [
+      {
+       "type": "infotext",
+       "name": "question109",
+       "title": "Your new address must be in B.C. according to the Court of Appeal rules.\n<br><br>\n[Shelley to confirm whether both appellants and responses need to have BC service addresses - No P.O. Boxes allowed]\n<br><br>\nDoes each self-rep do their P18 to change address or can 1 self-rep do 1 P18 to change multiple addresses?\n<br><br>\nIf people want an address outside of B.C., can they do this form and have it also create a Form4/request letter for a package deal?",
+       "isRequired": true,
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "address",
+       "name": "question116",
+       "title": "Where do you want your court documents to be delivered?"
+      },
+      {
+       "type": "contactinfo",
+       "name": "question117",
+       "title": "update contact info",
+       "description": "email optional but if you're filling it in, you consent to email service"
+      },
+      {
+       "type": "checkbox",
+       "name": "question111",
+       "title": "Who else has agreed to receive court documents at this address + contact info?",
+       "description": "Pull names from WebCATS [only pull names from their side, not parties from other side as well.]\n<br><br>\nThis means that you will be able to use service to include each other on future filings. [This needs a lot of work and future consideration for accessing each other's info]",
+       "choices": [
+        {
+         "value": "item1",
+         "text": "party1"
+        },
+        {
+         "value": "item2",
+         "text": "party2"
+        },
+        {
+         "value": "item3",
+         "text": "party3"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "panel",
+     "name": "panel9",
+     "elements": [
+      {
+       "type": "infotext",
+       "name": "question107",
+       "title": "Your new lawyer or law firm can work from outside of B.C. but they must have an address for service be in B.C. according to the Court of Appeal rules.",
+       "isRequired": true,
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "radiogroup",
+       "name": "question108",
+       "title": "[Unnecessary?] Who are you? [Can we assume it is whoever is logged in that has their name on the P18 even if party1 gave their credentials to the new lawyer]",
+       "choices": [
+        {
+         "value": "item2",
+         "text": "party1 (app would know who you are)"
+        },
+        {
+         "value": "item3",
+         "text": "newLawyer (logged into app using party1's credentials)"
+        }
+       ]
+      },
+      {
+       "type": "text",
+       "name": "question110",
+       "title": "What is your lawyer's name?"
+      },
+      {
+       "type": "text",
+       "name": "question112",
+       "title": "Name of law firm"
+      },
+      {
+       "type": "address",
+       "name": "question113",
+       "title": "Address of law firm"
+      },
+      {
+       "type": "contactinfo",
+       "name": "question114",
+       "title": "{newLaywerName}'s contact information [fax not required]",
+       "description": "email optional but if you're filling it in, you consent to email service"
+      },
+      {
+       "type": "checkbox",
+       "name": "question121",
+       "title": "Who else wants to be represented by {newLawyerName}? [do not display for old lawyer]",
+       "description": "Pull names from WebCATS [only pull names on the same side, not parties from other sides as well.] - Shelley to clarify whether 1 party can change a new lawyer for other parties if they're not already represented by the same lawyer.",
+       "choices": [
+        {
+         "value": "item4",
+         "text": "party1 (if who are you = new lawyer - or should we just assume this?)"
+        },
+        {
+         "value": "item2",
+         "text": "party2"
+        },
+        {
+         "value": "item3",
+         "text": "party3"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "page1"
   }
  ],
  "showQuestionNumbers": "off",
