@@ -21,7 +21,8 @@
         "first": "Socia",
         "middle": "",
         "last": "Werka"
-       }
+       },
+       "defaultSubstitution": "the Social Worker"
       },
       {
        "type": "address",
