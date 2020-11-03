@@ -53,7 +53,8 @@
         "first": "Bob",
         "middle": "",
         "last": "Loblaw"
-       }
+       },
+       "defaultSubstitution": "the Director's Counsel"
       }
      ]
     },
@@ -65,7 +66,8 @@
       {
        "type": "personname",
        "name": "childName",
-       "title": "Child"
+       "title": "Child",
+       "defaultSubstitution": "the Child"
       },
       {
        "type": "text",
@@ -105,7 +107,7 @@
       {
        "type": "yesno",
        "name": "childPreviousProceedings",
-       "title": "Are there previous proceedings involving the {panel.childName} or their siblings?"
+       "title": "Are there previous proceedings involving {panel.childName} or their siblings?"
       },
       {
        "type": "yesno",
