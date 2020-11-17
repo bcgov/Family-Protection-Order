@@ -868,13 +868,199 @@
    ]
   },
   {
-   "name": "Form18/Form19/Form20",
+   "name": "Party Form18 / Form20",
    "elements": [
     {
      "type": "infotext",
      "name": "question30",
      "title": "Accessed through Dashboard. Might not make sense to group them based on who is coming in to the app. Lawyer vs SRL arguing about lawyer",
      "titleLocation": "hidden"
+    },
+    {
+     "type": "infotext",
+     "name": "question155",
+     "title": "Lawyer is Withdrawing [Form 20]",
+     "titleLocation": "hidden",
+     "messageStyle": "inline"
+    },
+    {
+     "type": "panel",
+     "name": "panel14",
+     "elements": [
+      {
+       "type": "infotext",
+       "name": "question153",
+       "title": "[Triggered upon lawyer serving Form 19 through this service or when they entered a service date for Form 19; If the lawyer didn't write in a service date; change messaging below to + 7 days from service date instead of a pre-calculated date]\n<br><br>\nYour Lawyer has filed to withdraw from being your lawyer. / No longer wants to represent you anymore.\n<br>\nYou have until [serviceDate + days] to object.\n",
+       "titleLocation": "hidden",
+       "messageStyle": "error"
+      },
+      {
+       "type": "yesno",
+       "name": "question154",
+       "title": "Are you ok with {lawyerName} withdrawing from being your lawyer?"
+      }
+     ]
+    },
+    {
+     "type": "infotext",
+     "name": "question147",
+     "title": "Have Lawyer - Lawyer withdrew with Form 19 - Ok with withdrawal [Form 18]",
+     "titleLocation": "hidden",
+     "messageStyle": "inline"
+    },
+    {
+     "type": "panel",
+     "name": "panel15",
+     "elements": [
+      {
+       "type": "yesno",
+       "name": "question164",
+       "title": "Do you have a new lawyer?"
+      },
+      {
+       "type": "infotext",
+       "name": "question169",
+       "title": "Your new lawyer or law firm can work from outside of B.C. but they must have an address for service be in B.C. according to the Court of Appeal rules.\n<br><br>\n[??Do we need a separate P18 to fire a lawyer and then another P18 to hire a new lawyer?]",
+       "isRequired": true,
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "text",
+       "name": "question165",
+       "title": "What is your new lawyer's name?"
+      },
+      {
+       "type": "text",
+       "name": "question166",
+       "title": "Name of new law firm"
+      },
+      {
+       "type": "address",
+       "name": "question167",
+       "title": "Address of new law firm"
+      },
+      {
+       "type": "contactinfo",
+       "name": "question168",
+       "title": "{newLaywerName}'s contact information [fax not required]",
+       "description": "email optional but if you're filling it in, you consent to email service"
+      },
+      {
+       "type": "infotext",
+       "name": "question170",
+       "title": "[if App detects address outside of BC]. \nThe address you want to use is outside of BC. You will need to write a letter explaining why they court accept that address. This service will help you with that letter.\n(duplicate for all applicable) ",
+       "isRequired": true,
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "infotext",
+       "name": "question171",
+       "title": "[if App detects if PO Box]. \nNot allowed to use a PO Box. [What if the address just happens to include the letters, p-o-b-o-x in sequence??]\n<br><br>\nWhat about rural address that are only P.O. Boxes??",
+       "isRequired": true,
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "comment",
+       "name": "question172",
+       "title": "What address? why outside of BC versus inside of BC?",
+       "description": "[auto complete letter that says Reequest = address outside of BC]\n[Letter needs to include other people who want the same thing]"
+      },
+      {
+       "type": "infotext",
+       "name": "question173",
+       "title": "Click here to eFile [Form 18]",
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "infotext",
+       "name": "question177",
+       "title": "[No New Lawyer]",
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "address",
+       "name": "question174",
+       "title": "Confirm your service address (add BC warnings)"
+      },
+      {
+       "type": "contactinfo",
+       "name": "question175",
+       "title": "Confirm contact info (email optional but consents to email service)"
+      },
+      {
+       "type": "checkbox",
+       "name": "question178",
+       "title": "Who else wants to get court documents at this address?",
+       "choices": [
+        {
+         "value": "item1",
+         "text": "party1"
+        },
+        {
+         "value": "item2",
+         "text": "party2"
+        },
+        {
+         "value": "item3",
+         "text": "party3"
+        }
+       ]
+      },
+      {
+       "type": "infotext",
+       "name": "question176",
+       "title": "Click here to eFile [Form 18]",
+       "isRequired": true,
+       "titleLocation": "hidden"
+      }
+     ]
+    },
+    {
+     "type": "infotext",
+     "name": "question162",
+     "title": "Have Lawyer - Lawyer withdrew with Form 19 - Object to withdrawal [Form 20]",
+     "titleLocation": "hidden",
+     "messageStyle": "inline"
+    },
+    {
+     "type": "panel",
+     "name": "panel16",
+     "elements": [
+      {
+       "type": "checkbox",
+       "name": "question159",
+       "title": "Who else is not OK with {currentLawyerName} withdrawing?",
+       "description": "Pull names from WebCATS [only pull names from their side, not parties from other side as well.]",
+       "choices": [
+        {
+         "value": "item1",
+         "text": "party1"
+        },
+        {
+         "value": "item2",
+         "text": "party2"
+        },
+        {
+         "value": "item3",
+         "text": "party3"
+        }
+       ]
+      },
+      {
+       "type": "infotext",
+       "name": "question163",
+       "title": "Click here to eFile and serve lawyer",
+       "isRequired": true,
+       "titleLocation": "hidden"
+      }
+     ]
+    },
+    {
+     "type": "infotext",
+     "name": "question161",
+     "title": "Have Lawyer",
+     "titleLocation": "hidden",
+     "messageStyle": "inline"
     },
     {
      "type": "panel",
@@ -910,6 +1096,13 @@
        ]
       }
      ]
+    },
+    {
+     "type": "infotext",
+     "name": "question148",
+     "title": "Have Lawyer; Don't want Lawyer anymore",
+     "titleLocation": "hidden",
+     "messageStyle": "inline"
     },
     {
      "type": "panel",
@@ -991,6 +1184,13 @@
        "description": "email optional but if you're filling it in, you consent to email service"
       }
      ]
+    },
+    {
+     "type": "infotext",
+     "name": "question149",
+     "title": "Have Lawyer; Want to change Lawyer/Law Firm",
+     "titleLocation": "hidden",
+     "messageStyle": "inline"
     },
     {
      "type": "panel",
@@ -1105,13 +1305,20 @@
      ]
     },
     {
+     "type": "infotext",
+     "name": "question150",
+     "title": "Don't Have Lawyer",
+     "titleLocation": "hidden",
+     "messageStyle": "inline"
+    },
+    {
      "type": "panel",
      "name": "panel7",
      "elements": [
       {
        "type": "infotext",
        "name": "question82",
-       "title": "Current Status: [If appellant is represented]\n<br>\nThe lawyer is: {appellantLawyerName}\nFirm name: {appellantFirmName}",
+       "title": "Current Status: [If appellant is not represented]\n<br>\nThe lawyer is: {appellantLawyerName}\nFirm name: {appellantFirmName}",
        "titleLocation": "hidden"
       },
       {
@@ -1138,6 +1345,13 @@
        ]
       }
      ]
+    },
+    {
+     "type": "infotext",
+     "name": "question151",
+     "title": "Don't Have Lawyer; Change Address",
+     "titleLocation": "hidden",
+     "messageStyle": "inline"
     },
     {
      "type": "panel",
@@ -1182,6 +1396,13 @@
        ]
       }
      ]
+    },
+    {
+     "type": "infotext",
+     "name": "question152",
+     "title": "Don't Have Lawyer; Hired a Lawyer",
+     "titleLocation": "hidden",
+     "messageStyle": "inline"
     },
     {
      "type": "panel",
@@ -1255,7 +1476,239 @@
    ]
   },
   {
-   "name": "page1"
+   "name": "Lawyer Form 18 / Form 19",
+   "elements": [
+    {
+     "type": "infotext",
+     "name": "question120",
+     "title": "Accessed through Dashboard for Lawyers.\nForm 19 for withdrawing. Form 18 for changing firms/contact info.",
+     "titleLocation": "hidden"
+    },
+    {
+     "type": "panel",
+     "name": "panel10",
+     "elements": [
+      {
+       "type": "infotext",
+       "name": "question125",
+       "title": "Current Status:\n<br>\nYour current law firms is: {appellantFirmName}",
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "infotext",
+       "name": "question123",
+       "startWithNewLine": false,
+       "title": "I want to change the law firm on record\n[Form 18]",
+       "isRequired": true,
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "infotext",
+       "name": "question122",
+       "title": "Current Status:\n<br>\nYou are representing: \n<br>\n{partyNameX}\n<br>\n{partyNameY}\n<br>\n{partyNameZ}",
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "infotext",
+       "name": "question126",
+       "startWithNewLine": false,
+       "title": "I want to withdraw as a lawyer [Form 19]",
+       "isRequired": true,
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "infotext",
+       "name": "question136",
+       "startWithNewLine": false,
+       "title": "I want to represent more parties [Form 18]",
+       "isRequired": true,
+       "titleLocation": "hidden"
+      }
+     ]
+    },
+    {
+     "type": "infotext",
+     "name": "question137",
+     "title": "I want to change the law firm on record\n[Form 18]",
+     "titleLocation": "hidden",
+     "messageStyle": "inline"
+    },
+    {
+     "type": "panel",
+     "name": "panel12",
+     "elements": [
+      {
+       "type": "infotext",
+       "name": "question135",
+       "title": "Your new law firm can be outside of B.C. but they must have an address for service be in B.C. according to the Court of Appeal rules.",
+       "isRequired": true,
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "text",
+       "name": "question140",
+       "title": "Name of new law firm"
+      },
+      {
+       "type": "address",
+       "name": "question141",
+       "title": "Address of new law firm"
+      },
+      {
+       "type": "infotext",
+       "name": "question139",
+       "title": "[Shelley to check if this is relevant for Form 19- Nov 16 2020]\n<br>\n[if App detects address outside of BC]. \nThe address you want to use is outside of BC. You will need to write a letter explaining why they court accept that address. This service will help you with that letter.\n(duplicate for all applicable) ",
+       "isRequired": true,
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "infotext",
+       "name": "question143",
+       "title": "[Shelley to check if this is relevant for Form 19- Nov 16 2020]\n<br>\n[if App detects if PO Box]. \nNot allowed to use a PO Box. [What if the address just happens to include the letters, p-o-b-o-x in sequence??]\n<br><br>\nWhat about rural address that are only P.O. Boxes??",
+       "isRequired": true,
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "comment",
+       "name": "question132",
+       "title": "[Shelley to check if this is relevant for Form 19- Nov 16 2020]\n<br>\nWhat address? why outside of BC versus inside of BC?",
+       "description": "[auto complete letter that says Reequest = address outside of BC]\n[Letter needs to include other people who want the same thing]"
+      },
+      {
+       "type": "contactinfo",
+       "name": "question142",
+       "title": "{newLaywerName}'s contact information [fax not required]",
+       "description": "email optional but if you're filling it in, you consent to email service"
+      }
+     ]
+    },
+    {
+     "type": "infotext",
+     "name": "question138",
+     "title": "I want to withdraw as a lawyer [Form 19]",
+     "titleLocation": "hidden",
+     "messageStyle": "inline"
+    },
+    {
+     "type": "panel",
+     "name": "panel11",
+     "elements": [
+      {
+       "type": "infotext",
+       "name": "question124",
+       "title": "I want to withdraw as a lawyer. The Court of Appeal will need last known services addresses for each party that you were representing.\n<br><br>",
+       "isRequired": true,
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "checkbox",
+       "name": "question127",
+       "title": "Who do you want stop representing?",
+       "description": "Pull names from WebCATS [only pull names from their side, not parties from other side as well.]",
+       "choices": [
+        {
+         "value": "item1",
+         "text": "party1"
+        },
+        {
+         "value": "item2",
+         "text": "party2"
+        },
+        {
+         "value": "item3",
+         "text": "party3"
+        }
+       ]
+      },
+      {
+       "type": "address",
+       "name": "question129",
+       "title": "For {party1 who you don't want to represent anymore} What is the last known service address for {partyNameX}? (address must be in BC)"
+      },
+      {
+       "type": "infotext",
+       "name": "question130",
+       "title": "[Shelley to check if this is relevant for Form 19- Nov 16 2020]\n<br>\n[if App detects address outside of BC]. \nThe address you want to use is outside of BC. You will need to write a letter explaining why they court accept that address. This service will help you with that letter.\n(duplicate for all applicable) ",
+       "isRequired": true,
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "infotext",
+       "name": "question131",
+       "title": "[Shelley to check if this is relevant for Form 19- Nov 16 2020]\n<br>\n[if App detects if PO Box]. \nNot allowed to use a PO Box. [What if the address just happens to include the letters, p-o-b-o-x in sequence??]\n<br><br>\nWhat about rural address that are only P.O. Boxes??",
+       "isRequired": true,
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "comment",
+       "name": "question144",
+       "title": "[Shelley to check if this is relevant for Form 19- Nov 16 2020]\n<br>\nWhat address? why outside of BC versus inside of BC?",
+       "description": "[auto complete letter that says Reequest = address outside of BC]\n[Letter needs to include other people who want the same thing]"
+      },
+      {
+       "type": "contactinfo",
+       "name": "question133",
+       "title": "Last known contact info for party1",
+       "description": "email optional but if you're filling it in, you consent to email service"
+      },
+      {
+       "type": "address",
+       "name": "question128",
+       "title": "For {party1++ who you don't want to represent anymore} What is the last known service address for {partyNameX}? (address must be in BC)"
+      },
+      {
+       "type": "contactinfo",
+       "name": "question134",
+       "title": "Last known contact info for party2++",
+       "description": "email optional but if you're filling it in, you consent to email service"
+      },
+      {
+       "type": "yesno",
+       "name": "question158",
+       "title": "Do you want serve your clients though this service (this app)?"
+      },
+      {
+       "type": "infotext",
+       "name": "question157",
+       "title": "Click here to serve your clients by email through this service (app) [if they previously consented]",
+       "isRequired": true,
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "infotext",
+       "name": "question160",
+       "title": "Click here to generate the paper form so you can get it filed and stamped",
+       "isRequired": true,
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "text",
+       "name": "question156",
+       "title": "Date Served to clients (how do enforce the lawyer coming back and writing the the served date - they could be lazy)?",
+       "inputType": "date"
+      }
+     ]
+    },
+    {
+     "type": "infotext",
+     "name": "question145",
+     "title": "I want to represent more parties [Form 18]",
+     "titleLocation": "hidden",
+     "messageStyle": "inline"
+    },
+    {
+     "type": "panel",
+     "name": "panel13",
+     "elements": [
+      {
+       "type": "infotext",
+       "name": "question146",
+       "title": "TBD\n<br>\n1. Can parties be added to the whole proceeding?\n<br>\n2. Adding a client who is already in the proceed but not current represented = Form 18\n3. Switching a new client away from their old lawyer on the same proceeding = Form 18\n",
+       "titleLocation": "hidden"
+      }
+     ]
+    }
+   ]
   }
  ],
  "showQuestionNumbers": "off",
