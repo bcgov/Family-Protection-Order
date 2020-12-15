@@ -974,7 +974,7 @@
       {
        "type": "infotext",
        "name": "question177",
-       "title": "[No New Lawyer]",
+       "title": "[No New Lawyer]\n<br>\nDisregard Lawyer's input for Last Know Addresses because they might have stopped caring input wrong info. Just go directly to confirming with applicant.",
        "titleLocation": "hidden"
       },
       {
@@ -1009,6 +1009,12 @@
       {
        "type": "infotext",
        "name": "question176",
+       "title": "If not all parties have the same address, don't ask for their input. Each other party gets a warning on their dashboard \"your service address has been changed\" If this address is good, do nothing. If you want to change it, click here (Start a new P18 - but review questions so only minimal input required)",
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "infotext",
+       "name": "question179",
        "title": "Click here to eFile [Form 18]",
        "isRequired": true,
        "titleLocation": "hidden"
@@ -1049,6 +1055,13 @@
       {
        "type": "infotext",
        "name": "question163",
+       "title": "Each other party gets a warning of Party1's updates so they can stay informed or go their own route if desire. (review questions for minimal input required)",
+       "isRequired": true,
+       "titleLocation": "hidden"
+      },
+      {
+       "type": "infotext",
+       "name": "question180",
        "title": "Click here to eFile and serve lawyer",
        "isRequired": true,
        "titleLocation": "hidden"
@@ -1202,21 +1215,6 @@
        "title": "Your new lawyer or law firm can work from outside of B.C. but they must have an address for service be in B.C. according to the Court of Appeal rules.\n<br><br>\n[??Do we need a separate P18 to fire a lawyer and then another P18 to hire a new lawyer?]",
        "isRequired": true,
        "titleLocation": "hidden"
-      },
-      {
-       "type": "radiogroup",
-       "name": "question98",
-       "title": "[Unnecessary?] Who are you? [Can we assume it is whoever is logged in that has their name on the P18 even if party1 gave their credentials to the new lawyer]",
-       "choices": [
-        {
-         "value": "item2",
-         "text": "party1 (app would know who you are)"
-        },
-        {
-         "value": "item3",
-         "text": "newLawyer (logged into app using party1's credentials)"
-        }
-       ]
       },
       {
        "type": "yesno",
