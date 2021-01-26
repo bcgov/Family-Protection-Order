@@ -1,0 +1,73 @@
+@startuml
+actor "End User" as user
+node "Justice Proxy\n(AG/PSSG)" as agProxy
+
+package "Frontend - OpenShift Namespace" as frontendNamespace {
+  [Route\nw/ white-list] as frontendRoute
+  node "Client Application" as clientApp
+
+  note right of [frontendRoute]
+    1) Only accepts requests from
+    listed AG proxies.
+  end note
+}
+
+package "Backend - OpenShift Namespace" as backendNamespace {
+  [Route\nw/ white-list] as backendRoute
+  node "API" as api
+  node "PDF" as pdf
+  database  "DB" as db
+
+  note right of [backendRoute]
+    2) Only accepts requests
+    from the Client Application
+    in the Frontend namespace.
+  end note
+
+  note right of [api]
+    The API requires access to both
+    the PDF and DB services.
+
+    The PDF and DB services DO NOT
+    require access to the API and there is no
+    explicit connections from either to
+    the API, however the policies inside
+    the namespace do allow it.
+  end note
+
+  note right of [db]
+    The connection between the PDF and DB
+    services is not used or required, however
+    the policies inside the namespace do allow it.
+  end note
+}
+
+note as namespaceNote
+  3) Ingress Policy (default):
+  - The default ingress policy denies all requests from
+    external sources (including other namespaces).
+  - A route MUST be defined in order for requests to be
+    accepted and routed to the appropriate service.
+
+  4) Egress Policy (explicitly defined):
+  - Denies all requests from within the
+    namespace to external endpoints.
+
+  5) Multi-tenant plug-in Policy (default):
+  - Denies all requests from within a given
+    namespace to endpoints within another namespace.
+end note
+
+frontendNamespace #.. namespaceNote
+backendNamespace #.. namespaceNote
+
+user-up->agProxy:https
+agProxy-right->frontendRoute:https
+frontendRoute-down->clientApp
+
+clientApp-down->backendRoute:https
+backendRoute-down->api
+api<-down->pdf:only requires\napi --> pdf
+api<-down->db:only requires\napi --> db
+pdf<->db:connection\nnot required\nor used
+@enduml
