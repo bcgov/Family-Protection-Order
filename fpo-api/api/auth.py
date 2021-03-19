@@ -1,12 +1,14 @@
 import logging
 import random
 import re
+import urllib
 from string import ascii_lowercase, digits
 
 from django.urls.exceptions import NoReverseMatch
 from django.utils.encoding import escape_uri_path
 from rest_framework import authentication
 from rest_framework.request import Request
+from django.conf import settings
 from rest_framework.reverse import reverse
 
 from api.models.User import User
@@ -16,12 +18,15 @@ from oidc_rp.models import OIDCUser
 def get_login_uri(request: Request = None, next: str = None) -> str:
     uri = None
     if request:
+        query_dictionary = {"next": next, "kc_idp_hint": settings.OIDC_RP_KC_IDP_HINT}
+        query_dictionary = {k: v for k, v in query_dictionary.items() if v is not None}
         try:
-            uri = reverse("oidc_auth_request", request=request)
+            uri = "{base_url}?{querystring}".format(
+                base_url=reverse("oidc_auth_request", request=request),
+                querystring=urllib.parse.urlencode(query_dictionary),
+            )
         except NoReverseMatch:
             pass
-        if uri and next:
-            uri += "?next=" + escape_uri_path(next)
     return uri
 
 

@@ -3,7 +3,7 @@ django>=2.1.6,<2.2  # 2.2 increases minimum sqlite version, which is not support
 djangorestframework>=3.11.0,<4
 djangorestframework-bulk>=0.2.1,<1
 django-cors-headers>=2.4.0,<3
-git+https://github.com/andrewwhitehead/django-oidc-rp.git@233f1daeef96dbe84ecbb37fa31393c84f9c2805#egg=django-oidc-rp
+git+https://github.com/impak-finance/django-oidc-rp.git@e99534729c9a2fa9cd8e62cd50d9916409376038#egg=django-oidc-rp
 
 # Database managment
 psycopg2-binary>=2.7.3.1,<3

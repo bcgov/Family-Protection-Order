@@ -83,6 +83,7 @@ build-web() {
 
   echo -e "\nBuilding angular-on-nginx image ..."
   ${S2I_EXE} build \
+    --copy \
     -e "NPM_CONFIG_COLOR=${NPM_COLOR}" \
     -e "NPM_CONFIG_LOGLEVEL=timing" \
     -e "HTTP_PROXY=${HTTP_PROXY}" \
@@ -109,6 +110,7 @@ build-web-dev() {
   # NB: We build with DEV_MODE=true but run with DEV_MODE=false
   echo -e "\nBuilding angular-dev image ..."
   ${S2I_EXE} build \
+    --copy \
     -e "DEV_MODE=true" \
     -e "HTTP_PROXY=${HTTP_PROXY}" \
     -e "HTTPS_PROXY=${HTTPS_PROXY}" \
@@ -142,6 +144,7 @@ build-api() {
   #
   echo -e "\nBuilding django image ..."
   ${S2I_EXE} build \
+    --copy \
     '../fpo-api' \
     'centos/python-36-centos7' \
     'fpo-django'
@@ -206,9 +209,10 @@ configureEnvironment () {
 
   # fpo-web
   export WEB_HTTP_PORT=${WEB_HTTP_PORT-8080}
-  export API_URL=${API_URL-http://fpo-api:8080/api/v1/}
+  export API_URL=${API_URL-http://fpo-api:8080/api}
   export IpFilterRules='#allow all; deny all;'
   export RealIpFrom='127.0.0.0/16'
+  export WEB_BASE_HREF=${WEB_BASE_HREF:-/protection-order/}
 }
 
 getStartupParams() {

@@ -66,9 +66,11 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "oidc_rp.middleware.OIDCRefreshIDTokenMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
+    "fpo_api.XForwardedForPortMiddleware"
 ]
 
-SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
+SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
+SESSION_SAVE_EVERY_REQUEST = True
 
 ROOT_URLCONF = "fpo_api.urls"
 
@@ -142,9 +144,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-STATIC_URL = "/static/"
+STATIC_URL = os.getenv("WEB_BASE_HREF", "/protection-order/")  + "/api/static/"
 
-STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ["static"]))
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
@@ -220,12 +222,17 @@ if OIDC_RP_PROVIDER_ENDPOINT:
     OIDC_RP_SCOPES = "openid profile email"  # address phone
     OIDC_RP_PROMPT = "login consent select_account"
     OIDC_RP_ID_TOKEN_INCLUDE_USERINFO = True
-    OIDC_RP_AUTHENTICATION_FAILURE_REDIRECT_URI = os.getenv("OIDC_RP_FAILURE_URI", "/")
+    OIDC_RP_AUTHENTICATION_FAILURE_REDIRECT_URI = os.getenv("OIDC_RP_FAILURE_URI", "/protection-order/")
     OIDC_RP_USER_DETAILS_HANDLER = "api.auth.sync_keycloak_user"
+    OIDC_RP_AUTHENTICATION_REDIRECT_URI = (
+        os.getenv("OIDC_RP_AUTHENTICATION_REDIRECT_URI", "/protection-order/")
+    )
+    OIDC_RP_KC_IDP_HINT = os.getenv("OIDC_RP_KC_IDP_HINT")
 
     DRF_AUTH_CLASS = (
         "oidc_rp.contrib.rest_framework.authentication.BearerTokenAuthentication"
     )
+    
     OIDC_ENABLED = True
 else:
     DRF_AUTH_CLASS = "api.auth.DemoAuth"
@@ -238,3 +245,6 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.SessionAuthentication",
     )
 }
+
+FORCE_SCRIPT_NAME = os.getenv("WEB_BASE_HREF", "/protection-order/")
+LOGOUT_REDIRECT_URL = os.getenv("LOGOUT_REDIRECT_URL", "/protection-order/")

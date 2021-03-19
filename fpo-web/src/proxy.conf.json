@@ -1,0 +1,17 @@
+[
+	{
+		"context": [
+			"/protection-order/api",
+			"/api"
+		],
+		"target": "http://localhost:8081",
+		"pathRewrite": {
+			"^/protection-order/": "/"
+		},
+		"secure": false,
+		"changeOrigin": true,
+		"headers": {
+			"X-Forwarded-Host": "localhost:8080"
+		}
+	}
+]
