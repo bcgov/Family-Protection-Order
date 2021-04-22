@@ -144,6 +144,9 @@ objects:
       host: "${SITEMINDER_APPLICATION_DOMAIN}"
       port:
         targetPort: 8080-tcp
+      tls:
+        insecureEdgeTerminationPolicy: Redirect
+        termination: edge
       to:
         kind: Service
         name: ${NAME}
