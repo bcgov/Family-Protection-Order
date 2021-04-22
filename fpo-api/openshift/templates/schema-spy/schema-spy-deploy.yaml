@@ -190,7 +190,7 @@ parameters:
     displayName: Application Hostname
     description: The exposed hostname that will route to the Django service, if left
       blank a value will be defaulted.
-    value: 'protection-order-schema-dev.pathfinder.gov.bc.ca'
+    value: 'protection-order-schema-dev.apps.silver.devops.gov.bc.ca'
   - name: DATABASE_SERVICE_NAME
     displayName: Database Service Name
     required: true

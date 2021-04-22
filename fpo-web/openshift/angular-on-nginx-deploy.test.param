@@ -13,7 +13,7 @@
 # API_PATH=/api/v1/
 # AdditionalRealIpFromRules=
 # IpFilterRules=
-SITEMINDER_APPLICATION_DOMAIN=protection-order-test.pathfinder.bcgov
+SITEMINDER_APPLICATION_DOMAIN=protection-order-test.silver.devops.bcgov
 # SITEMINDER_WHITE_LIST=
 TAG_NAME=test
 # HTTP_BASIC=
