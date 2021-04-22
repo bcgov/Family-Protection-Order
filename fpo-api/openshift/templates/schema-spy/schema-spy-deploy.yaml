@@ -8,30 +8,6 @@ metadata:
     tags: schema-spy
 objects:
 
-  - kind: NetworkSecurityPolicy
-    apiVersion: secops.pathfinder.gov.bc.ca/v1alpha1
-    metadata:
-      name: ${NAME}
-      labels:
-        name: ${NAME}
-        app: ${APP_NAME}
-        env: ${TAG_NAME}
-    spec:
-      description: |
-        Allow the schema-spy service to talk to the db pod.
-      source:
-      source:
-        - - role=${ROLE}
-          - app=${APP_NAME}
-          - env=${TAG_NAME}
-          - $namespace=jag-csb-jes-family-protection-order-${TAG_NAME}
-          
-      destination:
-        - - role=db
-          - app=${APP_NAME}
-          - env=${TAG_NAME}
-          - $namespace=jag-csb-jes-family-protection-order-${TAG_NAME}
-
   - kind: Service
     apiVersion: v1
     metadata:

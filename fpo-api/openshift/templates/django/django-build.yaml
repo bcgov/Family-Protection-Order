@@ -9,22 +9,6 @@ metadata:
   name: "${NAME}-build-template"
 objects:
 
-  - kind: NetworkSecurityPolicy
-    apiVersion: secops.pathfinder.gov.bc.ca/v1alpha1
-    metadata:
-      name: pods-to-external-network
-      labels:
-        name: pods-to-external-network
-        env: ${ENV_NAME}
-    spec:
-      description: |
-        Allow the builds to access the internet.
-        This only needs to be specified once per environment.
-      source:
-        - - $namespace=jag-csb-jes-family-protection-order-${ENV_NAME}
-      destination:
-        - - ext:network=any
-
   - kind: ImageStream
     apiVersion: v1
     metadata:
