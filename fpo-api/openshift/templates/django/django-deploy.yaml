@@ -11,50 +11,6 @@ metadata:
     iconClass: icon-python
 objects:
 
-  - kind: NetworkSecurityPolicy
-    apiVersion: secops.pathfinder.gov.bc.ca/v1alpha1
-    metadata:
-      name: pods-to-api
-      labels:
-        name: pods-to-api
-        app: ${APP_NAME}
-        env: ${TAG_NAME}
-    spec:
-      description: |
-        Allow pods to talk to the internal api so deployments work.
-        This only needs to be specified once per environment.
-      source:
-        - - $namespace=jag-csb-jes-family-protection-order-${TAG_NAME}
-      destination:
-        - - int:network=internal-cluster-api-endpoint
-
-  - kind: NetworkSecurityPolicy
-    apiVersion: secops.pathfinder.gov.bc.ca/v1alpha1
-    metadata:
-      name: ${NAME}
-      labels:
-        name: ${NAME}
-        app: ${APP_NAME}
-        env: ${TAG_NAME}
-    spec:
-      description: |
-        Allow the application's API to talk to either the database or pdf microservice.
-      source:
-        - - role=${ROLE}
-          - app=${APP_NAME}
-          - env=${TAG_NAME}
-          - $namespace=jag-csb-jes-family-protection-order-${TAG_NAME}
-
-      destination:
-        - - role=db
-          - app=${APP_NAME}
-          - env=${TAG_NAME}
-          - $namespace=jag-csb-jes-family-protection-order-${TAG_NAME}
-        - - role=pdf
-          - app=${APP_NAME}
-          - env=${TAG_NAME}
-          - $namespace=jag-csb-jes-family-protection-order-${TAG_NAME}
-
   - kind: Service
     apiVersion: v1
     metadata:

@@ -8,30 +8,6 @@ metadata:
     tags: schema-spy
 objects:
 
-  - kind: NetworkSecurityPolicy
-    apiVersion: secops.pathfinder.gov.bc.ca/v1alpha1
-    metadata:
-      name: ${NAME}
-      labels:
-        name: ${NAME}
-        app: ${APP_NAME}
-        env: ${TAG_NAME}
-    spec:
-      description: |
-        Allow the schema-spy service to talk to the db pod.
-      source:
-      source:
-        - - role=${ROLE}
-          - app=${APP_NAME}
-          - env=${TAG_NAME}
-          - $namespace=jag-csb-jes-family-protection-order-${TAG_NAME}
-          
-      destination:
-        - - role=db
-          - app=${APP_NAME}
-          - env=${TAG_NAME}
-          - $namespace=jag-csb-jes-family-protection-order-${TAG_NAME}
-
   - kind: Service
     apiVersion: v1
     metadata:
@@ -190,7 +166,7 @@ parameters:
     displayName: Application Hostname
     description: The exposed hostname that will route to the Django service, if left
       blank a value will be defaulted.
-    value: 'protection-order-schema-dev.pathfinder.gov.bc.ca'
+    value: 'protection-order-schema-dev.apps.silver.devops.gov.bc.ca'
   - name: DATABASE_SERVICE_NAME
     displayName: Database Service Name
     required: true

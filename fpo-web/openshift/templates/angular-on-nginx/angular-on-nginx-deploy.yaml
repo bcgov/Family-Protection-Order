@@ -7,28 +7,6 @@ metadata:
     tags: angular,nginx
   name: angular-on-nginx
 objects:
-  - kind: NetworkSecurityPolicy
-    apiVersion: secops.pathfinder.gov.bc.ca/v1alpha1
-    metadata:
-      name: ${NAME}
-      labels:
-        name: ${NAME}
-        app: ${APP_NAME}
-        env: ${TAG_NAME}
-    spec:
-      description: |
-        Allow the frontend (web) to talk to the api pod.
-      source:
-        - - role=${ROLE}
-          - app=${APP_NAME}
-          - env=${TAG_NAME}
-          - $namespace=jag-csb-jes-family-protection-order-${TAG_NAME}
-      destination:
-        - - role=api
-          - app=${APP_NAME}
-          - env=${TAG_NAME}
-          - $namespace=jag-csb-jes-family-protection-order-${TAG_NAME}
-
   - kind: DeploymentConfig
     apiVersion: v1
     metadata:
@@ -166,6 +144,9 @@ objects:
       host: "${SITEMINDER_APPLICATION_DOMAIN}"
       port:
         targetPort: 8080-tcp
+      tls:
+        insecureEdgeTerminationPolicy: Redirect
+        termination: edge
       to:
         kind: Service
         name: ${NAME}
@@ -249,7 +230,7 @@ parameters:
   - description: The endpoint used for SiteMinder routed access to the application.
     displayName: SiteMinder Application Domain
     name: SITEMINDER_APPLICATION_DOMAIN
-    value: protection-order-dev.pathfinder.bcgov
+    value: protection-order-dev.silver.devops.bcgov
   - name: SITEMINDER_WHITE_LIST
     displayName: SiteMinder Whitelist
     description: The whitelist containing all of the trusted siteminder IPs.

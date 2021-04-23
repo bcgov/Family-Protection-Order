@@ -24,9 +24,9 @@ A PostgreSQL database for storage, complete with a SchemaSpy instance for docume
 ## Development Instances
 
 Development instances of the application can be found here;
-* Client Application - https://jag-csb-jes-family-protection-order-dev.pathfinder.gov.bc.ca/
-* REST API - https://django-jag-csb-jes-family-protection-order-dev.pathfinder.gov.bc.ca/api/v1/
-* SchemaSpy Database Documentation - http://schema-spy-schema-spy-jag-csb-jes-family-protection-order-dev.pathfinder.gov.bc.ca/
+* Client Application - https://jag-csb-jes-family-protection-order-dev.apps.silver.devops.gov.bc.ca/
+* REST API - https://django-jag-csb-jes-family-protection-order-dev.apps.silver.devops.gov.bc.ca/api/v1/
+* SchemaSpy Database Documentation - http://schema-spy-schema-spy-jag-csb-jes-family-protection-order-dev.apps.silver.devops.gov.bc.ca/
 
 ## Running on OpenShift
 
